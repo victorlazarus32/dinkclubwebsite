@@ -219,6 +219,12 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .news p{font-weight:600;margin-bottom:24px}
 .news form{display:flex;gap:10px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
 .news input{flex:1;min-width:220px;padding:15px 18px;border:2px solid var(--ink);border-radius:4px;font-family:var(--body);font-size:1rem}
+.news .join-form{display:grid;gap:12px;max-width:560px;margin:0 auto;text-align:left}
+.news .join-form .jf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.news .join-form input{flex:initial;width:100%;min-width:0;margin:0}
+.news .join-form .btn{justify-content:center;width:100%}
+.news .join-form .jf-fine{font-size:.78rem;color:#3a3700;font-weight:500;margin:2px 0 0;text-align:center}
+@media(max-width:480px){.news .join-form .jf-row{grid-template-columns:1fr}}
 
 /* footer */
 footer{background:var(--ink);color:#cfd6dd;padding:64px 0 30px}
