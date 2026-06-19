@@ -126,6 +126,9 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .chip{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:.78rem;letter-spacing:.04em;padding:9px 18px;border:2px solid var(--line);border-radius:50px;background:#fff;cursor:pointer;transition:all .15s}
 .chip:hover{border-color:var(--ink)}
 .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.subnav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:26px 0 0}
+.subnav a{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:.8rem;letter-spacing:.04em;padding:9px 18px;border-radius:50px;border:2px solid #2a2c33;color:#cfd6dd}
+.subnav a.active,.subnav a:hover{background:var(--volt);color:var(--ink);border-color:var(--volt)}
 .card .soldout{position:absolute;top:10px;left:10px;background:#0B0B0F;color:#fff;font-family:var(--display);font-weight:800;font-size:.65rem;padding:4px 8px;border-radius:3px;letter-spacing:.05em}
 .badge{position:absolute;top:10px;left:10px;background:var(--flare);color:#fff;font-family:var(--display);font-weight:800;font-size:.65rem;padding:4px 8px;border-radius:3px;letter-spacing:.05em}
 .card .pinfo{padding:16px}
@@ -186,6 +189,26 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .loc-info h2{font-size:2rem;font-weight:900;margin-bottom:18px}
 .loc-info .row{display:flex;gap:12px;margin-bottom:14px;font-size:.98rem;color:#cfd6dd}
 .loc-info .row b{color:#fff;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;min-width:90px;display:inline-block}
+
+/* product detail page (PDP) */
+.pdp{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.gallery .main{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;aspect-ratio:1}
+.gallery .main img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:10px;margin-top:12px}
+.thumbs img{width:78px;height:78px;object-fit:cover;border:2px solid var(--line);border-radius:8px;cursor:pointer;background:#fff}
+.thumbs img.active{border-color:var(--ink)}
+.pdp .pdp-brand{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#8a929b;font-size:.85rem}
+.pdp h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin:6px 0 10px}
+.pdp .price{font-family:var(--display);font-weight:900;font-size:1.8rem;margin-bottom:18px}
+.pdp .opt-label{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:.8rem;letter-spacing:.06em;margin:18px 0 8px}
+.opt-btns{display:flex;gap:8px;flex-wrap:wrap}
+.opt{font-family:var(--display);font-weight:700;font-size:.85rem;padding:10px 16px;border:2px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;transition:all .12s}
+.opt:hover{border-color:var(--ink)}
+.opt.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pdp .desc{color:#3d454e;margin:20px 0}
+.pdp .desc li{margin-left:18px;margin-bottom:5px}
+.pdp .trust-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:.82rem;color:#5b6470}
+@media(max-width:760px){.pdp{grid-template-columns:1fr}}
 
 /* booking band */
 .booking-mount{border:2px dashed #2a2c33;border-radius:12px;padding:40px 20px;text-align:center;color:#9aa2ab;font-size:.9rem;background:#121319}
