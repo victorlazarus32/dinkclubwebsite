@@ -148,16 +148,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 
 /* events */
 .events{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.ev{border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.ev .evtop{position:relative;color:#fff;padding:26px 22px;background:#0B0B0F center/cover no-repeat;overflow:hidden}
-.ev .evtop::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(44,107,255,.42),rgba(11,11,15,.84))}
-.ev .evtop>*{position:relative;z-index:1}
-.ev .evtop .evname{text-shadow:0 2px 12px rgba(0,0,0,.5)}
-.ev:hover .evtop{transform:scale(1.0)}
-.ev .evdate{font-family:var(--display);font-weight:900;font-size:1.05rem;color:var(--volt)}
-.ev .evname{font-family:var(--display);font-weight:900;font-size:1.5rem;margin-top:6px}
-.ev .evbody{padding:18px 22px}
-.ev .evbody p{font-size:.9rem;color:#5b6470;margin-bottom:12px}
+.ev{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.ev .evimg{aspect-ratio:4/5;background:#0B0B0F center/cover no-repeat;display:block;transition:opacity .15s}
+.ev a.evimg:hover{opacity:.93}
+.ev .evimg.contain{background-size:contain}
+.ev .evbody{padding:20px;display:flex;flex-direction:column;flex:1}
+.ev .evdate{font-family:var(--display);font-weight:900;font-size:.92rem;color:var(--electric)}
+.ev .evname{font-family:var(--display);font-weight:900;font-size:1.5rem;margin:4px 0 8px}
+.ev .evbody p{font-size:.9rem;color:#5b6470;margin-bottom:14px;flex:1}
+.ev .evbody .btn{align-self:flex-start}
 
 /* testimonials / reviews */
 .tests{background:var(--smoke)}
