@@ -149,7 +149,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 /* events */
 .events{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .ev{border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.ev .evtop{background:linear-gradient(135deg,var(--electric),#0B0B0F);color:#fff;padding:22px;position:relative}
+.ev .evtop{position:relative;color:#fff;padding:26px 22px;background:#0B0B0F center/cover no-repeat;overflow:hidden}
+.ev .evtop::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(44,107,255,.42),rgba(11,11,15,.84))}
+.ev .evtop>*{position:relative;z-index:1}
+.ev .evtop .evname{text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.ev:hover .evtop{transform:scale(1.0)}
 .ev .evdate{font-family:var(--display);font-weight:900;font-size:1.05rem;color:var(--volt)}
 .ev .evname{font-family:var(--display);font-weight:900;font-size:1.5rem;margin-top:6px}
 .ev .evbody{padding:18px 22px}
