@@ -224,7 +224,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 @media(max-width:760px){.pdp{grid-template-columns:1fr}}
 
 /* booking band */
-.booking-mount{border:2px dashed #2a2c33;border-radius:12px;padding:40px 20px;text-align:center;color:#9aa2ab;font-size:.9rem;background:#121319}
+.booking-mount{border:1px solid #23252c;border-radius:12px;padding:40px 20px;text-align:center;background:#121319}
 
 /* newsletter */
 .news{background:var(--volt);text-align:center}
