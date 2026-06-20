@@ -264,3 +264,12 @@ footer a:hover{color:var(--volt)}
   .grid4,.events,.tgrid,.ways .grid3,.grid3,.tiles,.stats .wrap,.feat-grid,.coach-grid{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* sticky mobile booking bar */
+.mobilebar{display:none}
+@media(max-width:900px){
+  body{padding-bottom:72px}
+  .mobilebar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:8px;padding:10px 12px;background:rgba(11,11,15,.96);backdrop-filter:blur(8px);border-top:1px solid #23252c}
+  .mobilebar a{flex:1;justify-content:center;padding:13px 6px;font-size:.82rem;border-radius:6px}
+  .mobilebar a.call{flex:0 0 auto;padding:13px 16px}
+}
