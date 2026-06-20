@@ -293,3 +293,24 @@ footer a:hover{color:var(--volt)}
 /* center an orphaned last row of cards (e.g. 5 cards in a 3-col grid) */
 .ways .ways-center{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
 .ways .ways-center .waycard{flex:0 1 calc((100% - 40px) / 3);min-width:260px}
+
+/* ============ mobile polish (full-site audit) ============ */
+html{overflow-x:clip}                          /* safety net: never let anything scroll the page sideways */
+p,li,figcaption,.eyebrow{overflow-wrap:break-word}
+@media(max-width:900px){
+  .menu a{padding:11px 4px;font-size:1rem}     /* bigger tap targets in the burger dropdown */
+}
+@media(max-width:600px){
+  .hero{padding:80px 0 84px !important}         /* trim oversized hero whitespace on phones */
+  .hero p.sub{font-size:1.05rem;margin-bottom:24px}
+  .trust{gap:14px 18px;margin-top:24px}
+  .section-head{margin-bottom:26px}
+  .ways .ways-center .waycard{flex-basis:100%;min-width:0}  /* single full-width column */
+}
+@media(max-width:420px){
+  .wrap{padding:0 18px}
+  .hero h1{font-size:2.35rem}                   /* keep long words like PICKLEBALL on-screen */
+  .hero-cta{gap:10px}
+  .hero-cta .btn{flex:1 1 100%;justify-content:center}  /* full-width, easy-to-tap CTAs */
+  section{padding:48px 0}
+}
