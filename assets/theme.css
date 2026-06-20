@@ -139,6 +139,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 /* ways to play */
 .ways{background:var(--ink);color:#fff}
 .ways .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .waycard{border:1px solid #23252c;border-radius:10px;padding:28px;background:#121319;transition:border-color .15s,transform .15s}
 .waycard:hover{border-color:var(--volt);transform:translateY(-4px)}
 .waycard .ico{width:46px;height:46px;border-radius:8px;background:var(--volt);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:1.3rem;margin-bottom:16px}
@@ -246,11 +247,11 @@ footer a:hover{color:var(--volt)}
 @media(max-width:900px){
   .menu,.nav-right .icon-btn{display:none}
   .burger{display:block}
-  .tiles,.grid4,.events,.tgrid,.ways .grid3,.stats .wrap,.feat-grid,.coach-grid{grid-template-columns:1fr 1fr}
+  .tiles,.grid4,.events,.tgrid,.ways .grid3,.grid3,.stats .wrap,.feat-grid,.coach-grid{grid-template-columns:1fr 1fr}
   .about-grid,.split,.loc-grid{grid-template-columns:1fr}
   .tiles{margin-top:30px}
 }
 @media(max-width:560px){
-  .grid4,.events,.tgrid,.ways .grid3,.tiles,.stats .wrap,.feat-grid,.coach-grid{grid-template-columns:1fr}
+  .grid4,.events,.tgrid,.ways .grid3,.grid3,.tiles,.stats .wrap,.feat-grid,.coach-grid{grid-template-columns:1fr}
   section{padding:56px 0}
 }
