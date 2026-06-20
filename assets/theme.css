@@ -289,3 +289,7 @@ footer a:hover{color:var(--volt)}
 @keyframes reelscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (max-width:700px){.reel img{height:190px;border-radius:10px}}
 @media (prefers-reduced-motion:reduce){.reel{overflow-x:auto;-webkit-overflow-scrolling:touch}.reel-track{animation:none}}
+
+/* center an orphaned last row of cards (e.g. 5 cards in a 3-col grid) */
+.ways .ways-center{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+.ways .ways-center .waycard{flex:0 1 calc((100% - 40px) / 3);min-width:260px}
