@@ -1,0 +1,48 @@
+# Dink Club — no-code content editor config (Decap CMS).
+# Backend "git-gateway" = the client logs in via Netlify Identity (email invite,
+# no GitHub account) and Publish commits straight to the repo, which redeploys
+# the site. To use the GitHub backend instead, see EVENTS-MODULE.md.
+backend:
+  name: git-gateway
+  branch: main
+
+# Uploaded images. Relative paths so they work under the GitHub Pages subpath.
+media_folder: "assets/img/uploads"
+public_folder: "assets/img/uploads"
+
+# Friendlier publish wording for a non-technical client.
+publish_mode: simple
+
+collections:
+  - name: "events"
+    label: "Events"
+    description: "Add, edit, remove, or reorder the events shown on the site."
+    files:
+      - name: "events"
+        label: "Event List"
+        file: "events.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Events"
+            label_singular: "Event"
+            name: "events"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.label}}"
+            fields:
+              - { label: "Event name", name: "name", widget: "string" }
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                default: "auto"
+                options:
+                  - { label: "Scheduled (uses the date)", value: "auto" }
+                  - { label: "Coming soon (no date yet)", value: "tba" }
+                hint: "Choose 'Coming soon' for events without a confirmed date."
+              - { label: "Date (used to sort & auto-archive)", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false }
+              - { label: "Date label (shown on the card)", name: "label", widget: "string", hint: "Example: JUL 10–12" }
+              - { label: "Flyer / image", name: "image", widget: "image" }
+              - { label: "Link (registration or info page)", name: "link", widget: "string", required: false }
+              - { label: "Button text", name: "cta", widget: "string", default: "Register →" }
+              - { label: "Short description", name: "blurb", widget: "text" }

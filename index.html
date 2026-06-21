@@ -193,59 +193,13 @@
   <div class="wrap">
     <div class="section-head"><p class="eyebrow">Compete</p><h2>Compete at Dink Club</h2><p>Tournaments, leagues, special events, and bracket play for Miami's pickleball community.</p></div>
     <p class="eyebrow" style="margin-bottom:14px">Upcoming Events</p>
-    <div class="events" id="upcoming-events">
-      <div class="ev" data-end="2026-07-12" data-label="JUL 10–12">
-        <a class="evimg contain" href="https://swishtournaments.com/product/dink-classic/" target="_blank" rel="noopener" style="background-image:url('assets/img/dink-classic.webp')" aria-label="Dink Classic pickleball tournament flyer — July 10 to 12 at Dink Club, Miami"></a>
-        <div class="evbody">
-          <div class="evdate">★ NEXT UP · JUL 10–12</div>
-          <div class="evname">Dink Classic</div>
-          <p>Our signature pickleball tournament — men's, women's &amp; mixed doubles, skill levels 2.5–5.0+. Great prizes, food, and good vibes all weekend at Dink Club.</p>
-          <a class="btn btn-volt" href="https://swishtournaments.com/product/dink-classic/" target="_blank" rel="noopener">Register on Swish →</a>
-        </div>
-      </div>
-      <div class="ev" data-end="2026-06-21" data-label="JUN 20–21 · 2026">
-        <a class="evimg contain" href="https://swishtournaments.com/" target="_blank" rel="noopener" style="background-image:url('assets/img/dink-madness.webp')" aria-label="Dink Madness pickleball tournament flyer"></a>
-        <div class="evbody">
-          <div class="evdate">JUN 20–21 · 2026</div>
-          <div class="evname">Dink Madness</div>
-          <p>Single-elimination bracket play — men's, women's &amp; mixed doubles. Rally. Compete. Repeat.</p>
-          <a class="btn btn-volt" href="https://swishtournaments.com/" target="_blank" rel="noopener">Register on Swish →</a>
-        </div>
-      </div>
-      <div class="ev" data-tba>
-        <div class="evimg contain" style="background-image:url('assets/img/dcpl-season-3.jpg')" role="img" aria-label="DCPL Season 3 — Dink Club Pickleball League flyer, season dates coming soon"></div>
-        <div class="evbody">
-          <div class="evdate">COMING SOON</div>
-          <div class="evname">DCPL Season 3</div>
-          <p>The Dink Club Pro League returns. Season schedule announced soon.</p>
-          <a class="btn btn-dark" href="https://swishtournaments.com/" target="_blank" rel="noopener">See on Swish</a>
-        </div>
-      </div>
-    </div>
+    <div class="events" id="upcoming-events"></div>
     <div id="past-wrap" style="display:none;margin-top:44px">
       <p class="eyebrow" style="margin-bottom:14px;color:#8a929b">Past Events</p>
       <div class="events" id="past-events"></div>
     </div>
   </div>
-  <script>
-  /* Date-proof tournaments: move passed events to Past, keep TBA as Coming Soon, flag soonest as NEXT UP. */
-  (function(){
-    var up=document.getElementById('upcoming-events'),past=document.getElementById('past-events'),wrap=document.getElementById('past-wrap');
-    if(!up||!past)return;
-    var today=new Date();today.setHours(0,0,0,0);
-    Array.prototype.forEach.call(up.querySelectorAll('.ev[data-end]'),function(ev){
-      var d=new Date(ev.getAttribute('data-end')+'T23:59:59'),label=ev.getAttribute('data-label')||'',b=ev.querySelector('.evdate');
-      if(d<today){ev.classList.add('is-past');if(b){b.textContent='PAST · '+label;b.style.color='#8a929b';}var btn=ev.querySelector('.btn');if(btn)btn.textContent='View Results →';past.appendChild(ev);}
-      else if(b){b.textContent=label;}
-    });
-    var upcoming=Array.prototype.slice.call(up.querySelectorAll('.ev[data-end]'));
-    upcoming.sort(function(a,b){return new Date(a.getAttribute('data-end'))-new Date(b.getAttribute('data-end'));});
-    upcoming.forEach(function(e){up.appendChild(e);});
-    Array.prototype.forEach.call(up.querySelectorAll('.ev[data-tba]'),function(e){up.appendChild(e);});
-    if(upcoming.length){var f=upcoming[0].querySelector('.evdate');if(f)f.textContent='★ NEXT UP · '+(upcoming[0].getAttribute('data-label')||'');}
-    if(past.children.length)wrap.style.display='';
-  })();
-  </script>
+  <script src="assets/events.js"></script>
 </section>
 
 <section id="pilates-event" style="background:var(--ink);color:#fff">

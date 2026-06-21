@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "name": "Dink Classic",
+      "status": "auto",
+      "date": "2026-07-12",
+      "label": "JUL 10–12",
+      "image": "assets/img/dink-classic.webp",
+      "link": "https://swishtournaments.com/product/dink-classic/",
+      "cta": "Register on Swish →",
+      "blurb": "Our signature pickleball tournament — men's, women's & mixed doubles, skill levels 2.5–5.0+. Great prizes, food, and good vibes all weekend at Dink Club."
+    },
+    {
+      "name": "Dink Madness",
+      "status": "auto",
+      "date": "2026-06-21",
+      "label": "JUN 20–21 · 2026",
+      "image": "assets/img/dink-madness.webp",
+      "link": "https://swishtournaments.com/",
+      "cta": "Register on Swish →",
+      "blurb": "Single-elimination bracket play — men's, women's & mixed doubles. Rally. Compete. Repeat."
+    },
+    {
+      "name": "DCPL Season 3",
+      "status": "tba",
+      "date": "",
+      "label": "COMING SOON",
+      "image": "assets/img/dcpl-season-3.jpg",
+      "link": "https://swishtournaments.com/",
+      "cta": "See on Swish",
+      "blurb": "The Dink Club Pro League returns. Season schedule announced soon."
+    }
+  ]
+}
