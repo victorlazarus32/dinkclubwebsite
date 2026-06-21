@@ -142,6 +142,67 @@
       <div class="events" id="past-events"></div>
     </div>
   </div>
-  <script src="assets/events.js"></script>
+</section>
+
+<!-- how to register -->
+<section>
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Three Steps</p><h2>How to Enter</h2></div>
+    <div class="grid3">
+      <div class="waycard" style="background:var(--smoke);border-color:var(--line);color:var(--ink)"><div class="ico">1</div><h3 style="color:var(--ink)">Pick Your Event</h3><p style="color:#5b6470">Choose a tournament or league season from the lineup above.</p></div>
+      <div class="waycard" style="background:var(--smoke);border-color:var(--line);color:var(--ink)"><div class="ico">2</div><h3 style="color:var(--ink)">Register on Swish</h3><p style="color:#5b6470">Sign up online with your partner and division — spots are limited.</p></div>
+      <div class="waycard" style="background:var(--smoke);border-color:var(--line);color:var(--ink)"><div class="ico">3</div><h3 style="color:var(--ink)">Show Up &amp; Compete</h3><p style="color:#5b6470">Arrive, check in, and play. Refreshments and restrooms on site.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- cta -->
+<section class="booking">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 30px;text-align:center"><p class="eyebrow" style="color:var(--volt)">Ready to Play?</p><h2>Claim Your Spot</h2><p>Browse open events and register online, or call us with questions about divisions and partners.</p></div>
+    <div class="booking-mount"><a class="btn btn-volt" href="https://swishtournaments.com/" target="_blank" rel="noopener">Register on Swish ↗</a> &nbsp; <a class="btn btn-ghost light call" href="tel:+13058134238">Call 305-813-4238</a></div>
+  </div>
+</section>
+
+<!-- faq -->
+<section style="background:var(--smoke)">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 40px;text-align:center"><p class="eyebrow">Good to Know</p><h2>Tournament FAQs</h2></div>
+    <div class="faq-list">
+      <div class="acc"><button>How do I register? <span class="pm">+</span></button><div class="ans"><p>Tournaments and league seasons are registered through Swish. Open the event you want and sign up online — popular events fill quickly.</p></div></div>
+      <div class="acc"><button>What divisions and levels can I play? <span class="pm">+</span></button><div class="ans"><p>Men's, women's, and mixed doubles across skill levels 2.5 to 5.0+ — there's a bracket for newer competitors through advanced players.</p></div></div>
+      <div class="acc"><button>Do I need a partner? <span class="pm">+</span></button><div class="ans"><p>Most brackets are doubles, so you'll register with a partner. Need help finding one? Call <a href="tel:+13058134238" style="color:var(--electric);font-weight:600;white-space:nowrap">305-813-4238</a>.</p></div></div>
+      <div class="acc"><button>What is DCPL? <span class="pm">+</span></button><div class="ans"><p>The Dink Club Pickleball League — weekly matches, standings, and team play across a season. New seasons are announced on Swish and our <a href="https://www.instagram.com/dinkclubpickleball/" target="_blank" rel="noopener" style="color:var(--electric);font-weight:600">Instagram</a>.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="footer-logo" href="index.html"><img src="assets/logo-white.png" alt="Dink Club"></a>
+        <p style="margin-top:14px;font-size:.92rem;max-width:280px">Miami's home for pickleball — courts, lessons, leagues, and gear at 10855 SW 112nd Ave.</p>
+        <div class="socials">
+          <a class="ig-big" href="https://www.instagram.com/dinkclubpickleball/" target="_blank" rel="noopener" aria-label="Follow Dink Club on Instagram"><span class="igmark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg></span><span class="ighandle">@dinkclubpickleball</span></a>
+        </div>
+      </div>
+      <div><h4>Play</h4><ul><li><a href="open-play.html">Open Play</a></li><li><a href="court-reservations.html">Court Reservations</a></li><li><a href="lessons.html">Lessons</a></li><li><a href="tournaments.html">Tournaments</a></li></ul></div>
+      <div><h4>Shop</h4><ul><li><a href="shop.html">Apparel</a></li><li><a href="paddles.html">Paddles</a></li><li><a href="accessories.html">Accessories</a></li><li><a href="https://dinkclub.com/collections/all" target="_blank" rel="noopener">All Products</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="about.html">About</a></li><li><a href="private-events.html">Private Events</a></li><li><a href="dupr.html">What Is DUPR?</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 Dink Club · 10855 SW 112nd Ave, Miami, FL 33176 · 305-813-4238</span>
+      <span>Privacy · Terms · Shipping · Returns</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.acc button').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+document.querySelector('.acc')?.classList.add('open');
+document.querySelector('.burger')?.addEventListener('click',()=>{const m=document.querySelector('.menu');if(m){m.style.display=m.style.display==='flex'?'none':'flex';m.style.position='absolute';m.style.flexDirection='column';m.style.background='#fff';m.style.top='74px';m.style.left='0';m.style.right='0';m.style.padding='20px 24px';m.style.borderBottom='1px solid var(--line)';m.style.gap='14px';}});
+</script>
+<script src="assets/events.js"></script>
 </body>
 </html>
