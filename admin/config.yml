@@ -46,3 +46,17 @@ collections:
               - { label: "Link (registration or info page)", name: "link", widget: "string", required: false }
               - { label: "Button text", name: "cta", widget: "string", default: "Register →" }
               - { label: "Short description", name: "blurb", widget: "text" }
+          - label: "Featured banner (the big highlighted event)"
+            name: "featured"
+            widget: "object"
+            fields:
+              - { label: "Show this banner?", name: "enabled", widget: "boolean", default: true }
+              - { label: "Eyebrow (small line above the title)", name: "eyebrow", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Flyer / image", name: "image", widget: "image" }
+              - { label: "Description", name: "body", widget: "text" }
+              - { label: "Tagline (shown bold)", name: "tagline", widget: "string", required: false }
+              - { label: "Details (one line each)", name: "details", widget: "list", field: { label: "Detail", name: "detail", widget: "string" } }
+              - { label: "Button text", name: "ctaText", widget: "string", default: "Sign Up →" }
+              - { label: "Button link", name: "ctaLink", widget: "string", default: "contact.html" }
+              - { label: "Auto-hide after this date", name: "hideAfter", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false }

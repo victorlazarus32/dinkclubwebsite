@@ -30,5 +30,21 @@
       "cta": "See on Swish",
       "blurb": "The Dink Club Pro League returns. Season schedule announced soon."
     }
-  ]
+  ],
+  "featured": {
+    "enabled": true,
+    "eyebrow": "Special Event · Saturday, June 27",
+    "title": "Pilates & Pickleball",
+    "image": "assets/img/pilates-pickleball.jpg",
+    "body": "Jetset Modern Pilates × Dink Club — a morning of movement, play, and good vibes. Flow through a guided pilates session, then hit the courts for pickleball. All levels welcome, and a great way to meet new people, network, and connect with the Miami pickleball community.",
+    "tagline": "Move. Play. Connect.",
+    "details": [
+      "🕤 Check-in 9:30 AM · Class 10:00 AM · Pickleball 11:00 AM",
+      "🧘 Pilates flow · 🎾 Pickleball play · ❤ Community",
+      "✨ All levels welcome · bring a friend · bring your own mat"
+    ],
+    "ctaText": "Sign Up →",
+    "ctaLink": "contact.html",
+    "hideAfter": "2026-06-27"
+  }
 }
