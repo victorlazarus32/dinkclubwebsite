@@ -1,0 +1,26 @@
+{
+  "home": {
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/",
+    "error": "'charmap' codec can't encode character '\\u2261' in position 12: character maps to <undefined>"
+  },
+  "tournaments": {
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/tournaments.html",
+    "error": "'charmap' codec can't encode character '\\u2261' in position 12: character maps to <undefined>"
+  },
+  "lessons": {
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.html",
+    "error": "'charmap' codec can't encode character '\\u2261' in position 12: character maps to <undefined>"
+  },
+  "open-play": {
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.html",
+    "error": "'charmap' codec can't encode character '\\u2261' in position 12: character maps to <undefined>"
+  },
+  "private-events": {
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/private-events.html",
+    "error": "'charmap' codec can't encode character '\\u2261' in position 12: character maps to <undefined>"
+  },
+  "court-reservations": {
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/court-reservations.html",
+    "error": "'charmap' codec can't encode character '\\u2261' in position 12: character maps to <undefined>"
+  }
+}

@@ -1,0 +1,1454 @@
+{
+  "home": {
+    "viewport": {
+      "width": 642,
+      "height": 1390
+    },
+    "scrollWidth": 642,
+    "horizontalOverflow": null,
+    "overflowingElements": [],
+    "images": [
+      {
+        "src": "32.github.io/dinkclubwebsite/assets/img/player-swinging.webp",
+        "alt": "Pickleball player mid-swing on the courts at Dink Club in Miami",
+        "classes": "ph",
+        "rendered": {
+          "w": 354,
+          "h": 539
+        },
+        "natural": {
+          "w": 467,
+          "h": 539
+        },
+        "issues": [
+          "distorted: natural 467x539 (ratio 0.87) rendered 354x539 (ratio 0.66)"
+        ]
+      }
+    ],
+    "smallText": [],
+    "tapTargets": [
+      {
+        "tag": "BUTTON",
+        "classes": "burger",
+        "text": "\u2261",
+        "href": "",
+        "size": {
+          "w": 15,
+          "h": 29
+        },
+        "top": 23,
+        "left": 357
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Open Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.",
+        "size": {
+          "w": 71,
+          "h": 18
+        },
+        "top": 16943,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Lessons",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 58,
+          "h": 18
+        },
+        "top": 17029,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Clinics",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/clinics.ht",
+        "size": {
+          "w": 46,
+          "h": 18
+        },
+        "top": 17061,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Leagues",
+        "href": "https://app.courtreserve.com/Online/Reservations/Bookings/13",
+        "size": {
+          "w": 59,
+          "h": 18
+        },
+        "top": 17093,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Paddles",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/paddles.ht",
+        "size": {
+          "w": 56,
+          "h": 18
+        },
+        "top": 16943,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Apparel",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/shop.html",
+        "size": {
+          "w": 54,
+          "h": 18
+        },
+        "top": 16975,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Accessories",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/accessorie",
+        "size": {
+          "w": 86,
+          "h": 18
+        },
+        "top": 17007,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Eyewear",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/#",
+        "size": {
+          "w": 59,
+          "h": 18
+        },
+        "top": 17038,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "CRBN",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/#",
+        "size": {
+          "w": 41,
+          "h": 18
+        },
+        "top": 17070,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "About",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/about.html",
+        "size": {
+          "w": 42,
+          "h": 18
+        },
+        "top": 16943,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Courts",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/court-rese",
+        "size": {
+          "w": 47,
+          "h": 18
+        },
+        "top": 17029,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Tournaments",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/tournament",
+        "size": {
+          "w": 91,
+          "h": 18
+        },
+        "top": 17061,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "FAQ",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/faq.html",
+        "size": {
+          "w": 28,
+          "h": 18
+        },
+        "top": 17093,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Contact",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 55,
+          "h": 18
+        },
+        "top": 17125,
+        "left": 540
+      }
+    ],
+    "misc": [
+      {
+        "type": "fixed/sticky",
+        "position": "fixed",
+        "tag": "DIV",
+        "classes": "mobilebar",
+        "rect": {
+          "top": 1319,
+          "bottom": 1390,
+          "height": 71,
+          "width": 642
+        }
+      },
+      {
+        "type": "fixed/sticky",
+        "position": "sticky",
+        "tag": "HEADER",
+        "classes": "",
+        "rect": {
+          "top": 0,
+          "bottom": 75,
+          "height": 75,
+          "width": 390
+        }
+      }
+    ],
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/",
+    "slug": "home"
+  },
+  "tournaments": {
+    "viewport": {
+      "width": 596,
+      "height": 1290
+    },
+    "scrollWidth": 596,
+    "horizontalOverflow": null,
+    "overflowingElements": [],
+    "images": [
+      {
+        "src": ".github.io/dinkclubwebsite/assets/img/tournament-winners.jpg",
+        "alt": "Tournament winners celebrating with medals at a Dink Club pickleball tournament in Miami",
+        "classes": "",
+        "rendered": {
+          "w": 354,
+          "h": 1024
+        },
+        "natural": {
+          "w": 768,
+          "h": 1024
+        },
+        "issues": [
+          "distorted: natural 768x1024 (ratio 0.75) rendered 354x1024 (ratio 0.35)"
+        ]
+      }
+    ],
+    "smallText": [],
+    "tapTargets": [
+      {
+        "tag": "BUTTON",
+        "classes": "burger",
+        "text": "\u2261",
+        "href": "",
+        "size": {
+          "w": 15,
+          "h": 29
+        },
+        "top": 23,
+        "left": 357
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Home",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 37,
+          "h": 16
+        },
+        "top": 93,
+        "left": 18
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "305-209-3133",
+        "href": "tel:+13052093133",
+        "size": {
+          "w": 113,
+          "h": 20
+        },
+        "top": 8590,
+        "left": 174
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Instagram",
+        "href": "https://www.instagram.com/dinkclubpickleball/",
+        "size": {
+          "w": 78,
+          "h": 20
+        },
+        "top": 8718,
+        "left": 43
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Open Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.",
+        "size": {
+          "w": 71,
+          "h": 18
+        },
+        "top": 8782,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Lessons",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 58,
+          "h": 18
+        },
+        "top": 8869,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Tournaments",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/tournament",
+        "size": {
+          "w": 91,
+          "h": 18
+        },
+        "top": 8900,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Apparel",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/shop.html",
+        "size": {
+          "w": 54,
+          "h": 18
+        },
+        "top": 8782,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Paddles",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/paddles.ht",
+        "size": {
+          "w": 56,
+          "h": 18
+        },
+        "top": 8814,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Accessories",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/accessorie",
+        "size": {
+          "w": 86,
+          "h": 18
+        },
+        "top": 8846,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "All Products",
+        "href": "https://dinkclub.com/collections/all",
+        "size": {
+          "w": 84,
+          "h": 18
+        },
+        "top": 8878,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "About",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/about.html",
+        "size": {
+          "w": 42,
+          "h": 18
+        },
+        "top": 8782,
+        "left": 541
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "FAQ",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/faq.html",
+        "size": {
+          "w": 28,
+          "h": 18
+        },
+        "top": 8869,
+        "left": 541
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Contact",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 55,
+          "h": 18
+        },
+        "top": 8900,
+        "left": 541
+      }
+    ],
+    "misc": [
+      {
+        "type": "fixed/sticky",
+        "position": "fixed",
+        "tag": "DIV",
+        "classes": "mobilebar",
+        "rect": {
+          "top": 1219,
+          "bottom": 1290,
+          "height": 71,
+          "width": 596
+        }
+      },
+      {
+        "type": "fixed/sticky",
+        "position": "sticky",
+        "tag": "HEADER",
+        "classes": "",
+        "rect": {
+          "top": 0,
+          "bottom": 75,
+          "height": 75,
+          "width": 390
+        }
+      }
+    ],
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/tournaments.html",
+    "slug": "tournaments"
+  },
+  "lessons": {
+    "viewport": {
+      "width": 632,
+      "height": 1368
+    },
+    "scrollWidth": 632,
+    "horizontalOverflow": null,
+    "overflowingElements": [],
+    "images": [
+      {
+        "src": "azarus32.github.io/dinkclubwebsite/assets/img/confidence.jpg",
+        "alt": "Dink Club coach showing a beginner the ball and basics on the outdoor courts in Miami",
+        "classes": "",
+        "rendered": {
+          "w": 354,
+          "h": 960
+        },
+        "natural": {
+          "w": 1280,
+          "h": 960
+        },
+        "issues": [
+          "distorted: natural 1280x960 (ratio 1.33) rendered 354x960 (ratio 0.37)"
+        ]
+      }
+    ],
+    "smallText": [],
+    "tapTargets": [
+      {
+        "tag": "BUTTON",
+        "classes": "burger",
+        "text": "\u2261",
+        "href": "",
+        "size": {
+          "w": 15,
+          "h": 29
+        },
+        "top": 23,
+        "left": 357
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Home",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 37,
+          "h": 16
+        },
+        "top": 93,
+        "left": 18
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 27,
+          "h": 16
+        },
+        "top": 93,
+        "left": 72
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "305-209-3133",
+        "href": "tel:+13052093133",
+        "size": {
+          "w": 119,
+          "h": 20
+        },
+        "top": 3578,
+        "left": 246
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "305-209-3133",
+        "href": "tel:+13052093133",
+        "size": {
+          "w": 113,
+          "h": 20
+        },
+        "top": 8127,
+        "left": 43
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "send a message",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 125,
+          "h": 20
+        },
+        "top": 8127,
+        "left": 181
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Open Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.",
+        "size": {
+          "w": 71,
+          "h": 18
+        },
+        "top": 10466,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Lessons",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 58,
+          "h": 18
+        },
+        "top": 10553,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Clinics",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/clinics.ht",
+        "size": {
+          "w": 46,
+          "h": 18
+        },
+        "top": 10584,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Leagues",
+        "href": "https://app.courtreserve.com/Online/Reservations/Bookings/13",
+        "size": {
+          "w": 59,
+          "h": 18
+        },
+        "top": 10616,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Paddles",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/paddles.ht",
+        "size": {
+          "w": 56,
+          "h": 18
+        },
+        "top": 10466,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Apparel",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/shop.html",
+        "size": {
+          "w": 54,
+          "h": 18
+        },
+        "top": 10498,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Accessories",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/accessorie",
+        "size": {
+          "w": 86,
+          "h": 18
+        },
+        "top": 10530,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Eyewear",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 59,
+          "h": 18
+        },
+        "top": 10562,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "CRBN",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 41,
+          "h": 18
+        },
+        "top": 10593,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "About",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/about.html",
+        "size": {
+          "w": 42,
+          "h": 18
+        },
+        "top": 10466,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Courts",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/court-rese",
+        "size": {
+          "w": 47,
+          "h": 18
+        },
+        "top": 10553,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Tournaments",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 91,
+          "h": 18
+        },
+        "top": 10584,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "FAQ",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/faq.html",
+        "size": {
+          "w": 28,
+          "h": 18
+        },
+        "top": 10616,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Contact",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 55,
+          "h": 18
+        },
+        "top": 10648,
+        "left": 540
+      }
+    ],
+    "misc": [
+      {
+        "type": "fixed/sticky",
+        "position": "fixed",
+        "tag": "DIV",
+        "classes": "mobilebar",
+        "rect": {
+          "top": 1297,
+          "bottom": 1368,
+          "height": 71,
+          "width": 632
+        }
+      },
+      {
+        "type": "fixed/sticky",
+        "position": "sticky",
+        "tag": "HEADER",
+        "classes": "",
+        "rect": {
+          "top": 0,
+          "bottom": 75,
+          "height": 75,
+          "width": 390
+        }
+      }
+    ],
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.html",
+    "slug": "lessons"
+  },
+  "open-play": {
+    "viewport": {
+      "width": 607,
+      "height": 1312
+    },
+    "scrollWidth": 607,
+    "horizontalOverflow": null,
+    "overflowingElements": [],
+    "images": [
+      {
+        "src": "us32.github.io/dinkclubwebsite/assets/img/open-play-crew.jpg",
+        "alt": "An open play pickleball crew together on the outdoor courts at Dink Club in Miami",
+        "classes": "",
+        "rendered": {
+          "w": 354,
+          "h": 720
+        },
+        "natural": {
+          "w": 1280,
+          "h": 960
+        },
+        "issues": [
+          "distorted: natural 1280x960 (ratio 1.33) rendered 354x720 (ratio 0.49)"
+        ]
+      }
+    ],
+    "smallText": [],
+    "tapTargets": [
+      {
+        "tag": "BUTTON",
+        "classes": "burger",
+        "text": "\u2261",
+        "href": "",
+        "size": {
+          "w": 15,
+          "h": 29
+        },
+        "top": 23,
+        "left": 357
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Home",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 37,
+          "h": 16
+        },
+        "top": 93,
+        "left": 18
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/court-rese",
+        "size": {
+          "w": 27,
+          "h": 16
+        },
+        "top": 93,
+        "left": 72
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "305-209-3133",
+        "href": "tel:+13052093133",
+        "size": {
+          "w": 113,
+          "h": 20
+        },
+        "top": 4914,
+        "left": 76
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Open Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.",
+        "size": {
+          "w": 71,
+          "h": 18
+        },
+        "top": 5053,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Lessons",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 58,
+          "h": 18
+        },
+        "top": 5139,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Clinics",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/clinics.ht",
+        "size": {
+          "w": 46,
+          "h": 18
+        },
+        "top": 5171,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Apparel",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/shop.html",
+        "size": {
+          "w": 54,
+          "h": 18
+        },
+        "top": 5053,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Paddles",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/paddles.ht",
+        "size": {
+          "w": 56,
+          "h": 18
+        },
+        "top": 5084,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Accessories",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/accessorie",
+        "size": {
+          "w": 86,
+          "h": 18
+        },
+        "top": 5116,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "All Products",
+        "href": "https://dinkclub.com/collections/all",
+        "size": {
+          "w": 84,
+          "h": 18
+        },
+        "top": 5148,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "About",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/about.html",
+        "size": {
+          "w": 42,
+          "h": 18
+        },
+        "top": 5053,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "FAQ",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/faq.html",
+        "size": {
+          "w": 28,
+          "h": 18
+        },
+        "top": 5139,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Contact",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 55,
+          "h": 18
+        },
+        "top": 5171,
+        "left": 540
+      }
+    ],
+    "misc": [
+      {
+        "type": "fixed/sticky",
+        "position": "fixed",
+        "tag": "DIV",
+        "classes": "mobilebar",
+        "rect": {
+          "top": 1241,
+          "bottom": 1312,
+          "height": 71,
+          "width": 607
+        }
+      },
+      {
+        "type": "fixed/sticky",
+        "position": "sticky",
+        "tag": "HEADER",
+        "classes": "",
+        "rect": {
+          "top": 0,
+          "bottom": 75,
+          "height": 75,
+          "width": 390
+        }
+      }
+    ],
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.html",
+    "slug": "open-play"
+  },
+  "private-events": {
+    "viewport": {
+      "width": 596,
+      "height": 1290
+    },
+    "scrollWidth": 596,
+    "horizontalOverflow": null,
+    "overflowingElements": [],
+    "images": [
+      {
+        "src": "torlazarus32.github.io/dinkclubwebsite/assets/img/events.jpg",
+        "alt": "A group enjoying a private pickleball event on the outdoor courts at Dink Club in Miami",
+        "classes": "",
+        "rendered": {
+          "w": 354,
+          "h": 960
+        },
+        "natural": {
+          "w": 1280,
+          "h": 960
+        },
+        "issues": [
+          "distorted: natural 1280x960 (ratio 1.33) rendered 354x960 (ratio 0.37)"
+        ]
+      }
+    ],
+    "smallText": [],
+    "tapTargets": [
+      {
+        "tag": "BUTTON",
+        "classes": "burger",
+        "text": "\u2261",
+        "href": "",
+        "size": {
+          "w": 15,
+          "h": 29
+        },
+        "top": 23,
+        "left": 357
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Home",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 37,
+          "h": 16
+        },
+        "top": 93,
+        "left": 18
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/court-rese",
+        "size": {
+          "w": 27,
+          "h": 16
+        },
+        "top": 93,
+        "left": 72
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "305-209-3133",
+        "href": "tel:+13052093133",
+        "size": {
+          "w": 113,
+          "h": 20
+        },
+        "top": 6829,
+        "left": 223
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "send an inquiry",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 119,
+          "h": 20
+        },
+        "top": 6853,
+        "left": 63
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Open Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.",
+        "size": {
+          "w": 71,
+          "h": 18
+        },
+        "top": 6967,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Lessons",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 58,
+          "h": 18
+        },
+        "top": 7054,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Tournaments",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/tournament",
+        "size": {
+          "w": 91,
+          "h": 18
+        },
+        "top": 7085,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Apparel",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/shop.html",
+        "size": {
+          "w": 54,
+          "h": 18
+        },
+        "top": 6967,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Paddles",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/paddles.ht",
+        "size": {
+          "w": 56,
+          "h": 18
+        },
+        "top": 6999,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Accessories",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/accessorie",
+        "size": {
+          "w": 86,
+          "h": 18
+        },
+        "top": 7031,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "All Products",
+        "href": "https://dinkclub.com/collections/all",
+        "size": {
+          "w": 84,
+          "h": 18
+        },
+        "top": 7063,
+        "left": 420
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "About",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/about.html",
+        "size": {
+          "w": 42,
+          "h": 18
+        },
+        "top": 6967,
+        "left": 541
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "FAQ",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/faq.html",
+        "size": {
+          "w": 28,
+          "h": 18
+        },
+        "top": 7054,
+        "left": 541
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Contact",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 55,
+          "h": 18
+        },
+        "top": 7085,
+        "left": 541
+      }
+    ],
+    "misc": [
+      {
+        "type": "fixed/sticky",
+        "position": "fixed",
+        "tag": "DIV",
+        "classes": "mobilebar",
+        "rect": {
+          "top": 1219,
+          "bottom": 1290,
+          "height": 71,
+          "width": 596
+        }
+      },
+      {
+        "type": "fixed/sticky",
+        "position": "sticky",
+        "tag": "HEADER",
+        "classes": "",
+        "rect": {
+          "top": 0,
+          "bottom": 75,
+          "height": 75,
+          "width": 390
+        }
+      }
+    ],
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/private-events.html",
+    "slug": "private-events"
+  },
+  "court-reservations": {
+    "viewport": {
+      "width": 607,
+      "height": 1312
+    },
+    "scrollWidth": 607,
+    "horizontalOverflow": null,
+    "overflowingElements": [],
+    "images": [
+      {
+        "src": "github.io/dinkclubwebsite/assets/img/courts-aerial-1280.webp",
+        "alt": "Six outdoor pickleball courts at Dink Club in Miami",
+        "classes": "",
+        "rendered": {
+          "w": 354,
+          "h": 960
+        },
+        "natural": {
+          "w": 1280,
+          "h": 960
+        },
+        "issues": [
+          "distorted: natural 1280x960 (ratio 1.33) rendered 354x960 (ratio 0.37)"
+        ]
+      }
+    ],
+    "smallText": [],
+    "tapTargets": [
+      {
+        "tag": "BUTTON",
+        "classes": "burger",
+        "text": "\u2261",
+        "href": "",
+        "size": {
+          "w": 15,
+          "h": 29
+        },
+        "top": 23,
+        "left": 357
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Home",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 37,
+          "h": 16
+        },
+        "top": 93,
+        "left": 18
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/index.html",
+        "size": {
+          "w": 27,
+          "h": 16
+        },
+        "top": 93,
+        "left": 72
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Open Play",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/open-play.",
+        "size": {
+          "w": 71,
+          "h": 18
+        },
+        "top": 8327,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Lessons",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/lessons.ht",
+        "size": {
+          "w": 58,
+          "h": 18
+        },
+        "top": 8414,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Leagues",
+        "href": "https://app.courtreserve.com/Online/Reservations/Bookings/13",
+        "size": {
+          "w": 59,
+          "h": 18
+        },
+        "top": 8446,
+        "left": 293
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Paddles",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/paddles.ht",
+        "size": {
+          "w": 56,
+          "h": 18
+        },
+        "top": 8327,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Apparel",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/shop.html",
+        "size": {
+          "w": 54,
+          "h": 18
+        },
+        "top": 8359,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Accessories",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/accessorie",
+        "size": {
+          "w": 86,
+          "h": 18
+        },
+        "top": 8391,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "CRBN",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/court-rese",
+        "size": {
+          "w": 41,
+          "h": 18
+        },
+        "top": 8423,
+        "left": 419
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "About",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/about.html",
+        "size": {
+          "w": 42,
+          "h": 18
+        },
+        "top": 8327,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Courts",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/court-rese",
+        "size": {
+          "w": 47,
+          "h": 18
+        },
+        "top": 8414,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "FAQ",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/faq.html",
+        "size": {
+          "w": 28,
+          "h": 18
+        },
+        "top": 8446,
+        "left": 540
+      },
+      {
+        "tag": "A",
+        "classes": "",
+        "text": "Contact",
+        "href": "https://victorlazarus32.github.io/dinkclubwebsite/contact.ht",
+        "size": {
+          "w": 55,
+          "h": 18
+        },
+        "top": 8478,
+        "left": 540
+      }
+    ],
+    "misc": [
+      {
+        "type": "fixed/sticky",
+        "position": "fixed",
+        "tag": "DIV",
+        "classes": "mobilebar",
+        "rect": {
+          "top": 1241,
+          "bottom": 1312,
+          "height": 71,
+          "width": 607
+        }
+      },
+      {
+        "type": "fixed/sticky",
+        "position": "sticky",
+        "tag": "HEADER",
+        "classes": "",
+        "rect": {
+          "top": 0,
+          "bottom": 75,
+          "height": 75,
+          "width": 390
+        }
+      }
+    ],
+    "url": "https://victorlazarus32.github.io/dinkclubwebsite/court-reservations.html",
+    "slug": "court-reservations"
+  }
+}
