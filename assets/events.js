@@ -78,7 +78,7 @@
           var tagline = f.tagline ? ' <b style="color:#fff">' + esc(f.tagline) + '</b>' : '';
           feat.innerHTML =
             '<div class="wrap split" style="align-items:center">' +
-              '<img src="' + esc(f.image) + '" alt="' + esc(f.title) + ' event flyer" loading="lazy" style="width:100%;max-width:380px;height:auto;border-radius:12px;display:block;margin:0 auto">' +
+              '<img src="' + esc(f.image) + '" alt="' + esc(f.title) + ' event flyer" loading="lazy" style="width:100%;max-width:400px;aspect-ratio:auto;height:auto;object-fit:contain;border-radius:12px;display:block;margin:0 auto">' +
               '<div>' +
                 '<p class="eyebrow" style="color:var(--volt)">' + esc(f.eyebrow) + '</p>' +
                 '<h2 style="color:#fff;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;margin-bottom:12px">' + esc(f.title) + '</h2>' +
