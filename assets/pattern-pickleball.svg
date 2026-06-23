@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="760" viewBox="0 0 900 760">
+  <g fill="none" stroke="#e7eaee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- pickleball, upper-left -->
+    <g transform="translate(120,130) rotate(-14)">
+      <circle r="36"/>
+      <g fill="#e7eaee" stroke="none">
+        <circle cx="0" cy="-18" r="2.7"/><circle cx="15" cy="-10" r="2.7"/><circle cx="18" cy="7" r="2.7"/>
+        <circle cx="6" cy="18" r="2.7"/><circle cx="-12" cy="15" r="2.7"/><circle cx="-19" cy="-2" r="2.7"/>
+        <circle cx="-8" cy="-14" r="2.7"/><circle cx="2" cy="2" r="2.7"/>
+      </g>
+    </g>
+
+    <!-- paddle, upper-right -->
+    <g transform="translate(700,120) rotate(32)">
+      <rect x="-28" y="-46" width="56" height="80" rx="26"/>
+      <rect x="-10" y="32" width="20" height="40" rx="6"/>
+    </g>
+
+    <!-- mini court, mid-left -->
+    <g transform="translate(150,420) rotate(-7)">
+      <rect x="-62" y="-40" width="124" height="80" rx="3"/>
+      <line x1="0" y1="-40" x2="0" y2="40"/>
+      <line x1="-22" y1="-40" x2="-22" y2="40"/>
+      <line x1="22" y1="-40" x2="22" y2="40"/>
+    </g>
+
+    <!-- small ball, center -->
+    <g transform="translate(470,330) rotate(10)">
+      <circle r="22"/>
+      <g fill="#e7eaee" stroke="none">
+        <circle cx="0" cy="-11" r="2.2"/><circle cx="10" cy="-3" r="2.2"/><circle cx="7" cy="9" r="2.2"/>
+        <circle cx="-7" cy="8" r="2.2"/><circle cx="-11" cy="-4" r="2.2"/>
+      </g>
+    </g>
+
+    <!-- paddle, lower-right -->
+    <g transform="translate(720,560) rotate(-22)">
+      <rect x="-24" y="-40" width="48" height="70" rx="23"/>
+      <rect x="-8" y="28" width="16" height="34" rx="5"/>
+    </g>
+
+    <!-- net snippet, lower-left -->
+    <g transform="translate(360,640) rotate(4)">
+      <line x1="-70" y1="0" x2="70" y2="0"/>
+      <line x1="-70" y1="-22" x2="70" y2="-22"/>
+      <line x1="-70" y1="0" x2="-70" y2="-30"/><line x1="70" y1="0" x2="70" y2="-30"/>
+      <line x1="-46" y1="-22" x2="-46" y2="0"/><line x1="-23" y1="-22" x2="-23" y2="0"/>
+      <line x1="0" y1="-22" x2="0" y2="0"/><line x1="23" y1="-22" x2="23" y2="0"/><line x1="46" y1="-22" x2="46" y2="0"/>
+    </g>
+
+    <!-- pickleball, far right -->
+    <g transform="translate(840,380) rotate(18)">
+      <circle r="28"/>
+      <g fill="#e7eaee" stroke="none">
+        <circle cx="0" cy="-14" r="2.4"/><circle cx="12" cy="-6" r="2.4"/><circle cx="9" cy="11" r="2.4"/>
+        <circle cx="-9" cy="10" r="2.4"/><circle cx="-14" cy="-4" r="2.4"/>
+      </g>
+    </g>
+
+  </g>
+</svg>
