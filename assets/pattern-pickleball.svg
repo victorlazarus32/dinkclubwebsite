@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="760" viewBox="0 0 900 760">
-  <g fill="none" stroke="#e7eaee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="none" stroke="#cbd2da" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
 
     <!-- pickleball, upper-left -->
     <g transform="translate(120,130) rotate(-14)">
       <circle r="36"/>
-      <g fill="#e7eaee" stroke="none">
+      <g fill="#cbd2da" stroke="none">
         <circle cx="0" cy="-18" r="2.7"/><circle cx="15" cy="-10" r="2.7"/><circle cx="18" cy="7" r="2.7"/>
         <circle cx="6" cy="18" r="2.7"/><circle cx="-12" cy="15" r="2.7"/><circle cx="-19" cy="-2" r="2.7"/>
         <circle cx="-8" cy="-14" r="2.7"/><circle cx="2" cy="2" r="2.7"/>
@@ -28,7 +28,7 @@
     <!-- small ball, center -->
     <g transform="translate(470,330) rotate(10)">
       <circle r="22"/>
-      <g fill="#e7eaee" stroke="none">
+      <g fill="#cbd2da" stroke="none">
         <circle cx="0" cy="-11" r="2.2"/><circle cx="10" cy="-3" r="2.2"/><circle cx="7" cy="9" r="2.2"/>
         <circle cx="-7" cy="8" r="2.2"/><circle cx="-11" cy="-4" r="2.2"/>
       </g>
@@ -52,7 +52,7 @@
     <!-- pickleball, far right -->
     <g transform="translate(840,380) rotate(18)">
       <circle r="28"/>
-      <g fill="#e7eaee" stroke="none">
+      <g fill="#cbd2da" stroke="none">
         <circle cx="0" cy="-14" r="2.4"/><circle cx="12" cy="-6" r="2.4"/><circle cx="9" cy="11" r="2.4"/>
         <circle cx="-9" cy="10" r="2.4"/><circle cx="-14" cy="-4" r="2.4"/>
       </g>

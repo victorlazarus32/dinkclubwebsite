@@ -6,7 +6,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--body);color:var(--ink);background:var(--paper) url('pattern-pickleball.svg') repeat;background-size:820px auto;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{font-family:var(--body);color:var(--ink);background:var(--paper) url('pattern-pickleball.svg') repeat;background-size:540px auto;line-height:1.55;-webkit-font-smoothing:antialiased}
 /* faint pickleball motifs also show through the light-gray sections */
 .ways-soft,section.smoke{background-color:transparent !important}
 img{max-width:100%;display:block}
