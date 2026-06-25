@@ -96,6 +96,10 @@ const BRANCH="main", FILE="events.json", UPLOADS="assets/img/uploads";
 // Git Gateway: Netlify proxies the GitHub API here, authorized by the logged-in user. No token needed.
 const GATEWAY="/.netlify/git/github";
 let state={events:[],featured:{}}, fileSha=null, user=null;
+// Instant local previews: a just-uploaded file's web address 404s until Netlify rebuilds,
+// so show the picked file straight from the browser until then.
+const localImg={};
+function dsrc(p){return localImg[p]||p||"";}
 const $=s=>document.querySelector(s), esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600);}
 async function authToken(){return user?await user.jwt():null;}
@@ -148,7 +152,7 @@ function renderEvents(){
       <label>Link (registration / info URL)</label><input value="${esc(ev.link)}" data-i="${i}" data-k="link">
       <label>Short description</label><textarea data-i="${i}" data-k="blurb">${esc(ev.blurb)}</textarea>
       <label>Flyer / image</label>
-      <div class="imgrow"><img src="${esc(ev.image||"")}" alt="" onerror="this.style.visibility='hidden'">
+      <div class="imgrow"><img src="${esc(dsrc(ev.image))}" alt="" onerror="this.style.visibility='hidden'">
         <input value="${esc(ev.image)}" data-i="${i}" data-k="image" placeholder="assets/img/...">
         <input type="file" accept="image/*" data-up="${i}" style="max-width:150px;border:0;padding:0">
       </div>
@@ -161,7 +165,7 @@ function renderFeatured(){
     <label>Eyebrow (small line above title)</label><input value="${esc(f.eyebrow)}" data-f="eyebrow">
     <label>Title</label><input value="${esc(f.title)}" data-f="title">
     <label>Flyer / image</label>
-    <div class="imgrow"><img src="${esc(f.image||"")}" onerror="this.style.visibility='hidden'">
+    <div class="imgrow"><img src="${esc(dsrc(f.image))}" onerror="this.style.visibility='hidden'">
       <input value="${esc(f.image)}" data-f="image" placeholder="assets/img/...">
       <input type="file" accept="image/*" data-upf="1" style="max-width:150px;border:0;padding:0"></div>
     <label>Description</label><textarea data-f="body">${esc(f.body)}</textarea>
@@ -177,7 +181,7 @@ function renderFeatured(){
 // ---------- preview render ----------
 function card(ev){
   const tba=ev.status==="tba"||!ev.date;
-  return `<div class="ev"><div class="evimg contain" style="background-image:url('${esc(ev.image)}')"></div>
+  return `<div class="ev"><div class="evimg contain" style="background-image:url('${esc(dsrc(ev.image))}')"></div>
     <div class="evbody"><div class="evdate">${esc(tba?(ev.label||"COMING SOON"):"★ "+(ev.label||""))}</div>
     <div class="evname">${esc(ev.name)}</div><p>${esc(ev.blurb)}</p>
     <a class="btn ${tba?"btn-dark":"btn-volt"}" href="#">${esc(ev.cta||"Register →")}</a></div></div>`;
@@ -188,7 +192,7 @@ function renderPreview(){
   $("#pvFeatured").innerHTML=!f.enabled?'<p style="color:#9aa">Banner hidden</p>':
     `<p class="eyebrow" style="color:var(--volt)">${esc(f.eyebrow)}</p>
      <h2 style="color:#fff;font-weight:900;margin:6px 0 10px">${esc(f.title)}</h2>
-     ${f.image?`<img src="${esc(f.image)}" style="max-width:150px;border-radius:8px;float:right;margin:0 0 8px 12px">`:""}
+     ${f.image?`<img src="${esc(dsrc(f.image))}" style="max-width:150px;border-radius:8px;float:right;margin:0 0 8px 12px">`:""}
      <p style="color:#cfd6dd;font-size:.92rem">${esc(f.body)} <b style="color:#fff">${esc(f.tagline||"")}</b></p>
      <ul style="color:#cfd6dd;font-size:.86rem">${(f.details||[]).map(d=>"<li>"+esc(d)+"</li>").join("")}</ul>
      <a class="btn btn-volt" href="#">${esc(f.ctaText||"Sign Up →")}</a>`;
@@ -231,7 +235,7 @@ async function uploadImage(file){
     const r=await fetch(`${GATEWAY}/contents/${path}`,{method:"PUT",
       headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},
       body:JSON.stringify({message:"Dashboard: upload "+name,content,branch:BRANCH})});
-    if(r.ok)return path;
+    if(r.ok){localImg[path]=URL.createObjectURL(file);return path;}
     const j=await r.json().catch(()=>({}));
     console.error("Image upload failed",r.status,j);
     toast("Upload failed ("+r.status+"): "+(j.message||"see console")); return null;
