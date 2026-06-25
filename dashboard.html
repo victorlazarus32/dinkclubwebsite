@@ -218,12 +218,21 @@ $("#addEvent").onclick=()=>{state.events.push({name:"New Event",status:"tba",dat
 
 // ---------- github api ----------
 function b64(str){return btoa(unescape(encodeURIComponent(str)));}
+function fileToB64(file){return new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(",")[1]);fr.onerror=()=>rej(fr.error);fr.readAsDataURL(file);});}
 async function uploadImage(file){
-  const buf=await file.arrayBuffer();let bin="";const bytes=new Uint8Array(buf);for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);
-  const content=btoa(bin);const name=(Date.now()+"-"+file.name).replace(/[^\w.\-]/g,"_");const path=`${UPLOADS}/${name}`;
-  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{method:"PUT",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},
-    body:JSON.stringify({message:"Dashboard: upload "+name,content,branch:BRANCH})});
-  if(r.ok)return path; toast("Upload failed — check the token."); return null;
+  if(file.size>9*1024*1024){toast("That image is "+(file.size/1048576).toFixed(1)+"MB — please use one under ~9MB.");return null;}
+  toast("Uploading image…");
+  try{
+    const content=await fileToB64(file);
+    const name=(Date.now()+"-"+file.name).replace(/[^\w.\-]/g,"_");const path=`${UPLOADS}/${name}`;
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{method:"PUT",
+      headers:{Authorization:"Bearer "+token,"Accept":"application/vnd.github+json","Content-Type":"application/json"},
+      body:JSON.stringify({message:"Dashboard: upload "+name,content,branch:BRANCH})});
+    if(r.ok)return path;
+    const j=await r.json().catch(()=>({}));
+    console.error("Image upload failed",r.status,j);
+    toast("Upload failed ("+r.status+"): "+(j.message||"see console")); return null;
+  }catch(e){console.error(e);toast("Upload error: "+e.message);return null;}
 }
 async function publish(){
   if(!token)return;
