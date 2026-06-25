@@ -53,12 +53,14 @@
   <span id="conn" class="pill">Not connected</span>
   <span class="sp"></span>
   <button class="btn btn-ghost btn-sm" id="reload">↻ Reload</button>
-  <button class="btn btn-ghost btn-sm" id="download">Download file</button>
+  <button class="btn btn-ghost btn-sm" id="setupToggle" title="Administrator setup">⚙</button>
+  <button class="btn btn-ghost btn-sm" id="download">Download</button>
   <button class="btn btn-volt" id="publish" disabled>Publish to site</button>
 </div>
 
-<div class="setup" id="setupbox">
-  <b>First-time setup (one time, ~2 minutes):</b> to let this dashboard publish changes to the live site, paste a GitHub access token below.
+<div class="setup" id="setupbox" style="display:none">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><b>⚙ Administrator setup</b><span class="sp" style="flex:1"></span><button class="del" id="setupClose" style="color:#0b0b0f">Close ✕</button></div>
+  <b>One time, ~2 minutes</b> — this connects the dashboard so the owner can publish. (The client never needs this screen.) Paste a GitHub access token below.
   <details style="margin-top:8px"><summary>How to get the token</summary>
   <ol style="margin:8px 0 0;padding-left:18px;line-height:1.6">
     <li>Go to <b>github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>.</li>
@@ -107,7 +109,7 @@ const REPO="victorlazarus32/dinkclubwebsite", BRANCH="main", FILE="events.json",
 let state={events:[],featured:{}}, fileSha=null, token=localStorage.getItem("dc_token")||"";
 const $=s=>document.querySelector(s), esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600);}
-function setConn(){const c=$("#conn");if(token){c.textContent="Connected ✓";c.classList.add("ok");$("#publish").disabled=false;$("#setupbox").style.display="none";}else{c.textContent="Not connected";c.classList.remove("ok");$("#publish").disabled=true;$("#setupbox").style.display="";}}
+function setConn(){const c=$("#conn");if(token){c.textContent="Ready to publish ✓";c.classList.add("ok");$("#publish").disabled=false;}else{c.textContent="Edit mode";c.classList.remove("ok");$("#publish").disabled=true;}}
 
 // ---------- load ----------
 async function load(){
@@ -239,7 +241,9 @@ async function publish(){
 }
 
 // ---------- buttons ----------
-$("#connect").onclick=()=>{const v=$("#token").value.trim();if(!v)return;token=v;localStorage.setItem("dc_token",v);setConn();load();toast("Connected.");};
+$("#setupToggle").onclick=()=>{const b=$("#setupbox");b.style.display=b.style.display==="none"?"":"none";};
+$("#setupClose").onclick=()=>{$("#setupbox").style.display="none";};
+$("#connect").onclick=()=>{const v=$("#token").value.trim();if(!v)return;token=v;localStorage.setItem("dc_token",v);$("#setupbox").style.display="none";setConn();load();toast("Connected — the owner can now Publish.");};
 $("#forget").onclick=()=>{localStorage.removeItem("dc_token");token="";setConn();toast("Token removed from this browser.");};
 $("#publish").onclick=publish;
 $("#reload").onclick=load;
