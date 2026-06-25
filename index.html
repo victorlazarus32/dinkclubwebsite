@@ -385,5 +385,16 @@ document.querySelector('.burger')?.addEventListener('click',()=>{
     m.style.borderBottom='1px solid var(--line)';m.style.gap='14px';}
 });
 </script>
+<!-- Netlify Identity: catches the email-invite link so the owner can set a password, then sends them to the editor. Harmless on GitHub Pages (no Identity there). -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function (user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; });
+      }
+    });
+  }
+</script>
 </body>
 </html>
