@@ -42,6 +42,23 @@
   .banner{background:#f0f7d8;border:1px solid #d4e89a;color:#3a4516;border-radius:10px;padding:12px 16px;margin:16px 22px 0;font-size:.9rem;display:flex;align-items:center;gap:10px}
   .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:8px;font-size:.9rem;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none}
   .toast.show{opacity:1}
+  .tabs{display:flex;gap:6px;max-width:1180px;margin:14px auto 0;padding:0 22px}
+  .tab{font-family:var(--display,'Archivo',sans-serif);font-weight:800;text-transform:uppercase;font-size:.82rem;letter-spacing:.03em;padding:11px 18px;border:1px solid var(--line);border-bottom:0;border-radius:10px 10px 0 0;background:var(--smoke);color:var(--gray);cursor:pointer}
+  .tab.on{background:#fff;color:var(--ink);box-shadow:0 -3px 0 var(--volt) inset}
+  .mkt .card{max-width:760px}
+  .post{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;background:#fff;max-width:760px}
+  .post .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .post .chip{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 9px;border-radius:20px;background:var(--ink);color:#fff}
+  .post .chip.t{background:var(--volt);color:var(--ink)}
+  .post .chip.d{background:var(--smoke);color:var(--gray);border:1px solid var(--line)}
+  .post .cap{width:100%;min-height:120px;white-space:pre-wrap;font-size:.95rem;line-height:1.5}
+  .post .tags{color:#2f6cd6;font-size:.86rem;margin:8px 0;word-spacing:2px}
+  .post .visual{color:var(--gray);font-size:.84rem;font-style:italic;margin:6px 0 10px}
+  .post .acts{display:flex;gap:8px;flex-wrap:wrap}
+  .strat{background:var(--ink);color:#fff;border-radius:12px;padding:14px 18px;margin-bottom:16px;max-width:760px;font-size:.95rem}
+  .strat b{color:var(--volt)}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid #ffffff66;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+  @keyframes sp{to{transform:rotate(360deg)}}
   .pvframe .events{grid-template-columns:1fr 1fr;padding:14px}
   .pvframe section{padding:0}
 </style>
@@ -63,7 +80,12 @@
   <span>👋</span><span><b>Welcome.</b> Click <b>Log in</b> (top right) and sign in with your email and password to start editing. Your changes go live on the website when you press <b>Publish</b>.</span>
 </div>
 
-<div class="wrap">
+<div class="tabs">
+  <button class="tab on" data-view="content">📅 Events &amp; Content</button>
+  <button class="tab" data-view="marketing">📣 Marketing Studio</button>
+</div>
+
+<div class="wrap" id="view-content">
   <!-- EDITOR -->
   <div>
     <h2 class="sec">Events</h2>
@@ -86,6 +108,58 @@
       <div class="pvhead">Featured banner</div>
       <div id="pvFeatured" style="background:var(--ink);color:#fff;padding:18px"></div>
     </div>
+  </div>
+</div>
+
+<!-- MARKETING STUDIO -->
+<div class="wrap mkt" id="view-marketing" style="display:none;grid-template-columns:1fr">
+  <div>
+    <h2 class="sec">📣 Marketing Studio</h2>
+    <p class="hint">Generate a ready-to-post Instagram plan — captions, hashtags, best times, and a countdown leading up to an event. Review, tweak, then copy &amp; post. <b>Log in</b> to use it.</p>
+
+    <div class="card">
+      <div class="two">
+        <div>
+          <label>Plan around which event?</label>
+          <select id="mktEvent"></select>
+        </div>
+        <div>
+          <label>How many posts?</label>
+          <select id="mktCount">
+            <option value="4">4 posts</option>
+            <option value="6" selected>6 posts</option>
+            <option value="8">8 posts</option>
+            <option value="10">10 posts</option>
+          </select>
+        </div>
+      </div>
+      <div class="two">
+        <div>
+          <label>Main goal</label>
+          <select id="mktGoal">
+            <option>Drive event signups</option>
+            <option>Grow awareness &amp; followers</option>
+            <option>Build community engagement</option>
+            <option>Promote open play / drop-ins</option>
+            <option>Recap &amp; show social proof</option>
+          </select>
+        </div>
+        <div>
+          <label>Tone</label>
+          <select id="mktTone">
+            <option>Energetic and fun</option>
+            <option>Friendly and welcoming</option>
+            <option>Bold and competitive</option>
+            <option>Chill and social</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-volt" id="mktGo" style="margin-top:14px">✨ Generate content plan</button>
+      <p class="hint" id="mktNote" style="margin-top:10px"></p>
+    </div>
+
+    <div id="mktStrategy"></div>
+    <div id="mktPosts"></div>
   </div>
 </div>
 
@@ -246,11 +320,21 @@ async function publish(){
   $("#publish").disabled=true;$("#publish").textContent="Publishing…";
   try{
     const tk=await authToken();
+    // Conflict guard: did the live file change since we loaded it?
     const g=await fetch(`${GATEWAY}/contents/${FILE}?ref=${BRANCH}`,{headers:{Authorization:"Bearer "+tk}});
-    if(g.ok)fileSha=(await g.json()).sha;
+    if(g.ok){
+      const latest=(await g.json()).sha;
+      if(!fileSha){fileSha=latest;}            // first publish this session — adopt latest
+      else if(latest!==fileSha){               // file changed underneath us → real conflict
+        const ok=confirm("Heads up: the live events were changed somewhere else (another device or person) since you opened this dashboard.\n\nPublishing now will OVERWRITE those changes.\n\n• Click Cancel to load the latest first (recommended), then re-apply your edits.\n• Click OK to overwrite and publish anyway.");
+        if(!ok){await load();toast("Loaded the latest. Re-apply your changes, then Publish.");$("#publish").disabled=false;$("#publish").textContent="Publish to site";return;}
+        fileSha=latest;                         // user chose to overwrite
+      }
+    }
     const r=await fetch(`${GATEWAY}/contents/${FILE}`,{method:"PUT",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},
       body:JSON.stringify({message:"Dashboard: update events",content:b64(JSON.stringify(state,null,2)+"\n"),sha:fileSha,branch:BRANCH})});
     if(r.ok){fileSha=(await r.json()).content.sha;toast("Published! Live in ~1 minute. Refresh the site to see it.");}
+    else if(r.status===409||r.status===422){toast("Someone just changed the live data — loading the latest. Re-apply your edits, then Publish.");await load();}
     else{const j=await r.json().catch(()=>({}));toast("Publish failed: "+(j.message||"please try again"));}
   }catch(e){toast("Publish error: "+e.message);}
   $("#publish").disabled=false;$("#publish").textContent="Publish to site";
@@ -261,6 +345,70 @@ $("#loginBtn").onclick=()=>{if(user){netlifyIdentity.logout();}else{netlifyIdent
 $("#publish").onclick=publish;
 $("#reload").onclick=load;
 $("#download").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)+"\n"],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="events.json";a.click();};
+
+// ---------- marketing studio ----------
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));
+  t.classList.add("on");
+  const v=t.dataset.view;
+  $("#view-content").style.display=v==="content"?"":"none";
+  $("#view-marketing").style.display=v==="marketing"?"":"none";
+  if(v==="marketing")fillMktEvents();
+});
+function fillMktEvents(){
+  const sel=$("#mktEvent");if(!sel)return;
+  const cur=sel.value;
+  sel.innerHTML=`<option value="">General — no specific event</option>`+
+    state.events.map((e,i)=>`<option value="${i}">${esc(e.name||"Untitled")}${e.label?" ("+esc(e.label)+")":""}</option>`).join("");
+  if(cur)sel.value=cur;
+}
+function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+async function generatePlan(){
+  if(!user){toast("Log in to use the Marketing Studio.");return;}
+  const go=$("#mktGo");go.disabled=true;go.innerHTML='<span class="spin"></span>Writing your plan…';
+  $("#mktNote").textContent="";$("#mktStrategy").innerHTML="";$("#mktPosts").innerHTML="";
+  const idx=$("#mktEvent").value;
+  const ev=idx!==""?state.events[+idx]:null;
+  try{
+    const tk=await authToken();
+    const r=await fetch("/.netlify/functions/marketing",{method:"POST",
+      headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},
+      body:JSON.stringify({today:todayISO(),event:ev,goal:$("#mktGoal").value,tone:$("#mktTone").value,count:$("#mktCount").value})});
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok){$("#mktNote").textContent="⚠️ "+(data.error||"Something went wrong. Please try again.");go.disabled=false;go.textContent="✨ Generate content plan";return;}
+    if(!data.posts||!data.posts.length){$("#mktNote").textContent="The AI didn't return any posts — try again.";go.disabled=false;go.textContent="✨ Generate content plan";return;}
+    renderPlan(data,ev);
+  }catch(e){$("#mktNote").textContent="⚠️ "+e.message;}
+  go.disabled=false;go.textContent="✨ Generate content plan";
+}
+function renderPlan(data,ev){
+  if(data.strategy)$("#mktStrategy").innerHTML=`<div class="strat"><b>The plan:</b> ${esc(data.strategy)}</div>`;
+  $("#mktPosts").innerHTML=data.posts.map((p,i)=>{
+    const tags=(p.hashtags||[]).join(" ");
+    const flyer=ev&&ev.image?ev.image:"";
+    return `<div class="post">
+      <div class="meta">
+        <span class="chip d">${esc(p.date||"")}</span>
+        <span class="chip d">${esc(p.time||"")}</span>
+        <span class="chip t">${esc(p.type||"Post")}</span>
+      </div>
+      ${p.visual?`<div class="visual">📷 ${esc(p.visual)}</div>`:""}
+      <textarea class="cap" id="cap${i}">${esc(p.caption||"")}</textarea>
+      <div class="tags" id="tags${i}">${esc(tags)}</div>
+      <div class="acts">
+        <button class="btn btn-volt btn-sm" data-copy="${i}">📋 Copy caption + tags</button>
+        ${flyer?`<a class="btn btn-ghost btn-sm" style="color:#0b0b0f;border-color:var(--line)" href="${esc(dsrc(flyer))}" download>⬇ Download flyer</a>`:""}
+      </div>
+    </div>`;
+  }).join("");
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-copy]");if(!t)return;
+  const i=t.dataset.copy;
+  const txt=$("#cap"+i).value+"\n\n"+$("#tags"+i).textContent;
+  navigator.clipboard.writeText(txt).then(()=>toast("Caption + hashtags copied — paste into Instagram."),()=>toast("Copy failed — select the text manually."));
+});
+$("#mktGo").onclick=generatePlan;
 
 // ---------- auth wiring ----------
 if(window.netlifyIdentity){

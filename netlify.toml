@@ -1,0 +1,8 @@
+# Netlify config for Dink Club.
+# Static site (no build step) + serverless functions for the Marketing Studio AI.
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
