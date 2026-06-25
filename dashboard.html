@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Dink Club — Content Dashboard</title>
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  :root{--ink:#0B0B0F;--volt:#C7FF3B;--smoke:#F4F5F7;--line:#E3E6EA;--gray:#5b6470}
+  body{background:#fff;color:var(--ink);font-family:var(--body,'Inter',system-ui,sans-serif);margin:0}
+  .topbar{position:sticky;top:0;z-index:30;background:var(--ink);color:#fff;display:flex;align-items:center;gap:16px;padding:12px 22px;flex-wrap:wrap}
+  .topbar h1{font-family:var(--display,'Archivo',sans-serif);font-size:1.15rem;margin:0;letter-spacing:.02em}
+  .topbar .sp{flex:1}
+  .pill{font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;background:#2a2c33;color:#cfd6dd}
+  .pill.ok{background:rgba(199,255,59,.18);color:var(--volt)}
+  .btn{font-family:var(--display,'Archivo',sans-serif);font-weight:800;text-transform:uppercase;font-size:.8rem;letter-spacing:.03em;padding:11px 18px;border-radius:6px;border:0;cursor:pointer}
+  .btn-volt{background:var(--volt);color:var(--ink)}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid #3a3d44}
+  .btn-sm{padding:7px 12px;font-size:.72rem}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media(max-width:920px){.wrap{grid-template-columns:1fr}}
+  h2.sec{font-family:var(--display,'Archivo',sans-serif);font-size:1.3rem;margin:6px 0 4px}
+  .hint{color:var(--gray);font-size:.86rem;margin:0 0 14px}
+  .card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;background:#fff}
+  .card .row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .card .row .grab{color:#aab;font-size:.8rem;flex:1;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  label{display:block;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--gray);margin:10px 0 4px}
+  input,textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;font-family:inherit;font-size:.95rem;box-sizing:border-box}
+  textarea{min-height:64px;resize:vertical}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .imgrow{display:flex;gap:12px;align-items:center}
+  .imgrow img{width:74px;height:92px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:var(--smoke)}
+  .del{background:#fff;border:1px solid var(--line);color:#c0392b;border-radius:6px;padding:6px 10px;font-size:.72rem;font-weight:700;cursor:pointer}
+  .preview{position:sticky;top:70px;align-self:start}
+  .pvframe{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--smoke)}
+  .pvhead{background:var(--ink);color:#fff;font-size:.72rem;font-weight:700;padding:6px 12px;letter-spacing:.05em;text-transform:uppercase}
+  .setup{background:#fff8e6;border:1px solid #f1d98a;border-radius:10px;padding:14px 16px;margin:18px 22px;font-size:.9rem}
+  .setup code{background:#fff;border:1px solid var(--line);padding:1px 6px;border-radius:4px}
+  details summary{cursor:pointer;font-weight:700;color:var(--gray);font-size:.84rem}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:8px;font-size:.9rem;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+  /* preview helpers reuse theme.css .ev / .booking */
+  .pvframe .events{grid-template-columns:1fr 1fr;padding:14px}
+  .pvframe section{padding:0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>🎾 Dink Club — Content Dashboard</h1>
+  <span id="conn" class="pill">Not connected</span>
+  <span class="sp"></span>
+  <button class="btn btn-ghost btn-sm" id="reload">↻ Reload</button>
+  <button class="btn btn-ghost btn-sm" id="download">Download file</button>
+  <button class="btn btn-volt" id="publish" disabled>Publish to site</button>
+</div>
+
+<div class="setup" id="setupbox">
+  <b>First-time setup (one time, ~2 minutes):</b> to let this dashboard publish changes to the live site, paste a GitHub access token below.
+  <details style="margin-top:8px"><summary>How to get the token</summary>
+  <ol style="margin:8px 0 0;padding-left:18px;line-height:1.6">
+    <li>Go to <b>github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>.</li>
+    <li>Repository access: <b>Only select repositories → dinkclubwebsite</b>.</li>
+    <li>Permissions → Repository → <b>Contents: Read and write</b>.</li>
+    <li>Generate, copy it, and paste it here. It's stored only in <b>this browser</b>.</li>
+  </ol></details>
+  <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+    <input id="token" type="password" placeholder="Paste GitHub token (ghp_… or github_pat_…)" style="flex:1;min-width:240px">
+    <button class="btn btn-volt btn-sm" id="connect">Connect</button>
+    <button class="btn btn-ghost btn-sm" id="forget" style="color:#0b0b0f;border-color:var(--line)">Forget token</button>
+  </div>
+  <p class="hint" style="margin:8px 0 0">No token yet? You can still edit and use <b>Download file</b>, then send us the file — but connecting lets you publish yourself.</p>
+</div>
+
+<div class="wrap">
+  <!-- EDITOR -->
+  <div>
+    <h2 class="sec">Events</h2>
+    <p class="hint">Add, edit, remove, or reorder the events shown on the Tournaments page and homepage. Drag the ▲▼ to reorder.</p>
+    <div id="events"></div>
+    <button class="btn btn-volt btn-sm" id="addEvent">+ Add event</button>
+
+    <h2 class="sec" style="margin-top:30px">Featured Banner</h2>
+    <p class="hint">The big highlighted event on the homepage. Toggle it off to hide it.</p>
+    <div id="featured" class="card"></div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview">
+    <h2 class="sec">Live Preview</h2>
+    <p class="hint">A quick look at how the cards and banner will appear. Click <b>Publish</b> when you're happy.</p>
+    <div class="pvframe">
+      <div class="pvhead">Event cards</div>
+      <div class="events" id="pvEvents"></div>
+      <div class="pvhead">Featured banner</div>
+      <div id="pvFeatured" style="background:var(--ink);color:#fff;padding:18px"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO="victorlazarus32/dinkclubwebsite", BRANCH="main", FILE="events.json", UPLOADS="assets/img/uploads";
+let state={events:[],featured:{}}, fileSha=null, token=localStorage.getItem("dc_token")||"";
+const $=s=>document.querySelector(s), esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600);}
+function setConn(){const c=$("#conn");if(token){c.textContent="Connected ✓";c.classList.add("ok");$("#publish").disabled=false;$("#setupbox").style.display="none";}else{c.textContent="Not connected";c.classList.remove("ok");$("#publish").disabled=true;$("#setupbox").style.display="";}}
+
+// ---------- load ----------
+async function load(){
+  try{
+    if(token){
+      const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}?ref=${BRANCH}`,{headers:{Authorization:"Bearer "+token}});
+      if(r.ok){const j=await r.json();fileSha=j.sha;state=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));}
+      else throw 0;
+    }else{
+      const r=await fetch("events.json?ts="+Date.now());state=await r.json();
+    }
+  }catch(e){const r=await fetch("events.json?ts="+Date.now());state=await r.json();}
+  state.events=state.events||[];state.featured=state.featured||{enabled:false,details:[]};
+  renderAll();
+}
+
+// ---------- editor render ----------
+function evField(i,k,label,el="input",attrs=""){return `<label>${label}</label><${el} data-i="${i}" data-k="${k}" ${attrs}>${el==="textarea"?esc(state.events[i][k]||""):""}</${el}>`.replace("<input",`<input value="${esc(state.events[i][k]||"")}"`);}
+function renderEvents(){
+  $("#events").innerHTML=state.events.map((ev,i)=>`
+    <div class="card">
+      <div class="row"><span class="grab">${esc(ev.name||"Untitled")}</span>
+        <button class="btn btn-ghost btn-sm" data-mv="${i}" data-d="-1" style="color:#0b0b0f;border-color:var(--line)">▲</button>
+        <button class="btn btn-ghost btn-sm" data-mv="${i}" data-d="1" style="color:#0b0b0f;border-color:var(--line)">▼</button>
+        <button class="del" data-del="${i}">Delete</button></div>
+      <label>Event name</label><input value="${esc(ev.name)}" data-i="${i}" data-k="name">
+      <div class="two">
+        <div><label>Status</label><select data-i="${i}" data-k="status"><option value="auto"${ev.status!=="tba"?" selected":""}>Scheduled (has a date)</option><option value="tba"${ev.status==="tba"?" selected":""}>Coming soon</option></select></div>
+        <div><label>Date</label><input type="date" value="${esc(ev.date)}" data-i="${i}" data-k="date"></div>
+      </div>
+      <div class="two">
+        <div><label>Date label (shown on card)</label><input value="${esc(ev.label)}" data-i="${i}" data-k="label" placeholder="JUL 10–12"></div>
+        <div><label>Button text</label><input value="${esc(ev.cta)}" data-i="${i}" data-k="cta" placeholder="Register on Swish →"></div>
+      </div>
+      <label>Link (registration / info URL)</label><input value="${esc(ev.link)}" data-i="${i}" data-k="link">
+      <label>Short description</label><textarea data-i="${i}" data-k="blurb">${esc(ev.blurb)}</textarea>
+      <label>Flyer / image</label>
+      <div class="imgrow"><img src="${esc(ev.image||"")}" alt="" onerror="this.style.visibility='hidden'">
+        <input value="${esc(ev.image)}" data-i="${i}" data-k="image" placeholder="assets/img/...">
+        <input type="file" accept="image/*" data-up="${i}" style="max-width:150px;border:0;padding:0">
+      </div>
+    </div>`).join("");
+}
+function renderFeatured(){
+  const f=state.featured;
+  $("#featured").innerHTML=`
+    <label><input type="checkbox" data-f="enabled" ${f.enabled?"checked":""} style="width:auto;margin-right:6px">Show this banner</label>
+    <label>Eyebrow (small line above title)</label><input value="${esc(f.eyebrow)}" data-f="eyebrow">
+    <label>Title</label><input value="${esc(f.title)}" data-f="title">
+    <label>Flyer / image</label>
+    <div class="imgrow"><img src="${esc(f.image||"")}" onerror="this.style.visibility='hidden'">
+      <input value="${esc(f.image)}" data-f="image" placeholder="assets/img/...">
+      <input type="file" accept="image/*" data-upf="1" style="max-width:150px;border:0;padding:0"></div>
+    <label>Description</label><textarea data-f="body">${esc(f.body)}</textarea>
+    <label>Tagline (shown bold)</label><input value="${esc(f.tagline)}" data-f="tagline">
+    <label>Details (one per line)</label><textarea data-f="details" placeholder="🕤 Check-in 9:30 AM…">${esc((f.details||[]).join("\n"))}</textarea>
+    <div class="two">
+      <div><label>Button text</label><input value="${esc(f.ctaText)}" data-f="ctaText"></div>
+      <div><label>Button link</label><input value="${esc(f.ctaLink)}" data-f="ctaLink"></div>
+    </div>
+    <label>Auto-hide after this date</label><input type="date" value="${esc(f.hideAfter)}" data-f="hideAfter">`;
+}
+
+// ---------- preview render ----------
+function card(ev){
+  const tba=ev.status==="tba"||!ev.date, link=ev.link||"#";
+  return `<div class="ev"><div class="evimg contain" style="background-image:url('${esc(ev.image)}')"></div>
+    <div class="evbody"><div class="evdate">${esc(tba?(ev.label||"COMING SOON"):"★ "+(ev.label||""))}</div>
+    <div class="evname">${esc(ev.name)}</div><p>${esc(ev.blurb)}</p>
+    <a class="btn ${tba?"btn-dark":"btn-volt"}" href="#">${esc(ev.cta||"Register →")}</a></div></div>`;
+}
+function renderPreview(){
+  $("#pvEvents").innerHTML=state.events.map(card).join("");
+  const f=state.featured;
+  $("#pvFeatured").innerHTML=!f.enabled?'<p style="color:#9aa">Banner hidden</p>':
+    `<p class="eyebrow" style="color:var(--volt)">${esc(f.eyebrow)}</p>
+     <h2 style="color:#fff;font-weight:900;margin:6px 0 10px">${esc(f.title)}</h2>
+     ${f.image?`<img src="${esc(f.image)}" style="max-width:150px;border-radius:8px;float:right;margin:0 0 8px 12px">`:""}
+     <p style="color:#cfd6dd;font-size:.92rem">${esc(f.body)} <b style="color:#fff">${esc(f.tagline||"")}</b></p>
+     <ul style="color:#cfd6dd;font-size:.86rem">${(f.details||[]).map(d=>"<li>"+esc(d)+"</li>").join("")}</ul>
+     <a class="btn btn-volt" href="#">${esc(f.ctaText||"Sign Up →")}</a>`;
+}
+function renderAll(){renderEvents();renderFeatured();renderPreview();}
+
+// ---------- editing handlers ----------
+document.addEventListener("input",e=>{
+  const t=e.target;
+  if(t.dataset.i!=null){state.events[t.dataset.i][t.dataset.k]=t.value;renderPreview();}
+  else if(t.dataset.f!=null){const k=t.dataset.f;state.featured[k]=t.type==="checkbox"?t.checked:(k==="details"?t.value.split("\n").filter(x=>x.trim()):t.value);renderPreview();}
+});
+document.addEventListener("click",e=>{
+  const t=e.target;
+  if(t.dataset.del!=null){if(confirm("Delete this event?")){state.events.splice(+t.dataset.del,1);renderAll();}}
+  else if(t.dataset.mv!=null){const i=+t.dataset.mv,d=+t.dataset.d,j=i+d;if(j>=0&&j<state.events.length){[state.events[i],state.events[j]]=[state.events[j],state.events[i]];renderAll();}}
+});
+document.addEventListener("change",async e=>{
+  const t=e.target;
+  if(t.dataset.up!=null||t.dataset.upf!=null){
+    const file=t.files[0];if(!file)return;
+    if(!token){toast("Connect a token to upload images (or set the path manually).");return;}
+    const path=await uploadImage(file);
+    if(path){if(t.dataset.upf!=null){state.featured.image=path;}else{state.events[t.dataset.up].image=path;}renderAll();toast("Image uploaded.");}
+  }
+});
+$("#addEvent").onclick=()=>{state.events.push({name:"New Event",status:"tba",date:"",label:"COMING SOON",image:"",link:"https://swishtournaments.com/",cta:"See on Swish",blurb:""});renderAll();};
+
+// ---------- github api ----------
+function b64(str){return btoa(unescape(encodeURIComponent(str)));}
+async function uploadImage(file){
+  const buf=await file.arrayBuffer();let bin="";const bytes=new Uint8Array(buf);for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);
+  const content=btoa(bin);const name=(Date.now()+"-"+file.name).replace(/[^\w.\-]/g,"_");const path=`${UPLOADS}/${name}`;
+  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{method:"PUT",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},
+    body:JSON.stringify({message:"Dashboard: upload "+name,content,branch:BRANCH})});
+  if(r.ok)return path; toast("Upload failed — check the token."); return null;
+}
+async function publish(){
+  if(!token)return;
+  $("#publish").disabled=true;$("#publish").textContent="Publishing…";
+  try{
+    // refresh sha
+    const g=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}?ref=${BRANCH}`,{headers:{Authorization:"Bearer "+token}});
+    if(g.ok)fileSha=(await g.json()).sha;
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{method:"PUT",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},
+      body:JSON.stringify({message:"Dashboard: update events",content:b64(JSON.stringify(state,null,2)+"\n"),sha:fileSha,branch:BRANCH})});
+    if(r.ok){fileSha=(await r.json()).content.sha;toast("Published! Live in ~1 minute. Hard-refresh the site to see it.");}
+    else{const j=await r.json();toast("Publish failed: "+(j.message||"check token permissions"));}
+  }catch(e){toast("Publish error: "+e.message);}
+  $("#publish").disabled=false;$("#publish").textContent="Publish to site";
+}
+
+// ---------- buttons ----------
+$("#connect").onclick=()=>{const v=$("#token").value.trim();if(!v)return;token=v;localStorage.setItem("dc_token",v);setConn();load();toast("Connected.");};
+$("#forget").onclick=()=>{localStorage.removeItem("dc_token");token="";setConn();toast("Token removed from this browser.");};
+$("#publish").onclick=publish;
+$("#reload").onclick=load;
+$("#download").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)+"\n"],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="events.json";a.click();};
+
+setConn();load();
+</script>
+</body>
+</html>
