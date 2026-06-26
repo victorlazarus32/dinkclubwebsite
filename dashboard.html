@@ -297,10 +297,11 @@ document.addEventListener("change",async e=>{
   else if(t.dataset.mkup!=null){
     const file=t.files[0];if(!file)return;
     const i=t.dataset.mkup, url=URL.createObjectURL(file);
-    mktImg[i]={src:url,name:file.name};
+    mktImg[i]={src:url,name:file.name,path:null};
     const img=$("#mimg"+i);if(img){img.src=url;img.style.visibility="";}
     const dl=$("#mdl"+i);if(dl){dl.href=url;dl.setAttribute("download",file.name);dl.style.display="";}
-    toast("Picture added to this post.");
+    // Publish to the site too, so it has a public URL for auto-posting to Instagram.
+    if(user){const path=await uploadImage(file);if(path){mktImg[i].path=path;localImg[path]=url;}}
   }
 });
 $("#addEvent").onclick=()=>{state.events.push({name:"New Event",status:"tba",date:"",label:"COMING SOON",image:"",link:"https://swishtournaments.com/",cta:"See on Swish",blurb:""});renderAll();};
@@ -407,7 +408,7 @@ function fillPost(i,p,ev){
   const tags=(p.hashtags||[]).join(" ");
   // Default picture for this post = the event flyer (if any). Marcelo can replace it per card.
   const def=ev&&ev.image?ev.image:"";
-  if(mktImg[i]===undefined&&def)mktImg[i]={src:dsrc(def),name:(def.split("/").pop()||"image")};
+  if(mktImg[i]===undefined&&def)mktImg[i]={src:dsrc(def),name:(def.split("/").pop()||"image"),path:def};
   const cur=mktImg[i]||{src:"",name:""};
   const el=$("#post"+i);if(!el)return;
   el.innerHTML=`
@@ -427,6 +428,7 @@ function fillPost(i,p,ev){
     <div class="acts">
       <button class="btn btn-volt btn-sm" data-copy="${i}">📋 Copy caption + tags</button>
       <a class="btn btn-ghost btn-sm" id="mdl${i}" style="color:#0b0b0f;border-color:var(--line);${cur.src?"":"display:none"}" href="${esc(cur.src)}" download="${esc(cur.name)}">⬇ Download picture</a>
+      <button class="btn btn-sm" style="background:#E1306C;color:#fff" data-igpost="${i}">📲 Post to Instagram now</button>
     </div>`;
 }
 function fillPostError(i,msg){
@@ -438,6 +440,24 @@ document.addEventListener("click",e=>{
   const i=t.dataset.copy;
   const txt=$("#cap"+i).value+"\n\n"+$("#tags"+i).textContent;
   navigator.clipboard.writeText(txt).then(()=>toast("Caption + hashtags copied — paste into Instagram."),()=>toast("Copy failed — select the text manually."));
+});
+document.addEventListener("click",async e=>{
+  const t=e.target.closest("[data-igpost]");if(!t)return;
+  const i=t.dataset.igpost;
+  if(!user){toast("Log in first.");return;}
+  const im=mktImg[i];
+  if(!im||!im.path){toast("Add a published picture to this post first (use Choose file).");return;}
+  const cap=$("#cap"+i).value+"\n\n"+$("#tags"+i).textContent;
+  const imageUrl=location.origin+"/"+String(im.path).replace(/^\//,"");
+  if(!confirm("Post this to the Dink Club Instagram right now?\n\nIt publishes immediately and can't be undone from here.\n\nPicture + caption shown will be posted."))return;
+  const orig=t.textContent;t.disabled=true;t.innerHTML='<span class="spin"></span>Posting…';
+  try{
+    const tk=await authToken();
+    const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({image_url:imageUrl,caption:cap})});
+    const d=await r.json().catch(()=>({}));
+    if(r.ok){toast("🎉 Posted to Instagram!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
+    else{toast("Couldn't post: "+(d.error||("error "+r.status)));t.disabled=false;t.textContent=orig;}
+  }catch(err){toast("Post error: "+err.message);t.disabled=false;t.textContent=orig;}
 });
 $("#mktGo").onclick=generatePlan;
 
