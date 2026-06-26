@@ -1,134 +1,133 @@
 // Dink Club — Marketing Studio AI (secure serverless function).
+// Generates ONE Instagram post per call (fast, never times out). The dashboard
+// fires several of these in parallel to build the full calendar.
+//
 // Holds the Anthropic API key server-side (never sent to the browser) and only
 // responds to a logged-in Netlify Identity user, so it can't be abused publicly.
 //
-// Admin setup (one time): in Netlify -> Site configuration -> Environment variables,
+// Admin setup (one time): Netlify -> Site configuration -> Environment variables,
 // add  ANTHROPIC_API_KEY = <your Anthropic key>.  Then redeploy.
 
-const MODEL = "claude-sonnet-4-6"; // strong + cost-effective for caption/calendar generation
+const MODEL = "claude-sonnet-4-6"; // each call is tiny, so we can use a strong model and still be fast
 
 const SYSTEM = `You are an elite Instagram marketing strategist for "Dink Club", an outdoor pickleball club in Miami, Florida.
-You write high-performing, on-brand Instagram content and content calendars.
+You write ONE high-performing, on-brand Instagram post at a time.
 
-Brand voice: energetic, fun, community-first, a little competitive. Pickleball culture. Local Miami flavor.
-Audience: local players (beginners to 5.0), social/competitive adults, people looking for something active and social.
+Brand voice: energetic, fun, community-first, a little competitive. Pickleball culture, local Miami flavor.
+Audience: local players (beginners to 5.0), social and competitive adults who want something active and social.
 
-Best practices you always apply:
-- Strong scroll-stopping hook in the first line of every caption.
-- One clear call-to-action per post (register, DM, tag a partner, save, share to stories, come play).
-- Mix content pillars: events/tournaments, community & people, quick tips/drills, behind-the-scenes, user-generated content, promos/last-call.
-- Use a "countdown campaign" when an event has a date: build from awareness -> details/lineup -> social proof -> last call -> day-of hype -> recap.
-- Recommend ideal posting windows for a local audience (mornings ~7-9am, lunch ~11:30-1, evenings ~6-8pm; weekends late morning). Vary times.
-- Use a focused set of relevant hashtags (mix of broad pickleball tags + local Miami tags + a couple branded). Never spammy walls of 30 identical tags.
-- Captions can use tasteful emojis and line breaks.
+Always: open with a scroll-stopping hook; give ONE clear call-to-action; use tasteful emojis and line breaks;
+use a focused set of relevant hashtags (mix broad pickleball + local Miami + a couple branded like #DinkClub). Never a spammy wall of tags.
 
-Output rules: respond with ONLY valid minified-or-pretty JSON, no markdown fences, no commentary, matching exactly this shape:
+Output rules: respond with ONLY one valid JSON object, no markdown fences, no commentary, exactly this shape:
 {
-  "strategy": "1-3 sentence summary of the plan",
-  "posts": [
-    {
-      "date": "YYYY-MM-DD",
-      "time": "e.g. 6:30 PM",
-      "type": "Reel | Carousel | Single image | Story",
-      "hook": "the first line / hook",
-      "caption": "full ready-to-post caption with line breaks and emojis",
-      "hashtags": ["#tag1", "#tag2"],
-      "visual": "short description of what to film/show for this post"
-    }
-  ]
+  "type": "Reel | Carousel | Single image | Story",
+  "hook": "the first line / hook",
+  "caption": "full ready-to-post caption with line breaks and emojis",
+  "hashtags": ["#tag1", "#tag2"],
+  "visual": "one short sentence: what to film or show for this post"
 }`;
 
-exports.handler = async (event, context) => {
-  if (event.httpMethod !== "POST") {
-    return resp(405, { error: "Method not allowed" });
-  }
+const TIMES = ["7:30 AM", "12:00 PM", "6:30 PM", "8:00 AM", "5:30 PM", "11:30 AM", "1:00 PM", "7:00 PM"];
+const MIDDLE_ROLES = [
+  "Share the key details and what to expect (format, levels, prizes, vibe).",
+  "Give a quick pickleball tip or drill to build interest and show expertise.",
+  "Behind-the-scenes / community vibe — the people, the courts, the energy.",
+  "Social proof — highlight a past event, a winner, or a happy regular.",
+  "Engagement post — ask players to tag their doubles partner in the comments.",
+  "Open play / drop-in reminder — easy low-commitment way to come check it out.",
+];
 
-  // Require a logged-in Netlify Identity user (protects the API key from abuse).
+exports.handler = async (event, context) => {
+  if (event.httpMethod !== "POST") return resp(405, { error: "Method not allowed" });
+
   const user = context.clientContext && context.clientContext.user;
-  if (!user) {
-    return resp(401, { error: "Please log in to use the Marketing Studio." });
-  }
+  if (!user) return resp(401, { error: "Please log in to use the Marketing Studio." });
 
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
-    return resp(500, {
-      error: "The AI isn't connected yet. (Admin: add ANTHROPIC_API_KEY in Netlify environment variables, then redeploy.)",
-    });
+    return resp(500, { error: "The AI isn't connected yet. (Admin: add ANTHROPIC_API_KEY in Netlify env vars, then redeploy.)" });
   }
 
   let p = {};
   try { p = JSON.parse(event.body || "{}"); } catch (e) {}
 
   const today = (p.today || "").trim();
-  const goal = (p.goal || "Grow awareness and drive event signups").trim();
+  const goal = (p.goal || "Drive event signups").trim();
   const tone = (p.tone || "energetic and fun").trim();
-  const count = Math.min(Math.max(parseInt(p.count, 10) || 6, 1), 14);
-  const ev = p.event || null;
+  const total = Math.min(Math.max(parseInt(p.total, 10) || 6, 1), 12);
+  const index = Math.min(Math.max(parseInt(p.index, 10) || 0, 0), total - 1);
+  const ev = p.event && p.event.name ? p.event : null;
 
-  let task;
-  if (ev && ev.name) {
-    task = `Build an Instagram content calendar of ${count} posts leading up to this event.
-Today's date is ${today || "unknown"}.
-Event name: ${ev.name}
-Event date: ${ev.date || ev.label || "TBA"}
-Event details: ${ev.blurb || "(none provided)"}
-Registration link: ${ev.link || "(none)"}
-Campaign goal: ${goal}
+  const eventDate = ev ? cleanDate(ev.date) : "";
+  const date = planDate(today, eventDate, index, total);
+  const time = TIMES[index % TIMES.length];
+
+  // Where this post sits in the countdown arc.
+  let role;
+  const frac = total > 1 ? index / (total - 1) : 0;
+  if (index === 0) role = ev ? "KICKOFF — announce the event and create excitement." : "Set the tone — introduce Dink Club and invite people to come play.";
+  else if (frac >= 0.85) role = ev ? "FINAL PUSH — last call / day-of hype. Urgency to register or show up." : "Strong call to action to come play this week.";
+  else role = MIDDLE_ROLES[(index - 1) % MIDDLE_ROLES.length];
+
+  let task = `Write Instagram post #${index + 1} of ${total} for Dink Club.
+Goal of the campaign: ${goal}
 Tone: ${tone}
-Spread the posts sensibly between today and the event date (or over the next ~2 weeks if no firm date), following a countdown campaign arc.`;
-  } else {
-    task = `Build an Instagram content calendar of ${count} posts for the Dink Club over roughly the next two weeks starting ${today || "today"}.
-No single event — focus on community, open play, tips, behind-the-scenes, and general awareness.
-Campaign goal: ${goal}
-Tone: ${tone}`;
+This post will be published on ${date} at ${time}.
+This post's job in the plan: ${role}`;
+  if (ev) {
+    task += `
+It is part of a countdown leading up to this event:
+- Event: ${ev.name}
+- Event date: ${ev.date || ev.label || "TBA"}
+- Details: ${ev.blurb || "(none provided)"}
+- Registration link: ${ev.link || "(none)"}`;
   }
+  task += `\nRemember: respond with ONLY the JSON object.`;
 
   let data;
   try {
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
-      headers: {
-        "x-api-key": key,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 4000,
-        system: SYSTEM,
-        messages: [{ role: "user", content: task }],
-      }),
+      headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+      body: JSON.stringify({ model: MODEL, max_tokens: 900, system: SYSTEM, messages: [{ role: "user", content: task }] }),
     });
     data = await r.json();
-    if (!r.ok) {
-      return resp(502, { error: (data && data.error && data.error.message) || "The AI request failed." });
-    }
+    if (!r.ok) return resp(502, { error: (data && data.error && data.error.message) || "The AI request failed." });
   } catch (e) {
     return resp(502, { error: "Could not reach the AI service: " + e.message });
   }
 
   const text = (data.content || []).map((c) => c.text || "").join("").trim();
-  const parsed = extractJson(text);
-  if (!parsed) {
-    return resp(200, { strategy: "", posts: [], raw: text });
-  }
-  return resp(200, parsed);
+  const post = extractJson(text) || { type: "Single image", hook: "", caption: text, hashtags: [], visual: "" };
+  post.date = date;
+  post.time = time;
+  return resp(200, post);
 };
 
+function cleanDate(d) {
+  if (!d) return "";
+  const m = String(d).match(/\d{4}-\d{2}-\d{2}/);
+  return m ? m[0] : "";
+}
+function planDate(today, eventDate, i, total) {
+  let start = today && /^\d{4}-\d{2}-\d{2}$/.test(today) ? new Date(today + "T12:00:00Z") : new Date();
+  let end;
+  if (eventDate) end = new Date(eventDate + "T12:00:00Z");
+  else { end = new Date(start.getTime()); end.setUTCDate(end.getUTCDate() + 14); }
+  if (!(end > start)) { end = new Date(start.getTime()); end.setUTCDate(end.getUTCDate() + total + 1); }
+  const t = total > 1 ? i / (total - 1) : 0;
+  const d = new Date(start.getTime() + (end.getTime() - start.getTime()) * t);
+  return d.toISOString().slice(0, 10);
+}
 function extractJson(text) {
   if (!text) return null;
-  // Strip accidental code fences, then grab the outermost { ... }.
   const cleaned = text.replace(/```json/gi, "").replace(/```/g, "");
   const start = cleaned.indexOf("{");
   const end = cleaned.lastIndexOf("}");
   if (start === -1 || end === -1 || end < start) return null;
   try { return JSON.parse(cleaned.slice(start, end + 1)); } catch (e) { return null; }
 }
-
 function resp(statusCode, obj) {
-  return {
-    statusCode,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(obj),
-  };
+  return { statusCode, headers: { "Content-Type": "application/json" }, body: JSON.stringify(obj) };
 }

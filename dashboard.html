@@ -363,44 +363,57 @@ function fillMktEvents(){
   if(cur)sel.value=cur;
 }
 function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+async function genOne(i,total,ev,goal,tone,tk){
+  const r=await fetch("/.netlify/functions/marketing",{method:"POST",
+    headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},
+    body:JSON.stringify({today:todayISO(),event:ev,goal,tone,index:i,total})});
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(data.error||("Error "+r.status));
+  return data;
+}
 async function generatePlan(){
   if(!user){toast("Log in to use the Marketing Studio.");return;}
   const go=$("#mktGo");go.disabled=true;go.innerHTML='<span class="spin"></span>Writing your plan…';
-  $("#mktNote").textContent="";$("#mktStrategy").innerHTML="";$("#mktPosts").innerHTML="";
   const idx=$("#mktEvent").value;
   const ev=idx!==""?state.events[+idx]:null;
+  const goal=$("#mktGoal").value, tone=$("#mktTone").value, total=+$("#mktCount").value;
+  // Lay out placeholder cards, then fill each as its post comes back (in parallel).
+  $("#mktStrategy").innerHTML="";
+  $("#mktPosts").innerHTML=Array.from({length:total},(_,i)=>
+    `<div class="post" id="post${i}"><div class="meta"><span class="chip t">Post ${i+1}</span></div><p class="hint" style="margin:0">✍️ Writing…</p></div>`).join("");
+  $("#mktNote").textContent="Writing "+total+" posts…";
+  let done=0, failed=0;
   try{
     const tk=await authToken();
-    const r=await fetch("/.netlify/functions/marketing",{method:"POST",
-      headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},
-      body:JSON.stringify({today:todayISO(),event:ev,goal:$("#mktGoal").value,tone:$("#mktTone").value,count:$("#mktCount").value})});
-    const data=await r.json().catch(()=>({}));
-    if(!r.ok){$("#mktNote").textContent="⚠️ "+(data.error||"Something went wrong. Please try again.");go.disabled=false;go.textContent="✨ Generate content plan";return;}
-    if(!data.posts||!data.posts.length){$("#mktNote").textContent="The AI didn't return any posts — try again.";go.disabled=false;go.textContent="✨ Generate content plan";return;}
-    renderPlan(data,ev);
-  }catch(e){$("#mktNote").textContent="⚠️ "+e.message;}
+    await Promise.all(Array.from({length:total},(_,i)=>
+      genOne(i,total,ev,goal,tone,tk)
+        .then(p=>{fillPost(i,p,ev);done++;$("#mktNote").textContent="Wrote "+done+" of "+total+"…";})
+        .catch(e=>{failed++;fillPostError(i,e.message);})));
+  }catch(e){$("#mktNote").textContent="⚠️ "+e.message;go.disabled=false;go.textContent="✨ Generate content plan";return;}
+  $("#mktNote").textContent=failed?("Done — "+done+" written, "+failed+" failed (click Generate to retry).") : "Done! Review, tweak the wording, then Copy each post into Instagram. 🎾";
   go.disabled=false;go.textContent="✨ Generate content plan";
 }
-function renderPlan(data,ev){
-  if(data.strategy)$("#mktStrategy").innerHTML=`<div class="strat"><b>The plan:</b> ${esc(data.strategy)}</div>`;
-  $("#mktPosts").innerHTML=data.posts.map((p,i)=>{
-    const tags=(p.hashtags||[]).join(" ");
-    const flyer=ev&&ev.image?ev.image:"";
-    return `<div class="post">
-      <div class="meta">
-        <span class="chip d">${esc(p.date||"")}</span>
-        <span class="chip d">${esc(p.time||"")}</span>
-        <span class="chip t">${esc(p.type||"Post")}</span>
-      </div>
-      ${p.visual?`<div class="visual">📷 ${esc(p.visual)}</div>`:""}
-      <textarea class="cap" id="cap${i}">${esc(p.caption||"")}</textarea>
-      <div class="tags" id="tags${i}">${esc(tags)}</div>
-      <div class="acts">
-        <button class="btn btn-volt btn-sm" data-copy="${i}">📋 Copy caption + tags</button>
-        ${flyer?`<a class="btn btn-ghost btn-sm" style="color:#0b0b0f;border-color:var(--line)" href="${esc(dsrc(flyer))}" download>⬇ Download flyer</a>`:""}
-      </div>
+function fillPost(i,p,ev){
+  const tags=(p.hashtags||[]).join(" ");
+  const flyer=ev&&ev.image?ev.image:"";
+  const el=$("#post"+i);if(!el)return;
+  el.innerHTML=`
+    <div class="meta">
+      <span class="chip d">${esc(p.date||"")}</span>
+      <span class="chip d">${esc(p.time||"")}</span>
+      <span class="chip t">${esc(p.type||"Post")}</span>
+    </div>
+    ${p.visual?`<div class="visual">📷 ${esc(p.visual)}</div>`:""}
+    <textarea class="cap" id="cap${i}">${esc(p.caption||"")}</textarea>
+    <div class="tags" id="tags${i}">${esc(tags)}</div>
+    <div class="acts">
+      <button class="btn btn-volt btn-sm" data-copy="${i}">📋 Copy caption + tags</button>
+      ${flyer?`<a class="btn btn-ghost btn-sm" style="color:#0b0b0f;border-color:var(--line)" href="${esc(dsrc(flyer))}" download>⬇ Download flyer</a>`:""}
     </div>`;
-  }).join("");
+}
+function fillPostError(i,msg){
+  const el=$("#post"+i);if(!el)return;
+  el.innerHTML=`<div class="meta"><span class="chip t">Post ${i+1}</span></div><p class="hint" style="margin:0;color:#c0392b">⚠️ ${esc(msg||"failed")} — click Generate to retry.</p>`;
 }
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-copy]");if(!t)return;
