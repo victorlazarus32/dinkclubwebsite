@@ -174,6 +174,8 @@ let state={events:[],featured:{}}, fileSha=null, user=null;
 // so show the picked file straight from the browser until then.
 const localImg={};
 function dsrc(p){return localImg[p]||p||"";}
+// Per-marketing-post pictures (index -> {src, name}). Local only — for download alongside the caption.
+const mktImg={};
 const $=s=>document.querySelector(s), esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600);}
 async function authToken(){return user?await user.jwt():null;}
@@ -292,6 +294,14 @@ document.addEventListener("change",async e=>{
     const path=await uploadImage(file);
     if(path){if(t.dataset.upf!=null){state.featured.image=path;}else{state.events[t.dataset.up].image=path;}renderAll();toast("Image uploaded.");}
   }
+  else if(t.dataset.mkup!=null){
+    const file=t.files[0];if(!file)return;
+    const i=t.dataset.mkup, url=URL.createObjectURL(file);
+    mktImg[i]={src:url,name:file.name};
+    const img=$("#mimg"+i);if(img){img.src=url;img.style.visibility="";}
+    const dl=$("#mdl"+i);if(dl){dl.href=url;dl.setAttribute("download",file.name);dl.style.display="";}
+    toast("Picture added to this post.");
+  }
 });
 $("#addEvent").onclick=()=>{state.events.push({name:"New Event",status:"tba",date:"",label:"COMING SOON",image:"",link:"https://swishtournaments.com/",cta:"See on Swish",blurb:""});renderAll();};
 
@@ -395,7 +405,10 @@ async function generatePlan(){
 }
 function fillPost(i,p,ev){
   const tags=(p.hashtags||[]).join(" ");
-  const flyer=ev&&ev.image?ev.image:"";
+  // Default picture for this post = the event flyer (if any). Marcelo can replace it per card.
+  const def=ev&&ev.image?ev.image:"";
+  if(mktImg[i]===undefined&&def)mktImg[i]={src:dsrc(def),name:(def.split("/").pop()||"image")};
+  const cur=mktImg[i]||{src:"",name:""};
   const el=$("#post"+i);if(!el)return;
   el.innerHTML=`
     <div class="meta">
@@ -403,12 +416,17 @@ function fillPost(i,p,ev){
       <span class="chip d">${esc(p.time||"")}</span>
       <span class="chip t">${esc(p.type||"Post")}</span>
     </div>
-    ${p.visual?`<div class="visual">📷 ${esc(p.visual)}</div>`:""}
+    ${p.visual?`<div class="visual">📷 Suggested: ${esc(p.visual)}</div>`:""}
     <textarea class="cap" id="cap${i}">${esc(p.caption||"")}</textarea>
     <div class="tags" id="tags${i}">${esc(tags)}</div>
+    <label style="margin-top:6px">Post picture</label>
+    <div class="imgrow">
+      <img id="mimg${i}" src="${esc(cur.src)}" alt="" onerror="this.style.visibility='hidden'" ${cur.src?"":'style="visibility:hidden"'}>
+      <input type="file" accept="image/*" data-mkup="${i}" style="max-width:160px;border:0;padding:0">
+    </div>
     <div class="acts">
       <button class="btn btn-volt btn-sm" data-copy="${i}">📋 Copy caption + tags</button>
-      ${flyer?`<a class="btn btn-ghost btn-sm" style="color:#0b0b0f;border-color:var(--line)" href="${esc(dsrc(flyer))}" download>⬇ Download flyer</a>`:""}
+      <a class="btn btn-ghost btn-sm" id="mdl${i}" style="color:#0b0b0f;border-color:var(--line);${cur.src?"":"display:none"}" href="${esc(cur.src)}" download="${esc(cur.name)}">⬇ Download picture</a>
     </div>`;
 }
 function fillPostError(i,msg){
