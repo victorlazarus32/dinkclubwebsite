@@ -3,14 +3,18 @@
 // Meta's Graph API. Token stays server-side; only a logged-in user can call it.
 //
 // Admin setup (one time): Netlify -> Site configuration -> Environment variables:
-//   IG_USER_ID        = the Instagram Business account's numeric ID
-//   IG_ACCESS_TOKEN   = a long-lived access token with instagram_content_publish
+//   IG_USER_ID        = the Instagram account's numeric ID
+//   IG_ACCESS_TOKEN   = a long-lived access token with content-publish permission
+//   IG_GRAPH_BASE     = (optional) API base. Default https://graph.instagram.com/v21.0
+//                       (the "Instagram Login" method, no Facebook Page needed).
+//                       If you ever switch to the Facebook-Page method, set this to
+//                       https://graph.facebook.com/v21.0
 // Then redeploy.
 //
 // Note: Instagram requires the image to be a public JPEG URL. Our site images are
 // public; use .jpg pictures for posting.
 
-const GRAPH = "https://graph.facebook.com/v21.0";
+const GRAPH = process.env.IG_GRAPH_BASE || "https://graph.instagram.com/v21.0";
 
 exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") return resp(405, { error: "Method not allowed" });
