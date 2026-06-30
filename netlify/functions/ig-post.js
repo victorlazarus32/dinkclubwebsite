@@ -22,11 +22,13 @@ exports.handler = async (event, context) => {
   const user = context.clientContext && context.clientContext.user;
   if (!user) return resp(401, { error: "Please log in." });
 
-  const igId = process.env.IG_USER_ID;
   const token = process.env.IG_ACCESS_TOKEN;
-  if (!igId || !token) {
-    return resp(500, { error: "Instagram isn't connected yet. (Admin: add IG_USER_ID and IG_ACCESS_TOKEN in Netlify, then redeploy.)" });
+  if (!token) {
+    return resp(500, { error: "Instagram isn't connected yet. (Admin: add IG_ACCESS_TOKEN in Netlify, then redeploy.)" });
   }
+  // With the Instagram Login token, "me" resolves to the connected account, so an
+  // explicit IG_USER_ID is optional.
+  const igId = process.env.IG_USER_ID || "me";
 
   let p = {};
   try { p = JSON.parse(event.body || "{}"); } catch (e) {}
