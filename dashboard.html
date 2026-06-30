@@ -295,13 +295,18 @@ document.addEventListener("change",async e=>{
     if(path){if(t.dataset.upf!=null){state.featured.image=path;}else{state.events[t.dataset.up].image=path;}renderAll();toast("Image uploaded.");}
   }
   else if(t.dataset.mkup!=null){
-    const file=t.files[0];if(!file)return;
-    const i=t.dataset.mkup, url=URL.createObjectURL(file);
-    mktImg[i]={src:url,name:file.name,path:null};
+    const raw=t.files[0];if(!raw)return;
+    const i=t.dataset.mkup;
+    toast("Preparing image for Instagram…");
+    let blob;
+    try{blob=await normalizeForIG(raw);}catch(err){toast("Couldn't read that image — try a different one.");return;}
+    const name=(raw.name||"post").replace(/\.[^.]+$/,"")+".jpg";
+    const url=URL.createObjectURL(blob);
+    mktImg[i]={src:url,name,path:null};
     const img=$("#mimg"+i);if(img){img.src=url;img.style.visibility="";}
-    const dl=$("#mdl"+i);if(dl){dl.href=url;dl.setAttribute("download",file.name);dl.style.display="";}
-    // Publish to the site too, so it has a public URL for auto-posting to Instagram.
-    if(user){const path=await uploadImage(file);if(path){mktImg[i].path=path;localImg[path]=url;}}
+    const dl=$("#mdl"+i);if(dl){dl.href=url;dl.setAttribute("download",name);dl.style.display="";}
+    // Publish the Instagram-ready JPG to the site so it has a public URL for posting.
+    if(user){const path=await uploadImage(blob,name);if(path){mktImg[i].path=path;localImg[path]=url;toast("Picture ready ✓");}}
   }
 });
 $("#addEvent").onclick=()=>{state.events.push({name:"New Event",status:"tba",date:"",label:"COMING SOON",image:"",link:"https://swishtournaments.com/",cta:"See on Swish",blurb:""});renderAll();};
@@ -309,13 +314,36 @@ $("#addEvent").onclick=()=>{state.events.push({name:"New Event",status:"tba",dat
 // ---------- git gateway (no token — uses your login) ----------
 function b64(str){return btoa(unescape(encodeURIComponent(str)));}
 function fileToB64(file){return new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(",")[1]);fr.onerror=()=>rej(fr.error);fr.readAsDataURL(file);});}
-async function uploadImage(file){
+// Make any picture Instagram-ready: convert to JPG and fit it to a valid aspect
+// ratio (pads with white, never crops) so the post can't be rejected.
+function normalizeForIG(file){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>{
+      const MAX=1440, MINR=0.8, MAXR=1.91;
+      let w=img.naturalWidth, h=img.naturalHeight;
+      const scale=Math.min(1, MAX/Math.max(w,h));
+      const dw=Math.max(1,Math.round(w*scale)), dh=Math.max(1,Math.round(h*scale));
+      const ratio=dw/dh;
+      let cw=dw, ch=dh, ox=0, oy=0;
+      if(ratio<MINR){cw=Math.round(dh*MINR);ox=Math.round((cw-dw)/2);}        // too tall → pad sides
+      else if(ratio>MAXR){ch=Math.round(dw/MAXR);oy=Math.round((ch-dh)/2);}   // too wide → pad top/bottom
+      const c=document.createElement("canvas");c.width=cw;c.height=ch;
+      const ctx=c.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,cw,ch);
+      ctx.drawImage(img,ox,oy,dw,dh);
+      c.toBlob(b=>b?resolve(b):reject(new Error("Could not process image")),"image/jpeg",0.9);
+    };
+    img.onerror=()=>reject(new Error("Could not read that image"));
+    img.src=URL.createObjectURL(file);
+  });
+}
+async function uploadImage(file,nameHint){
   if(!user){toast("Log in to upload images.");return null;}
   if(file.size>9*1024*1024){toast("That image is "+(file.size/1048576).toFixed(1)+"MB — please use one under ~9MB.");return null;}
   toast("Uploading image…");
   try{
     const content=await fileToB64(file);
-    const name=(Date.now()+"-"+file.name).replace(/[^\w.\-]/g,"_");const path=`${UPLOADS}/${name}`;
+    const name=(Date.now()+"-"+(nameHint||file.name||"image.jpg")).replace(/[^\w.\-]/g,"_");const path=`${UPLOADS}/${name}`;
     const tk=await authToken();
     const r=await fetch(`${GATEWAY}/contents/${path}`,{method:"PUT",
       headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},
