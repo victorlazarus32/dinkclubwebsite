@@ -47,7 +47,6 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 
 /* hero */
 .hero{position:relative;background:linear-gradient(rgba(11,11,15,.55),rgba(11,11,15,.82)),url('img/courts-aerial.webp') center 30%/cover no-repeat #0B0B0F;color:#fff;overflow:hidden;padding:120px 0 130px}
-.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(transparent 49.5%,rgba(199,255,59,.05) 50%),linear-gradient(90deg,transparent 49.5%,rgba(199,255,59,.05) 50%);background-size:64px 64px;opacity:.4}
 .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(199,255,59,.22),transparent 65%)}
 .hero .wrap{position:relative;z-index:2;max-width:860px}
 .hero h1{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900;margin:14px 0 18px}
