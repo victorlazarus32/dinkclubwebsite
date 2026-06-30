@@ -45,7 +45,22 @@ exports.handler = async (event, context) => {
     const cj = await c.json();
     if (!c.ok || !cj.id) return resp(502, { error: igErr(cj) || "Could not prepare the post for Instagram." });
 
-    // 2) Publish the container.
+    // 2) Wait for Instagram to finish processing the container (stay under the function timeout).
+    let ready = false;
+    for (let i = 0; i < 3; i++) {
+      await sleep(2000);
+      try {
+        const s = await fetch(`${GRAPH}/${cj.id}?fields=status_code&access_token=${encodeURIComponent(token)}`);
+        const sj = await s.json();
+        if (sj.status_code === "FINISHED") { ready = true; break; }
+        if (sj.status_code === "ERROR" || sj.status_code === "EXPIRED") {
+          return resp(502, { error: "Instagram couldn't process this image. Please try a different photo." });
+        }
+      } catch (e) {}
+    }
+    if (!ready) return resp(502, { error: "Instagram is still preparing the image — wait ~15 seconds and tap Post again." });
+
+    // 3) Publish the container.
     const pUrl = `${GRAPH}/${igId}/media_publish?creation_id=${encodeURIComponent(cj.id)}&access_token=${encodeURIComponent(token)}`;
     const pub = await fetch(pUrl, { method: "POST" });
     const pj = await pub.json();
@@ -57,6 +72,9 @@ exports.handler = async (event, context) => {
   }
 };
 
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
 function igErr(j) {
   return j && j.error && (j.error.error_user_msg || j.error.message);
 }
