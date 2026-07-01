@@ -6,3 +6,18 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# Long-cache static images (they rarely change); HTML/CSS/JS left uncached to avoid stale previews.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# Baseline security headers on every response.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

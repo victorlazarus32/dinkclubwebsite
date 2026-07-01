@@ -1,2 +1,6 @@
+# STAGING: the whole site is blocked from crawlers while in preview.
+# AT LAUNCH: delete the "Disallow: /" line below to allow indexing.
 User-agent: *
 Disallow: /
+
+Sitemap: https://dinkclub.com/sitemap.xml

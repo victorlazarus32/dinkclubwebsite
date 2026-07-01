@@ -13,6 +13,8 @@
 <meta property="og:title" content="Dink Club — Miami's Home for Pickleball">
 <meta property="og:description" content="6 outdoor courts, open play, lessons, leagues, and a full pro shop in Miami.">
 <meta property="og:url" content="https://dinkclub.com/">
+<meta property="og:image" content="https://dinkclub.com/assets/img/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
 <script type="application/ld+json">
 {
@@ -41,6 +43,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/img/courts-aerial.webp" type="image/webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/theme.css">
@@ -379,16 +382,22 @@ document.querySelector('.burger')?.addEventListener('click',()=>{
     m.style.borderBottom='1px solid var(--line)';m.style.gap='14px';}
 });
 </script>
-<!-- Netlify Identity: catches the email-invite link so the owner can set a password, then sends them to the editor. Harmless on GitHub Pages (no Identity there). -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<!-- Netlify Identity: only load the 240KB widget when someone arrives via an email invite/recovery link — normal visits stay fast. -->
 <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", function (user) {
-      if (!user) {
-        window.netlifyIdentity.on("login", function () { document.location.href = "/dashboard.html"; });
-      }
+(function(){
+  var h = location.hash || "";
+  if (h.indexOf("invite_token=") === -1 && h.indexOf("recovery_token=") === -1) return;
+  var s = document.createElement("script");
+  s.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
+  s.onload = function(){
+    if (!window.netlifyIdentity) return;
+    window.netlifyIdentity.on("init", function(user){
+      if (!user) window.netlifyIdentity.on("login", function(){ document.location.href = "/dashboard.html"; });
     });
-  }
+    window.netlifyIdentity.open();
+  };
+  document.body.appendChild(s);
+})();
 </script>
 </body>
 </html>
