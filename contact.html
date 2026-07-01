@@ -128,17 +128,19 @@
     <div>
       <p class="eyebrow">Send a Message</p>
       <h2 style="font-size:1.6rem">Drop Us a Line</h2>
-      <form class="cform" onsubmit="return false">
+      <form class="cform" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
         <div class="two">
-          <input type="text" placeholder="First name" aria-label="First name">
-          <input type="text" placeholder="Last name" aria-label="Last name">
+          <input type="text" name="first-name" placeholder="First name" aria-label="First name" required>
+          <input type="text" name="last-name" placeholder="Last name" aria-label="Last name">
         </div>
         <div class="two">
-          <input type="email" placeholder="Email" aria-label="Email">
-          <input type="tel" placeholder="Phone" aria-label="Phone">
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required>
+          <input type="tel" name="phone" placeholder="Phone" aria-label="Phone">
         </div>
-        <input type="text" placeholder="Subject (e.g. private event, lessons)" aria-label="Subject">
-        <textarea rows="5" placeholder="How can we help?" aria-label="Message"></textarea>
+        <input type="text" name="subject" placeholder="Subject (e.g. private event, lessons)" aria-label="Subject">
+        <textarea name="message" rows="5" placeholder="How can we help?" aria-label="Message" required></textarea>
         <button class="btn btn-volt" type="submit" style="justify-content:center">Send Message</button>
       </form>
     </div>
