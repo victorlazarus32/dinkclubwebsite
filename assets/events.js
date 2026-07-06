@@ -35,7 +35,8 @@
             var tba = ev.status === 'tba' || !ev.date;
             var link = ev.link || '';
             var hasLink = link && link !== '#';
-            var attrs = hasLink ? ' href="' + esc(link) + '" target="_blank" rel="noopener"' : '';
+            var external = /^https?:\/\//i.test(link);
+            var attrs = hasLink ? ' href="' + esc(link) + '"' + (external ? ' target="_blank" rel="noopener"' : '') : '';
             var img = hasLink
               ? '<a class="evimg contain"' + attrs + ' style="background-image:url(\'' + esc(ev.image) + '\')" aria-label="' + esc(ev.name) + ' flyer"></a>'
               : '<div class="evimg contain" style="background-image:url(\'' + esc(ev.image) + '\')" role="img" aria-label="' + esc(ev.name) + '"></div>';

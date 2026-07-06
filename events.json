@@ -32,6 +32,17 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/W5O7K991384199?resId=56531737",
       "cta": "Register",
       "blurb": "🏓 One Team. One Night. One Champion.\n\nGather your favorite pickleball crew and get ready for one of the most exciting events of the summer!\n\nJoin us at Dink Club on Saturday, July 25th from 5:00–11:00 PM for our MLP Pickleball/Moneyball 1-Day Tournament—an evening packed with great competition, amazing energy, and plenty of fun with friends."
+    },
+    {
+      "name": "Events & Open Play",
+      "type": "event",
+      "status": "tba",
+      "date": "",
+      "label": "ALL LEVELS · ONGOING",
+      "image": "assets/img/open-play-crew.webp",
+      "link": "open-play.html",
+      "cta": "See Sessions →",
+      "blurb": "Find your level, rotate into games, and meet the Dink Club community — no full group needed. Reserved sessions by skill level on 6 outdoor courts. Grab your spot online before you come."
     }
   ],
   "featured": {
