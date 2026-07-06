@@ -1,9 +1,12 @@
 /* Dink Club — Events module.
    Reads events.json and renders:
-   (1) the event cards into #upcoming-events (sorts by date, flags NEXT UP,
-       moves passed events to Past Events, shows "tba" as Coming Soon), and
+   (1) the event cards, split into two grids by type —
+       #upcoming-tournaments (anything not type "event") and
+       #upcoming-events (type "event"). Each grid sorts by date, flags its own
+       NEXT UP, and shows "tba" as Coming Soon. Passed events move to the shared
+       #past-events grid. A category block auto-hides when its grid is empty.
    (2) the featured-event banner into #featured-event (auto-hides after its date).
-   Everything here is editable by the client via /admin — no code needed. */
+   Everything here is editable by the client via the dashboard — no code needed. */
 (function () {
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
@@ -13,9 +16,10 @@
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
   ready(function () {
-    var up = document.getElementById('upcoming-events');
+    var tourGrid = document.getElementById('upcoming-tournaments');
+    var evGrid = document.getElementById('upcoming-events');
     var feat = document.getElementById('featured-event');
-    if (!up && !feat) return; // nothing on this page to render
+    if (!tourGrid && !evGrid && !feat) return; // nothing on this page to render
 
     fetch('events.json', { cache: 'no-store' })
       .then(function (r) { return r.json(); })
@@ -23,10 +27,11 @@
         var today = new Date(); today.setHours(0, 0, 0, 0);
 
         /* ---------- event cards ---------- */
-        if (up) {
+        if (tourGrid || evGrid) {
           var past = document.getElementById('past-events');
           var wrap = document.getElementById('past-wrap');
-          (data.events || []).forEach(function (ev) {
+
+          function buildCard(ev) {
             var tba = ev.status === 'tba' || !ev.date;
             var link = ev.link || '';
             var hasLink = link && link !== '#';
@@ -42,29 +47,59 @@
             el.innerHTML = img +
               '<div class="evbody"><div class="evdate">' + esc(ev.label || (tba ? 'COMING SOON' : '')) + '</div>' +
               '<div class="evname">' + esc(ev.name) + '</div><p>' + esc(ev.blurb) + '</p>' + btn + '</div>';
-            up.appendChild(el);
+            return el;
+          }
+
+          /* Route each card to its category grid. Anything not explicitly
+             type "event" is treated as a tournament. Falls back to whichever
+             grid exists if a page only has one of them. */
+          function gridFor(ev) {
+            var isEvent = (ev.type === 'event');
+            return isEvent ? (evGrid || tourGrid) : (tourGrid || evGrid);
+          }
+          (data.events || []).forEach(function (ev) {
+            var g = gridFor(ev);
+            if (g) g.appendChild(buildCard(ev));
           });
-          if (past) {
-            Array.prototype.forEach.call(up.querySelectorAll('.ev[data-end]'), function (ev) {
-              var d = new Date(ev.getAttribute('data-end') + 'T23:59:59');
-              var label = ev.getAttribute('data-label') || '';
-              var b = ev.querySelector('.evdate');
-              if (d < today) {
-                ev.classList.add('is-past');
-                if (b) { b.textContent = 'PAST · ' + label; b.style.color = '#8a929b'; }
-                var btn = ev.querySelector('.btn'); if (btn) btn.textContent = 'View Results →';
-                past.appendChild(ev);
-              } else if (b) { b.textContent = label; }
-            });
+
+          /* Per grid: move past events to the shared Past grid, sort the
+             upcoming by date, then flag the soonest as NEXT UP. */
+          function processGrid(grid) {
+            if (!grid) return;
+            if (past) {
+              Array.prototype.forEach.call(grid.querySelectorAll('.ev[data-end]'), function (ev) {
+                var d = new Date(ev.getAttribute('data-end') + 'T23:59:59');
+                var label = ev.getAttribute('data-label') || '';
+                var b = ev.querySelector('.evdate');
+                if (d < today) {
+                  ev.classList.add('is-past');
+                  if (b) { b.textContent = 'PAST · ' + label; b.style.color = '#8a929b'; }
+                  var btn = ev.querySelector('.btn'); if (btn) btn.textContent = 'View Results →';
+                  past.appendChild(ev);
+                } else if (b) { b.textContent = label; }
+              });
+            }
+            var upcoming = Array.prototype.slice.call(grid.querySelectorAll('.ev[data-end]'));
+            upcoming.sort(function (a, b) { return new Date(a.getAttribute('data-end')) - new Date(b.getAttribute('data-end')); });
+            upcoming.forEach(function (e) { grid.appendChild(e); });
+            Array.prototype.forEach.call(grid.querySelectorAll('.ev[data-tba]'), function (e) { grid.appendChild(e); });
+            if (upcoming.length) {
+              var f0 = upcoming[0].querySelector('.evdate');
+              if (f0) f0.textContent = '★ NEXT UP · ' + (upcoming[0].getAttribute('data-label') || '');
+            }
           }
-          var upcoming = Array.prototype.slice.call(up.querySelectorAll('.ev[data-end]'));
-          upcoming.sort(function (a, b) { return new Date(a.getAttribute('data-end')) - new Date(b.getAttribute('data-end')); });
-          upcoming.forEach(function (e) { up.appendChild(e); });
-          Array.prototype.forEach.call(up.querySelectorAll('.ev[data-tba]'), function (e) { up.appendChild(e); });
-          if (upcoming.length) {
-            var f0 = upcoming[0].querySelector('.evdate');
-            if (f0) f0.textContent = '★ NEXT UP · ' + (upcoming[0].getAttribute('data-label') || '');
+          processGrid(tourGrid);
+          processGrid(evGrid);
+
+          /* Hide a category's header + grid when it has no cards. */
+          function hideEmpty(grid, blockId) {
+            if (!grid) return;
+            var b = document.getElementById(blockId);
+            if (b && !grid.children.length) b.style.display = 'none';
           }
+          hideEmpty(tourGrid, 'tournaments-block');
+          hideEmpty(evGrid, 'events-block');
+
           if (past && wrap && past.children.length) wrap.style.display = '';
         }
 

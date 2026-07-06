@@ -32,6 +32,14 @@ collections:
             summary: "{{fields.name}} — {{fields.label}}"
             fields:
               - { label: "Event name", name: "name", widget: "string" }
+              - label: "Show under"
+                name: "type"
+                widget: "select"
+                default: "tournament"
+                options:
+                  - { label: "Tournaments", value: "tournament" }
+                  - { label: "Events & Open Play", value: "event" }
+                hint: "Which area on the page this card appears in."
               - label: "Status"
                 name: "status"
                 widget: "select"

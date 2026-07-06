@@ -103,7 +103,9 @@
     <h2 class="sec">Live Preview</h2>
     <p class="hint">A quick look at how the cards and banner will appear. Click <b>Publish</b> when you're happy.</p>
     <div class="pvframe">
-      <div class="pvhead">Event cards</div>
+      <div class="pvhead">🏆 Tournaments</div>
+      <div class="events" id="pvTournaments"></div>
+      <div class="pvhead">📅 Events &amp; Open Play</div>
       <div class="events" id="pvEvents"></div>
       <div class="pvhead">Featured banner</div>
       <div id="pvFeatured" style="background:var(--ink);color:#fff;padding:18px"></div>
@@ -218,9 +220,10 @@ function renderEvents(){
         <button class="del" data-del="${i}">Delete</button></div>
       <label>Event name</label><input value="${esc(ev.name)}" data-i="${i}" data-k="name">
       <div class="two">
+        <div><label>Show under</label><select data-i="${i}" data-k="type"><option value="tournament"${ev.type!=="event"?" selected":""}>🏆 Tournaments</option><option value="event"${ev.type==="event"?" selected":""}>📅 Events &amp; Open Play</option></select></div>
         <div><label>Status</label><select data-i="${i}" data-k="status"><option value="auto"${ev.status!=="tba"?" selected":""}>Scheduled (has a date)</option><option value="tba"${ev.status==="tba"?" selected":""}>Coming soon</option></select></div>
-        <div><label>Date</label><input type="date" value="${esc(ev.date)}" data-i="${i}" data-k="date"></div>
       </div>
+      <label>Date</label><input type="date" value="${esc(ev.date)}" data-i="${i}" data-k="date">
       <div class="two">
         <div><label>Date label (shown on card)</label><input value="${esc(ev.label)}" data-i="${i}" data-k="label" placeholder="JUL 10–12"></div>
         <div><label>Button text</label><input value="${esc(ev.cta)}" data-i="${i}" data-k="cta" placeholder="Register on Swish →"></div>
@@ -263,7 +266,11 @@ function card(ev){
     <a class="btn ${tba?"btn-dark":"btn-volt"}" href="#">${esc(ev.cta||"Register →")}</a></div></div>`;
 }
 function renderPreview(){
-  $("#pvEvents").innerHTML=state.events.map(card).join("");
+  const isEvent=ev=>ev.type==="event";
+  const empty=msg=>`<p style="color:#9aa;font-size:.85rem;grid-column:1/-1;margin:0">${msg}</p>`;
+  const tours=state.events.filter(ev=>!isEvent(ev)), evs=state.events.filter(isEvent);
+  $("#pvTournaments").innerHTML=tours.length?tours.map(card).join(""):empty("No tournaments yet.");
+  $("#pvEvents").innerHTML=evs.length?evs.map(card).join(""):empty("No events yet — set an event’s “Show under” to Events &amp; Open Play.");
   const f=state.featured;
   $("#pvFeatured").innerHTML=!f.enabled?'<p style="color:#9aa">Banner hidden</p>':
     `<p class="eyebrow" style="color:var(--volt)">${esc(f.eyebrow)}</p>
@@ -309,7 +316,7 @@ document.addEventListener("change",async e=>{
     if(user){const path=await uploadImage(blob,name);if(path){mktImg[i].path=path;localImg[path]=url;toast("Picture ready ✓");}}
   }
 });
-$("#addEvent").onclick=()=>{state.events.push({name:"New Event",status:"tba",date:"",label:"COMING SOON",image:"",link:"https://swishtournaments.com/",cta:"See on Swish",blurb:""});renderAll();};
+$("#addEvent").onclick=()=>{state.events.push({name:"New Event",type:"tournament",status:"tba",date:"",label:"COMING SOON",image:"",link:"https://swishtournaments.com/",cta:"See on Swish",blurb:""});renderAll();};
 
 // ---------- git gateway (no token — uses your login) ----------
 function b64(str){return btoa(unescape(encodeURIComponent(str)));}
