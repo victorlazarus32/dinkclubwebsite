@@ -1,5 +1,5 @@
 # Dink Club — Miami Pickleball Facility
-# https://dinkclub.com
+# https://www.dinkclub.com
 
 > Dink Club is an outdoor pickleball facility in Kendall, Miami (10855 SW 112nd Ave, Miami, FL 33176)
 > with 6 courts offering open play, court reservations, lessons, clinics, tournaments, leagues, and private events.
@@ -8,16 +8,18 @@
 
 ## Key Pages
 - /: Overview and facility intro
-- /pages/court-reservations: Book a court ($20/hr via CourtReserve)
-- /pages/open-play: Drop-in sessions by skill level
-- /pages/lessons: Private, semi-private, and group coaching (Coach Pillo; guest pro Lorena Duknic)
-- /pages/clinics: Structured skill clinics, all levels
-- /pages/tournaments: Tournaments, the Dink Club Pickleball League (DCPL); DUPR-rated divisions
-- /pages/faq: Hours, pricing, booking, court rules
-- /pages/new-to-pickleball: Beginner guide and skill-level chart
-- /pages/dupr: What DUPR is and how ratings work
-- /pages/about: Facility story and community focus
-- /pages/contact: Address, map, phone, contact form
+- /court-reservations: Book a court ($20/hr via CourtReserve)
+- /open-play: Drop-in sessions by skill level
+- /lessons: Private, semi-private, and group coaching (Coach Pillo; guest pro Lorena Duknic)
+- /clinics: Structured skill clinics, all levels
+- /tournaments: Tournaments, the Dink Club Pickleball League (DCPL); DUPR-rated divisions
+- /leagues: The Dink Club Pickleball League (DCPL)
+- /private-events: Private and corporate pickleball events
+- /faq: Hours, pricing, booking, court rules
+- /new-to-pickleball: Beginner guide and skill-level chart
+- /dupr: What DUPR is and how ratings work
+- /about: Facility story and community focus
+- /contact: Address, map, phone, contact form
 
 ## Excluded
 - /dashboard.html (private content editor)

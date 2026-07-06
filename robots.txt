@@ -1,6 +1,10 @@
-# STAGING: the whole site is blocked from crawlers while in preview.
-# AT LAUNCH: delete the "Disallow: /" line below to allow indexing.
+# Dink Club — live. Search engines welcome.
 User-agent: *
-Disallow: /
+Allow: /
 
-Sitemap: https://dinkclub.com/sitemap.xml
+# Private / non-public areas.
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /admin/
+
+Sitemap: https://www.dinkclub.com/sitemap.xml

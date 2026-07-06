@@ -21,3 +21,38 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# --- Launch redirects (clean URLs at www.dinkclub.com) ---
+# Netlify serves clean URLs (/about from about.html) automatically. These 301s
+# preserve SEO from the old Shopify URL structure and retired paths.
+# Order matters: specific rules before wildcards (first match wins).
+
+# The old "Play" hub page no longer exists -> send to the court-reservations hub.
+[[redirects]]
+  from = "/pages/play"
+  to = "/court-reservations"
+  status = 301
+[[redirects]]
+  from = "/play"
+  to = "/court-reservations"
+  status = 301
+
+# Old Shopify /pages/<x> content URLs -> clean /<x>.
+[[redirects]]
+  from = "/pages/*"
+  to = "/:splat"
+  status = 301
+
+# Old Shopify store URLs (shop is paused) -> the "coming soon" shop page.
+[[redirects]]
+  from = "/products/*"
+  to = "/shop"
+  status = 301
+[[redirects]]
+  from = "/collections/*"
+  to = "/shop"
+  status = 301
+[[redirects]]
+  from = "/cart"
+  to = "/shop"
+  status = 301
