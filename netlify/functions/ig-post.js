@@ -22,7 +22,10 @@ exports.handler = async (event, context) => {
   const user = context.clientContext && context.clientContext.user;
   if (!user) return resp(401, { error: "Please log in." });
 
-  const token = process.env.IG_ACCESS_TOKEN;
+  // Prefer the auto-refreshed token stored in Blobs by the weekly ig-refresh
+  // function; fall back to the env var (used before the first refresh runs, or
+  // if Blobs is ever unavailable). This keeps posting working no matter what.
+  const token = (await storedToken()) || process.env.IG_ACCESS_TOKEN;
   if (!token) {
     return resp(500, { error: "Instagram isn't connected yet. (Admin: add IG_ACCESS_TOKEN in Netlify, then redeploy.)" });
   }
@@ -72,6 +75,18 @@ exports.handler = async (event, context) => {
   }
 };
 
+// Read the auto-refreshed token that ig-refresh.js keeps current in Blobs.
+// Any failure (Blobs empty, module missing) returns null so the caller falls
+// back to the IG_ACCESS_TOKEN env var — posting behaves exactly as before.
+async function storedToken() {
+  try {
+    const { getStore } = require("@netlify/blobs");
+    const saved = await getStore("instagram").get("access_token", { type: "json" });
+    return (saved && saved.token) || null;
+  } catch (e) {
+    return null;
+  }
+}
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
