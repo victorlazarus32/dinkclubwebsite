@@ -55,6 +55,12 @@
   .post .tags{color:#2f6cd6;font-size:.86rem;margin:8px 0;word-spacing:2px}
   .post .visual{color:var(--gray);font-size:.84rem;font-style:italic;margin:6px 0 10px}
   .post .acts{display:flex;gap:8px;flex-wrap:wrap}
+  .post .ptype{max-width:260px;font-weight:700}
+  .post .thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .post .thumb{position:relative;width:56px;height:56px}
+  .post .thumb img{width:56px;height:56px;object-fit:cover;border-radius:7px;border:1px solid var(--line)}
+  .post .thumb button{position:absolute;top:-7px;right:-7px;width:20px;height:20px;line-height:1;padding:0;border-radius:50%;border:0;background:#c0392b;color:#fff;font-weight:800;cursor:pointer}
+  .post .hintline{color:var(--gray);font-size:.8rem;margin:4px 0 0}
   .strat{background:var(--ink);color:#fff;border-radius:12px;padding:14px 18px;margin-bottom:16px;max-width:760px;font-size:.95rem}
   .strat b{color:var(--volt)}
   .spin{display:inline-block;width:14px;height:14px;border:2px solid #ffffff66;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
@@ -176,8 +182,12 @@ let state={events:[],featured:{}}, fileSha=null, user=null;
 // so show the picked file straight from the browser until then.
 const localImg={};
 function dsrc(p){return localImg[p]||p||"";}
-// Per-marketing-post pictures (index -> {src, name}). Local only — for download alongside the caption.
+// Per-marketing-post pictures (index -> {src, name, path}). Primary picture = feed/story photo, or slide 1 of a carousel.
 const mktImg={};
+// Per-post Instagram format: "feed" | "story" | "carousel".
+const mktType={};
+// Extra carousel slides per post (index -> [{src, name, path}, …]); slide 1 is mktImg.
+const mktMore={};
 const $=s=>document.querySelector(s), esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600);}
 async function authToken(){return user?await user.jwt():null;}
@@ -445,6 +455,13 @@ function fillPost(i,p,ev){
   const def=ev&&ev.image?ev.image:"";
   if(mktImg[i]===undefined&&def)mktImg[i]={src:dsrc(def),name:(def.split("/").pop()||"image"),path:def};
   const cur=mktImg[i]||{src:"",name:""};
+  // Default the format from the AI's suggestion (Reel falls back to Feed — video posting comes later).
+  if(mktType[i]===undefined){
+    const s=String(p.type||"");
+    mktType[i]=/carousel/i.test(s)?"carousel":/story/i.test(s)?"story":"feed";
+  }
+  const ty=mktType[i];
+  const opt=(v,label)=>`<option value="${v}"${ty===v?" selected":""}>${label}</option>`;
   const el=$("#post"+i);if(!el)return;
   el.innerHTML=`
     <div class="meta">
@@ -455,16 +472,40 @@ function fillPost(i,p,ev){
     ${p.visual?`<div class="visual">📷 Suggested: ${esc(p.visual)}</div>`:""}
     <textarea class="cap" id="cap${i}">${esc(p.caption||"")}</textarea>
     <div class="tags" id="tags${i}">${esc(tags)}</div>
-    <label style="margin-top:6px">Post picture</label>
+    <label style="margin-top:6px">Post as</label>
+    <select class="ptype" data-mktype="${i}">
+      ${opt("feed","📷 Feed photo")}${opt("story","⭕ Story (24 hrs)")}${opt("carousel","🖼️ Carousel (2–10 photos)")}
+    </select>
+    <p class="hintline" id="tynote${i}">${esc(typeNote(ty))}</p>
+    <label style="margin-top:8px" id="piclabel${i}">${ty==="carousel"?"Slide 1 picture":"Post picture"}</label>
     <div class="imgrow">
       <img id="mimg${i}" src="${esc(cur.src)}" alt="" onerror="this.style.visibility='hidden'" ${cur.src?"":'style="visibility:hidden"'}>
       <input type="file" accept="image/*" data-mkup="${i}" style="max-width:160px;border:0;padding:0">
     </div>
+    <div class="carousel-extra" id="cx${i}" style="${ty==="carousel"?"":"display:none"}">
+      <label style="margin-top:8px">More carousel photos (slide 2+)</label>
+      <input type="file" accept="image/*" multiple data-mkmore="${i}" style="max-width:220px;border:0;padding:0">
+      <div class="thumbs" id="thumbs${i}"></div>
+    </div>
     <div class="acts">
       <button class="btn btn-volt btn-sm" data-copy="${i}">📋 Copy caption + tags</button>
       <a class="btn btn-ghost btn-sm" id="mdl${i}" style="color:#0b0b0f;border-color:var(--line);${cur.src?"":"display:none"}" href="${esc(cur.src)}" download="${esc(cur.name)}">⬇ Download picture</a>
-      <button class="btn btn-sm" style="background:#E1306C;color:#fff" data-igpost="${i}">📲 Post to Instagram now</button>
+      <button class="btn btn-sm" style="background:#E1306C;color:#fff" data-igpost="${i}">${esc(postBtnLabel(ty))}</button>
     </div>`;
+  renderThumbs(i);
+}
+function typeNote(ty){
+  if(ty==="story")return "Stories post to your 24-hour Story and don't show captions or clickable links.";
+  if(ty==="carousel")return "A swipeable post of 2–10 photos. Set slide 1 below, then add more photos.";
+  return "A single photo posted to your Instagram feed.";
+}
+function postBtnLabel(ty){
+  return ty==="story"?"📲 Post to Story now":ty==="carousel"?"📲 Post carousel now":"📲 Post to Instagram now";
+}
+function renderThumbs(i){
+  const box=$("#thumbs"+i);if(!box)return;
+  const arr=mktMore[i]||[];
+  box.innerHTML=arr.map((im,k)=>`<span class="thumb"><img src="${esc(im.src)}" alt=""><button data-delslide="${i}:${k}" title="Remove">×</button></span>`).join("");
 }
 function fillPostError(i,msg){
   const el=$("#post"+i);if(!el)return;
@@ -485,24 +526,87 @@ async function waitForLive(url,timeoutMs){
   }
   return false;
 }
+// Switch a post's format (feed / story / carousel) in place, so the edited caption isn't lost.
+document.addEventListener("change",e=>{
+  const t=e.target.closest("[data-mktype]");if(!t)return;
+  const i=t.dataset.mktype, ty=t.value;
+  mktType[i]=ty;
+  const cx=$("#cx"+i);if(cx)cx.style.display=ty==="carousel"?"":"none";
+  const note=$("#tynote"+i);if(note)note.textContent=typeNote(ty);
+  const lab=$("#piclabel"+i);if(lab)lab.textContent=ty==="carousel"?"Slide 1 picture":"Post picture";
+  const btn=document.querySelector('[data-igpost="'+i+'"]');if(btn)btn.textContent=postBtnLabel(ty);
+});
+// Upload extra carousel slides (multiple files at once), normalized + published like the main picture.
+document.addEventListener("change",async e=>{
+  const t=e.target.closest("[data-mkmore]");if(!t)return;
+  const i=t.dataset.mkmore;
+  if(!user){toast("Log in to upload images.");return;}
+  const files=[...t.files];if(!files.length)return;
+  mktMore[i]=mktMore[i]||[];
+  for(const raw of files){
+    if(mktMore[i].length>=9){toast("That's the 10-photo carousel limit (slide 1 + 9 more).");break;}
+    toast("Preparing carousel photo…");
+    let blob;try{blob=await normalizeForIG(raw);}catch(err){toast("Skipped an unreadable image.");continue;}
+    const name=(raw.name||"slide").replace(/\.[^.]+$/,"")+".jpg";
+    const url=URL.createObjectURL(blob);
+    const path=await uploadImage(blob,name);
+    if(path){mktMore[i].push({src:url,name,path});localImg[path]=url;renderThumbs(i);}
+  }
+  t.value="";
+  toast("Carousel photos ready ✓");
+});
+// Remove a carousel slide.
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-delslide]");if(!t)return;
+  const parts=t.dataset.delslide.split(":"),i=parts[0],k=+parts[1];
+  if(mktMore[i]){mktMore[i].splice(k,1);renderThumbs(i);}
+});
 document.addEventListener("click",async e=>{
   const t=e.target.closest("[data-igpost]");if(!t)return;
   const i=t.dataset.igpost;
   if(!user){toast("Log in first.");return;}
+  const type=mktType[i]||"feed";
+  const cap=$("#cap"+i).value+"\n\n"+$("#tags"+i).textContent;
+  const toUrl=path=>location.origin+"/"+String(path).replace(/^\//,"");
+  const orig=t.textContent;
+
+  if(type==="carousel"){
+    const slides=[mktImg[i],...(mktMore[i]||[])].filter(im=>im&&im.path);
+    if(slides.length<2){toast("A carousel needs at least 2 pictures — add slide 1 plus at least one more.");return;}
+    if(slides.length>10){toast("Instagram allows up to 10 photos — remove some.");return;}
+    const urls=slides.map(s=>toUrl(s.path));
+    if(!confirm("Post this CAROUSEL ("+urls.length+" photos) to the Dink Club Instagram now?\n\nIt publishes immediately and can't be undone from here."))return;
+    t.disabled=true;
+    try{
+      t.innerHTML='<span class="spin"></span>Checking photos…';
+      for(const u of urls){if(!await waitForLive(u,150000)){toast("A photo is still going live — wait ~30s and try again.");t.disabled=false;t.textContent=orig;return;}}
+      t.innerHTML='<span class="spin"></span>Posting…';
+      const tk=await authToken();
+      const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({type:"carousel",image_urls:urls,caption:cap})});
+      const d=await r.json().catch(()=>({}));
+      if(r.ok){toast("🎉 Carousel posted!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
+      else{toast("Couldn't post: "+(d.error||("error "+r.status)));t.disabled=false;t.textContent=orig;}
+    }catch(err){toast("Post error: "+err.message);t.disabled=false;t.textContent=orig;}
+    return;
+  }
+
+  // feed or story — single photo
   const im=mktImg[i];
   if(!im||!im.path){toast("Add a published picture to this post first (use Choose file).");return;}
-  const cap=$("#cap"+i).value+"\n\n"+$("#tags"+i).textContent;
-  const imageUrl=location.origin+"/"+String(im.path).replace(/^\//,"");
-  if(!confirm("Post this to the Dink Club Instagram right now?\n\nIt publishes immediately and can't be undone from here.\n\nPicture + caption shown will be posted."))return;
-  const orig=t.textContent;t.disabled=true;
+  const imageUrl=toUrl(im.path);
+  const confirmMsg=type==="story"
+    ? "Post this photo as a STORY (disappears in 24 hours) right now?\n\nStories don't show captions."
+    : "Post this to the Dink Club Instagram feed right now?\n\nIt publishes immediately and can't be undone from here.";
+  if(!confirm(confirmMsg))return;
+  t.disabled=true;
   try{
     t.innerHTML='<span class="spin"></span>Checking picture…';
     if(!await waitForLive(imageUrl,150000)){toast("The picture is still going live on the site — wait ~30 seconds and tap Post again.");t.disabled=false;t.textContent=orig;return;}
     t.innerHTML='<span class="spin"></span>Posting…';
     const tk=await authToken();
-    const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({image_url:imageUrl,caption:cap})});
+    const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({type,image_url:imageUrl,caption:cap})});
     const d=await r.json().catch(()=>({}));
-    if(r.ok){toast("🎉 Posted to Instagram!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
+    if(r.ok){toast(type==="story"?"🎉 Posted to your Story!":"🎉 Posted to Instagram!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
     else{toast("Couldn't post: "+(d.error||("error "+r.status)));t.disabled=false;t.textContent=orig;}
   }catch(err){toast("Post error: "+err.message);t.disabled=false;t.textContent=orig;}
 });
