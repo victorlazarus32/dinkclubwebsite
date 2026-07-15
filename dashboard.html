@@ -477,13 +477,13 @@ function fillPost(i,p,ev){
       ${opt("feed","📷 Feed photo")}${opt("story","⭕ Story (24 hrs)")}${opt("carousel","🖼️ Carousel (2–10 photos)")}
     </select>
     <p class="hintline" id="tynote${i}">${esc(typeNote(ty))}</p>
-    <label style="margin-top:8px" id="piclabel${i}">${ty==="carousel"?"Slide 1 picture":"Post picture"}</label>
+    <label style="margin-top:8px" id="piclabel${i}">${esc(picLabel(ty))}</label>
     <div class="imgrow">
       <img id="mimg${i}" src="${esc(cur.src)}" alt="" onerror="this.style.visibility='hidden'" ${cur.src?"":'style="visibility:hidden"'}>
       <input type="file" accept="image/*" data-mkup="${i}" style="max-width:160px;border:0;padding:0">
     </div>
-    <div class="carousel-extra" id="cx${i}" style="${ty==="carousel"?"":"display:none"}">
-      <label style="margin-top:8px">More carousel photos (slide 2+)</label>
+    <div class="carousel-extra" id="cx${i}" style="${(ty==="carousel"||ty==="story")?"":"display:none"}">
+      <label style="margin-top:8px" id="cxlabel${i}">${esc(cxLabel(ty))}</label>
       <input type="file" accept="image/*" multiple data-mkmore="${i}" style="max-width:220px;border:0;padding:0">
       <div class="thumbs" id="thumbs${i}"></div>
     </div>
@@ -495,10 +495,12 @@ function fillPost(i,p,ev){
   renderThumbs(i);
 }
 function typeNote(ty){
-  if(ty==="story")return "Stories post to your 24-hour Story and don't show captions or clickable links.";
-  if(ty==="carousel")return "A swipeable post of 2–10 photos. Set slide 1 below, then add more photos.";
-  return "A single photo posted to your Instagram feed.";
+  if(ty==="story")return "Posts to your 24-hour Story (no captions). Add more photos to post several Stories at once.";
+  if(ty==="carousel")return "A swipeable feed post of 2–10 photos. Set slide 1, then add more photos.";
+  return "A single photo to your feed. Want several photos in one feed post? Choose Carousel.";
 }
+function picLabel(ty){return ty==="carousel"?"Slide 1 picture":ty==="story"?"Story photo":"Post picture";}
+function cxLabel(ty){return ty==="story"?"More Story photos (each posts as its own Story)":"More carousel photos (slide 2+)";}
 function postBtnLabel(ty){
   return ty==="story"?"📲 Post to Story now":ty==="carousel"?"📲 Post carousel now":"📲 Post to Instagram now";
 }
@@ -531,9 +533,10 @@ document.addEventListener("change",e=>{
   const t=e.target.closest("[data-mktype]");if(!t)return;
   const i=t.dataset.mktype, ty=t.value;
   mktType[i]=ty;
-  const cx=$("#cx"+i);if(cx)cx.style.display=ty==="carousel"?"":"none";
+  const cx=$("#cx"+i);if(cx)cx.style.display=(ty==="carousel"||ty==="story")?"":"none";
   const note=$("#tynote"+i);if(note)note.textContent=typeNote(ty);
-  const lab=$("#piclabel"+i);if(lab)lab.textContent=ty==="carousel"?"Slide 1 picture":"Post picture";
+  const lab=$("#piclabel"+i);if(lab)lab.textContent=picLabel(ty);
+  const cl=$("#cxlabel"+i);if(cl)cl.textContent=cxLabel(ty);
   const btn=document.querySelector('[data-igpost="'+i+'"]');if(btn)btn.textContent=postBtnLabel(ty);
 });
 // Upload extra carousel slides (multiple files at once), normalized + published like the main picture.
@@ -544,8 +547,8 @@ document.addEventListener("change",async e=>{
   const files=[...t.files];if(!files.length)return;
   mktMore[i]=mktMore[i]||[];
   for(const raw of files){
-    if(mktMore[i].length>=9){toast("That's the 10-photo carousel limit (slide 1 + 9 more).");break;}
-    toast("Preparing carousel photo…");
+    if(mktMore[i].length>=9){toast("That's the max of 10 photos at once.");break;}
+    toast("Preparing photo…");
     let blob;try{blob=await normalizeForIG(raw);}catch(err){toast("Skipped an unreadable image.");continue;}
     const name=(raw.name||"slide").replace(/\.[^.]+$/,"")+".jpg";
     const url=URL.createObjectURL(blob);
@@ -553,7 +556,7 @@ document.addEventListener("change",async e=>{
     if(path){mktMore[i].push({src:url,name,path});localImg[path]=url;renderThumbs(i);}
   }
   t.value="";
-  toast("Carousel photos ready ✓");
+  toast("Photos ready ✓");
 });
 // Remove a carousel slide.
 document.addEventListener("click",e=>{
@@ -590,23 +593,48 @@ document.addEventListener("click",async e=>{
     return;
   }
 
-  // feed or story — single photo
+  if(type==="story"){
+    // Each photo posts as its own 24-hour Story frame (one function call each, so we
+    // never hit the function time limit no matter how many).
+    const frames=[mktImg[i],...(mktMore[i]||[])].filter(im=>im&&im.path);
+    if(!frames.length){toast("Add a photo to this Story first (use Choose file).");return;}
+    const urls=frames.map(s=>toUrl(s.path));
+    const msg=urls.length>1
+      ? "Post these "+urls.length+" photos as separate Stories now?\n\nEach becomes its own 24-hour Story. Stories don't show captions."
+      : "Post this photo as a STORY (disappears in 24 hours) right now?\n\nStories don't show captions.";
+    if(!confirm(msg))return;
+    t.disabled=true;
+    try{
+      t.innerHTML='<span class="spin"></span>Checking photos…';
+      for(const u of urls){if(!await waitForLive(u,150000)){toast("A photo is still going live — wait ~30s and try again.");t.disabled=false;t.textContent=orig;return;}}
+      const tk=await authToken();
+      let done=0;
+      for(const u of urls){
+        t.innerHTML='<span class="spin"></span>Posting Story '+(done+1)+' of '+urls.length+'…';
+        const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({type:"story",image_url:u})});
+        const d=await r.json().catch(()=>({}));
+        if(!r.ok){toast("Couldn't post Story "+(done+1)+": "+(d.error||("error "+r.status)));t.disabled=false;t.textContent=orig;return;}
+        done++;
+      }
+      toast(done>1?("🎉 Posted "+done+" Stories!"):"🎉 Posted to your Story!");t.textContent="✓ Posted";t.style.background="#2e7d32";
+    }catch(err){toast("Post error: "+err.message);t.disabled=false;t.textContent=orig;}
+    return;
+  }
+
+  // feed — single photo
   const im=mktImg[i];
   if(!im||!im.path){toast("Add a published picture to this post first (use Choose file).");return;}
   const imageUrl=toUrl(im.path);
-  const confirmMsg=type==="story"
-    ? "Post this photo as a STORY (disappears in 24 hours) right now?\n\nStories don't show captions."
-    : "Post this to the Dink Club Instagram feed right now?\n\nIt publishes immediately and can't be undone from here.";
-  if(!confirm(confirmMsg))return;
+  if(!confirm("Post this to the Dink Club Instagram feed right now?\n\nIt publishes immediately and can't be undone from here."))return;
   t.disabled=true;
   try{
     t.innerHTML='<span class="spin"></span>Checking picture…';
     if(!await waitForLive(imageUrl,150000)){toast("The picture is still going live on the site — wait ~30 seconds and tap Post again.");t.disabled=false;t.textContent=orig;return;}
     t.innerHTML='<span class="spin"></span>Posting…';
     const tk=await authToken();
-    const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({type,image_url:imageUrl,caption:cap})});
+    const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({type:"feed",image_url:imageUrl,caption:cap})});
     const d=await r.json().catch(()=>({}));
-    if(r.ok){toast(type==="story"?"🎉 Posted to your Story!":"🎉 Posted to Instagram!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
+    if(r.ok){toast("🎉 Posted to Instagram!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
     else{toast("Couldn't post: "+(d.error||("error "+r.status)));t.disabled=false;t.textContent=orig;}
   }catch(err){toast("Post error: "+err.message);t.disabled=false;t.textContent=orig;}
 });
