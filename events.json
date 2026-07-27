@@ -1,39 +1,6 @@
 {
   "events": [
     {
-      "name": "Dink Classic",
-      "type": "tournament",
-      "status": "auto",
-      "date": "2026-07-12",
-      "label": "JUL 10–12",
-      "image": "assets/img/dink-classic.webp",
-      "link": "https://swishtournaments.com/product/dink-classic/",
-      "cta": "Register on Swish →",
-      "blurb": "Our signature pickleball tournament — men's, women's & mixed doubles, skill levels 2.5–5.0+. Great prizes, food, and good vibes all weekend at Dink Club."
-    },
-    {
-      "name": "Mixed Moneyball",
-      "type": "tournament",
-      "status": "auto",
-      "date": "2026-07-07",
-      "label": "JUL 7 · 2026",
-      "image": "assets/img/uploads/1782481116022-Mixed_July_7.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/EXSLXHS13841507?resId=56312234",
-      "cta": "Register  →",
-      "blurb": "Dink Club Mixed Mini Moneyball Tournament! \n🔥 3.25–4.0 DUPR (Combined Max 8.0) \n💵 $60 per team 🥇 1st Place Cash Payout – Up to $360! "
-    },
-    {
-      "name": "MLP Teams Moneyball",
-      "type": "event",
-      "status": "auto",
-      "date": "2026-07-25",
-      "label": "July 25th",
-      "image": "assets/img/uploads/1782826047694-MLP_MB_DUPR_15.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/W5O7K991384199?resId=56531737",
-      "cta": "Register",
-      "blurb": "🏓 One Team. One Night. One Champion.\n\nGather your favorite pickleball crew and get ready for one of the most exciting events of the summer!\n\nJoin us at Dink Club on Saturday, July 25th from 5:00–11:00 PM for our MLP Pickleball/Moneyball 1-Day Tournament—an evening packed with great competition, amazing energy, and plenty of fun with friends."
-    },
-    {
       "name": "Events & Open Play",
       "type": "event",
       "status": "tba",
@@ -45,24 +12,26 @@
       "blurb": "Find your level, rotate into games, and meet the Dink Club community — no full group needed. Reserved sessions by skill level on 6 outdoor courts. Grab your spot online before you come."
     },
     {
-      "name": "Men's Moneyball 4.0-4.5",
+      "name": "Men's Mini Moneyball",
+      "type": "tournament",
       "status": "auto",
-      "date": "2026-07-14",
-      "label": "July 14th",
-      "image": "assets/img/uploads/1783461069293-Men_MB_4.5.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/LZETDB513841433?resId=56688833",
+      "date": "2026-08-04",
+      "label": "Aug 4th",
+      "image": "assets/img/uploads/1785172129094-Men_MB_4.5_1_QR.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/TQT99731384175?resId=57857085",
       "cta": "Register",
-      "blurb": "Men's Mini Moneyball 4.0-4.5 (Combined max 9.1) Payout is 50% (Up to $360) for 1st Place and credit entry fee for 2nd Place. Must have at least 4 teams to run event and a minimum of 6 teams for 2np place payout. "
+      "blurb": "📊 Division 9.1 (Max Individual DUPR 4.99)\n💵 $60 Per Team\n📅 Tuesday, August 4\n🕗 8:00 PM – 10:00 PM"
     },
     {
-      "name": "Burgers & Beers",
+      "name": "Mixed Mini Moneyball",
+      "type": "tournament",
       "status": "auto",
-      "date": "2026-07-19",
-      "label": "July 19th",
-      "image": "assets/img/uploads/1783463849392-Burgers.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/FDKD2C213841713?resId=56889646",
+      "date": "2026-07-30",
+      "label": "July 30th",
+      "image": "assets/img/uploads/1785172326609-Mixed_July_30_qr.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/PXTP49B13841124?resId=57623303",
       "cta": "Register",
-      "blurb": "Looking for the perfect way to spend your Sunday evening?\n\nJoin us at Dink Club for a fun-filled Pickleball Round Robin where the competition is friendly, the burgers are hot, the beers are cold, and the community is even better!"
+      "blurb": "📊 Division 8.1 (Max Individual DUPR 4.99)\n💵 $60 Per Team\n📅 Thursday, July 30th\n🕗 8:00 PM – 10:00 PM"
     }
   ],
   "featured": {
