@@ -12,7 +12,7 @@
       "blurb": "Find your level, rotate into games, and meet the Dink Club community — no full group needed. Reserved sessions by skill level on 6 outdoor courts. Grab your spot online before you come."
     },
     {
-      "name": "Men's Mini Moneyball",
+      "name": "Men's Mini Moneyball 9.1",
       "type": "tournament",
       "status": "auto",
       "date": "2026-08-04",
@@ -23,7 +23,7 @@
       "blurb": "📊 Division 9.1 (Max Individual DUPR 4.99)\n💵 $60 Per Team\n📅 Tuesday, August 4\n🕗 8:00 PM – 10:00 PM"
     },
     {
-      "name": "Mixed Mini Moneyball",
+      "name": "Mixed Mini Moneyball 8.1",
       "type": "tournament",
       "status": "auto",
       "date": "2026-08-13",
@@ -45,7 +45,7 @@
       "blurb": "Join us at Dink Club for a fun-filled Sunday Funday Pickleball Round Robin! Enjoy plenty of pickleball, complimentary tacos, cold beer, and great company.\n\n📅 Sunday, August 9\n⏰ 6:30–9:30 PM\n💲 $15 entry fee"
     },
     {
-      "name": "Men's Mini Moneyball",
+      "name": "Men's Mini Moneyball 8.1",
       "type": "tournament",
       "status": "auto",
       "date": "2026-08-11",
@@ -54,6 +54,17 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/8II66AE13841184?resId=58197300",
       "cta": "Regster",
       "blurb": "📊 Division 8.1 (Max Individual DUPR 4.5)\n💵 $60 Per Team\n📅 Tuesday, August 11\n🕗 8:00 PM – 10:00 PM"
+    },
+    {
+      "name": "Men's Mini Moneyball 7.1",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-08-18",
+      "label": "Aug 18th",
+      "image": "assets/img/uploads/1785677884679-Mens_7.1.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/E5QG8ZX13841236?resId=58199264",
+      "cta": "Register",
+      "blurb": "📊 Division 7.1 (Max Individual DUPR 3.99)\n💵 $60 Per Team\n📅 Tuesday, August 18\n🕗 8:00 PM – 10:00 PM"
     }
   ],
   "featured": {
