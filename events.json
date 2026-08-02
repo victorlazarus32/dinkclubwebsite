@@ -26,12 +26,12 @@
       "name": "Mixed Mini Moneyball",
       "type": "tournament",
       "status": "auto",
-      "date": "2026-07-30",
-      "label": "July 30th",
-      "image": "assets/img/uploads/1785172326609-Mixed_July_30_qr.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/PXTP49B13841124?resId=57623303",
+      "date": "2026-08-13",
+      "label": "Aug 13th",
+      "image": "assets/img/uploads/1785676212609-Mixed_Aug_13.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/UW7QRZV13841128?resId=58197326",
       "cta": "Register",
-      "blurb": "📊 Division 8.1 (Max Individual DUPR 4.99)\n💵 $60 Per Team\n📅 Thursday, July 30th\n🕗 8:00 PM – 10:00 PM"
+      "blurb": "📊 Division 8.1 (Max Individual DUPR 4.99)\n💵 $60 Per Team\n📅 Thursday Aug 13th\n🕗 8:00 PM – 10:00 PM"
     },
     {
       "name": "Tacos & Beers Pickleball",
@@ -43,6 +43,17 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/84GH91D13841445?resId=57921760",
       "cta": "Register",
       "blurb": "Join us at Dink Club for a fun-filled Sunday Funday Pickleball Round Robin! Enjoy plenty of pickleball, complimentary tacos, cold beer, and great company.\n\n📅 Sunday, August 9\n⏰ 6:30–9:30 PM\n💲 $15 entry fee"
+    },
+    {
+      "name": "Men's Mini Moneyball",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-08-11",
+      "label": "Aug 11th",
+      "image": "assets/img/uploads/1785675035874-Men_MB_3.5_4.0_2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/8II66AE13841184?resId=58197300",
+      "cta": "Regster",
+      "blurb": "📊 Division 8.1 (Max Individual DUPR 4.5)\n💵 $60 Per Team\n📅 Tuesday, August 11\n🕗 8:00 PM – 10:00 PM"
     }
   ],
   "featured": {
