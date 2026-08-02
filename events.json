@@ -69,18 +69,19 @@
   ],
   "featured": {
     "enabled": true,
-    "eyebrow": "Special Event · Saturday, June 27",
-    "title": "Pilates & Pickleball",
-    "image": "assets/img/pilates-pickleball.jpg",
-    "body": "Jetset Modern Pilates × Dink Club — a morning of movement, play, and good vibes. Flow through a guided pilates session, then hit the courts for pickleball. All levels welcome, and a great way to meet new people, network, and connect with the Miami pickleball community.",
+    "eyebrow": "Every Wednesday",
+    "title": "Beginner Pickleball",
+    "image": "assets/img/uploads/1785679201217-Beginners.png",
+    "body": "Join us every Wednesday from 6–8 PM at Dink Club for Beginner & Intermediate Round-Robin Play! These welcoming sessions are designed specifically for newer and entry-level players—so there’s no pressure and no need to feel intimidated. Everyone is learning, playing, and having fun together! 😊",
     "tagline": "Move. Play. Connect.",
     "details": [
-      "🕤 Check-in 9:30 AM · Class 10:00 AM · Pickleball 11:00 AM",
-      "🧘 Pilates flow · 🎾 Pickleball play · ❤ Community",
-      "✨ All levels welcome · bring a friend · bring your own mat"
+      "📅 Every Wednesday",
+      "⏰ 6–8 PM",
+      "📍 Dink Club",
+      "📲 Register now through Court Reserve"
     ],
     "ctaText": "Sign Up →",
-    "ctaLink": "contact.html",
-    "hideAfter": "2026-07-08"
+    "ctaLink": "https://app.courtreserve.com/Online/Events/Details/13841/ASE6HSP13841955?resId=58197031",
+    "hideAfter": "2026-09-03"
   }
 }
