@@ -65,11 +65,22 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/E5QG8ZX13841236?resId=58199264",
       "cta": "Register",
       "blurb": "📊 Division 7.1 (Max Individual DUPR 3.99)\n💵 $60 Per Team\n📅 Tuesday, August 18\n🕗 8:00 PM – 10:00 PM"
+    },
+    {
+      "name": "Beginner Pickleball",
+      "type": "event",
+      "status": "auto",
+      "date": "2026-08-05",
+      "label": "Wednesday's",
+      "image": "assets/img/uploads/1785719683141-Beginners.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/ASE6HSP13841955?resId=58197031",
+      "cta": "Register",
+      "blurb": "Join us every Wednesday from 6–8 PM at Dink Club for Beginner & Intermediate Round-Robin Play! These welcoming sessions are designed specifically for newer and entry-level players—so there’s no pressure and no need to feel intimidated. Everyone is learning, playing, and having fun together! 😊"
     }
   ],
   "featured": {
     "enabled": true,
-    "eyebrow": "Every Wednesday",
+    "eyebrow": "",
     "title": "Beginner Pickleball",
     "image": "assets/img/uploads/1785679201217-Beginners.png",
     "body": "Join us every Wednesday from 6–8 PM at Dink Club for Beginner & Intermediate Round-Robin Play! These welcoming sessions are designed specifically for newer and entry-level players—so there’s no pressure and no need to feel intimidated. Everyone is learning, playing, and having fun together! 😊",
