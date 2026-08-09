@@ -12,17 +12,6 @@
       "blurb": "Find your level, rotate into games, and meet the Dink Club community — no full group needed. Reserved sessions by skill level on 6 outdoor courts. Grab your spot online before you come."
     },
     {
-      "name": "Men's Mini Moneyball 9.1",
-      "type": "tournament",
-      "status": "auto",
-      "date": "2026-08-04",
-      "label": "Aug 4th",
-      "image": "assets/img/uploads/1785172129094-Men_MB_4.5_1_QR.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/TQT99731384175?resId=57857085",
-      "cta": "Register",
-      "blurb": "📊 Division 9.1 (Max Individual DUPR 4.99)\n💵 $60 Per Team\n📅 Tuesday, August 4\n🕗 8:00 PM – 10:00 PM"
-    },
-    {
       "name": "Mixed Mini Moneyball 8.1",
       "type": "tournament",
       "status": "auto",
@@ -32,17 +21,6 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/UW7QRZV13841128?resId=58197326",
       "cta": "Register",
       "blurb": "📊 Division 8.1 (Max Individual DUPR 4.99)\n💵 $60 Per Team\n📅 Thursday Aug 13th\n🕗 8:00 PM – 10:00 PM"
-    },
-    {
-      "name": "Tacos & Beers Pickleball",
-      "type": "event",
-      "status": "auto",
-      "date": "2026-08-09",
-      "label": "COMING SOON",
-      "image": "assets/img/uploads/1785248836021-Tacos.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/84GH91D13841445?resId=57921760",
-      "cta": "Register",
-      "blurb": "Join us at Dink Club for a fun-filled Sunday Funday Pickleball Round Robin! Enjoy plenty of pickleball, complimentary tacos, cold beer, and great company.\n\n📅 Sunday, August 9\n⏰ 6:30–9:30 PM\n💲 $15 entry fee"
     },
     {
       "name": "Men's Mini Moneyball 8.1",
@@ -76,6 +54,17 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/ASE6HSP13841955?resId=58197031",
       "cta": "Register",
       "blurb": "Join us every Wednesday from 6–8 PM at Dink Club for Beginner & Intermediate Round-Robin Play! These welcoming sessions are designed specifically for newer and entry-level players—so there’s no pressure and no need to feel intimidated. Everyone is learning, playing, and having fun together! 😊"
+    },
+    {
+      "name": "Clinic with a Pro!",
+      "type": "event",
+      "status": "auto",
+      "date": "2026-08-13",
+      "label": "Sept 13th",
+      "image": "assets/img/uploads/1786300408087-Lorena_Clinic_2.png",
+      "link": "https://swishtournaments.com/",
+      "cta": "Register",
+      "blurb": "Train with Pro Lorena Duknic—Only 12 Spots Available\nChoose the session that matches your level:\n\nMorning Clinic | 3.0–4.0 Level\n8:00–11:00 a.m.\n\nEvening Clinic | 4.0+ Level\n6:00–9:00 p.m.\n\nEach clinic includes:\n\n90 minutes of personalized instruction\n30 minutes of live coaching and match play\nFocused guidance designed to sharpen your skills and elevate your game"
     }
   ],
   "featured": {
