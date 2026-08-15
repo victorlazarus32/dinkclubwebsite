@@ -46,6 +46,27 @@
   to = "/court-reservations"
   status = 301
 
+# Shopify pages whose SLUG CHANGED in the migration. These must sit ABOVE the
+# /pages/* wildcard below, because first match wins — the wildcard maps
+# /pages/about-us to /about-us, which does not exist, so all three of these were
+# returning 404 while still ranking in Google. /pages/about-us was sitting at
+# position 2.6 and taking real traffic straight into a dead page.
+[[redirects]]
+  from = "/pages/about-us"
+  to = "/about"
+  status = 301
+# Retired: there is no membership page — the club is pay-as-you-play. Sending to
+# the booking + pricing hub, which is the closest live intent.
+[[redirects]]
+  from = "/pages/membership"
+  to = "/court-reservations"
+  status = 301
+# Retired one-off event stream -> the tournaments hub.
+[[redirects]]
+  from = "/pages/dink-palooza-live-stream"
+  to = "/tournaments"
+  status = 301
+
 # Old Shopify /pages/<x> content URLs -> clean /<x>.
 [[redirects]]
   from = "/pages/*"
