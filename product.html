@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Shop paused: redirect to the Coming Soon page. Delete these 2 lines to restore this page. -->
-<script>location.replace("/shop")</script>
-<meta http-equiv="refresh" content="0; url=/shop">
 <meta charset="UTF-8">
 
-<!-- Google Analytics 4 (G-9PJR9BZXHP). Installed 2026-08-15 — the site had no
-     analytics of any kind before this, so there is no history prior to today. -->
+<!-- Google Analytics 4 (G-9PJR9BZXHP). -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9PJR9BZXHP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -16,38 +12,109 @@
   gtag('config', 'G-9PJR9BZXHP');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Still noindex: unreleased collection, nothing buyable yet. Remove at launch. -->
 <meta name="robots" content="noindex,nofollow">
 
-<title>Dink Responsibly Tee | Dink Club Pickleball Apparel — Miami</title>
-<meta name="description" content="The Dink Responsibly Tee by Dink Club — a soft, premium-cotton unisex pickleball t-shirt. Available in Black/Green, Black/Pink, and Black/Blue, sizes S–4XL. Pickup at the club in Miami or shipped.">
+<title>Dink Club Apparel — The 2026 Collection</title>
+<meta name="description" content="Dink Club 2026 apparel. Unisex and women's fits, XS–3XL, collect at the club in Miami.">
 <meta property="og:type" content="product">
-<meta property="og:title" content="Dink Responsibly Tee — Dink Club">
-<meta property="og:description" content="Soft unisex pickleball tee. Black/Green, Black/Pink, Black/Blue. S–4XL.">
-<meta property="og:url" content="https://www.dinkclub.com/products/dink-responsibly-tee">
-
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
- {"@type":"ListItem","position":1,"name":"Home","item":"https://www.dinkclub.com/"},
- {"@type":"ListItem","position":2,"name":"Shop","item":"https://www.dinkclub.com/collections/all"},
- {"@type":"ListItem","position":3,"name":"Apparel","item":"https://www.dinkclub.com/collections/apparel"},
- {"@type":"ListItem","position":4,"name":"Dink Responsibly Tee","item":"https://www.dinkclub.com/products/dink-responsibly-tee"}
-]}
-</script>
-<script type="application/ld+json">
-{
- "@context":"https://schema.org","@type":"Product",
- "name":"Dink Responsibly Tee",
- "brand":{"@type":"Brand","name":"Dink Club"},
- "description":"Soft, premium-cotton unisex pickleball t-shirt with the Dink Club 'Dink Responsibly' graphic. Available in Black/Green, Black/Pink, and Black/Blue, sizes S–4XL.",
- "image":["https://www.dinkclub.com/cdn/shop/files/", "assets/img/products/pdp-drt-0.webp"],
- "offers":{"@type":"Offer","priceCurrency":"USD","price":"30.00","availability":"https://schema.org/InStock","url":"https://www.dinkclub.com/products/dink-responsibly-tee"}
-}
-</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
+<script src="assets/collection.js"></script>
+<style data-page="pdp">
+body{background:#fff}
+.pd{max-width:1340px;margin:0 auto;padding:22px 24px 90px}
+.pd-crumb{font-size:.82rem;color:#6f7781;margin:6px 0 18px}
+.pd-crumb a{color:inherit;text-decoration:none}
+.pd-crumb a:hover{color:var(--ink);text-decoration:underline}
+
+/* two columns: gallery scrolls, buy panel sticks — Nike's arrangement */
+.pd-grid{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,.85fr);gap:46px}
+@media(max-width:980px){.pd-grid{grid-template-columns:1fr;gap:26px}}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:1fr;gap:10px}
+.gal figure{position:relative;margin:0;border-radius:10px;overflow:hidden;cursor:zoom-in;
+  background:radial-gradient(circle at 50% 42%,#fff 0%,#f0f2f4 70%,#e7eaee 100%)}
+.gal img{width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;display:block;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.gal figure:hover img{transform:scale(1.04)}
+.gal .pd-cap{position:absolute;left:12px;bottom:11px;font-family:var(--display);font-weight:800;font-size:.66rem;
+  letter-spacing:.14em;text-transform:uppercase;color:#8b939d}
+
+/* buy panel */
+.buycol{min-width:0}
+.buy{position:sticky;top:96px}
+@media(max-width:980px){.buy{position:static}}
+.buy .pd-line{font-family:var(--display);font-weight:800;font-size:.7rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--electric)}
+.buy h1{font-size:clamp(1.7rem,2.6vw,2.3rem);font-weight:900;line-height:1.06;margin:7px 0 4px}
+.buy .pd-sub{color:#5b6470;font-size:1rem}
+.buy .pd-price{margin:16px 0 4px;font-family:var(--display);font-weight:900;font-size:1.25rem}
+.buy .pd-price small{display:block;font-family:var(--body);font-weight:500;font-size:.82rem;color:#6f7781;letter-spacing:0;margin-top:3px}
+
+.pd-opt{margin-top:26px}
+.pd-opt h4{font-family:var(--display);font-weight:800;font-size:.76rem;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline}
+.pd-opt h4 span{font-family:var(--body);font-weight:500;font-size:.82rem;color:#6f7781;letter-spacing:0;text-transform:none}
+.sw{display:flex;gap:9px;flex-wrap:wrap}
+.sw button{width:60px;height:60px;border-radius:8px;border:2px solid var(--line);background:#fff;padding:3px;cursor:pointer;overflow:hidden}
+.sw button[aria-pressed="true"]{border-color:var(--ink)}
+.sw img{width:100%;height:100%;object-fit:contain;display:block}
+.grid-opt{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.grid-opt button{padding:13px 6px;border:1.5px solid var(--line);border-radius:7px;background:#fff;cursor:pointer;
+  font-family:var(--display);font-weight:800;font-size:.82rem;letter-spacing:.03em;transition:.14s}
+.grid-opt button:hover{border-color:var(--ink)}
+.grid-opt button[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:#fff}
+.fitrow{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+
+.acts{margin-top:26px;display:grid;gap:11px}
+.pill{display:flex;align-items:center;justify-content:center;gap:.5em;width:100%;padding:17px 20px;border-radius:40px;
+  font-family:var(--display);font-weight:800;font-size:.98rem;letter-spacing:.02em;text-transform:uppercase;
+  border:1.5px solid transparent;cursor:pointer;transition:.16s}
+.pill-dark{background:var(--ink);color:#fff}
+.pill-dark:hover{background:#25262c}
+.pill-ghost{background:#fff;border-color:#c9cfd6;color:var(--ink)}
+.pill-ghost:hover{border-color:var(--ink)}
+.pd-note{margin-top:14px;font-size:.83rem;color:#6f7781;line-height:1.6}
+.pd-desc{margin-top:18px;font-size:.95rem;color:#3d454e;line-height:1.7}
+
+.pd-acc{margin-top:30px;border-top:1px solid var(--line)}
+.pd-acc details{border-bottom:1px solid var(--line)}
+.pd-acc summary{list-style:none;cursor:pointer;padding:17px 0;font-family:var(--display);font-weight:800;
+  font-size:.88rem;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center}
+.pd-acc summary::-webkit-details-marker{display:none}
+.pd-acc summary::after{content:"+";font-size:1.3rem;font-weight:400;color:#6f7781}
+.pd-acc details[open] summary::after{content:"–"}
+.pd-acc .pd-body{padding:0 0 18px;font-size:.92rem;color:#5b6470;line-height:1.65}
+.pd-acc .pd-body ul{margin:8px 0 0 18px}
+.pd-acc .pd-body li{margin-bottom:5px}
+
+/* more from the line */
+.more{max-width:1340px;margin:0 auto;padding:0 24px 90px}
+.more h2{font-size:1.5rem;font-weight:900;margin-bottom:20px}
+.more-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:900px){.more-grid{grid-template-columns:repeat(2,1fr)}}
+.mcard{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;display:block;
+  transition:transform .2s,box-shadow .2s}
+.mcard:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(11,11,15,.12)}
+.mcard .sh{aspect-ratio:1/1;background:radial-gradient(circle at 50% 42%,#fff 0%,#eef0f3 72%,#e6e9ed 100%)}
+.mcard img{width:100%;height:100%;object-fit:contain}
+.mcard .mt{padding:13px 14px 15px;border-top:1px solid var(--line)}
+.mcard .mt b{display:block;font-family:var(--display);font-weight:900;font-size:.92rem}
+.mcard .mt span{font-size:.78rem;color:#8b939d;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+
+/* zoom overlay */
+.zoom{position:fixed;inset:0;background:rgba(8,8,11,.95);backdrop-filter:blur(6px);z-index:200;display:none;
+  place-items:center;padding:24px;cursor:zoom-out}
+.zoom[open]{display:grid}
+.zoom img{max-width:min(94vw,1000px);max-height:92vh;object-fit:contain}
+.zoom .x{position:absolute;top:20px;right:20px;width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:1.3rem;cursor:pointer}
+@media(prefers-reduced-motion:reduce){.gal img,.mcard{transition:none!important}}
+</style>
 </head>
 <body>
 <div class="mobilebar">
@@ -55,7 +122,6 @@
   <a class="btn btn-ghost light" href="/open-play">Events</a>
   <a class="btn btn-ghost light call" href="tel:+13058134238" aria-label="Call Dink Club">Call</a>
 </div>
-
 
 <header>
   <div class="wrap nav">
@@ -69,85 +135,87 @@
     </ul></nav>
     <div class="nav-right">
       <a class="icon-btn" href="#" aria-label="Search">⌕</a>
-      <a class="icon-btn" href="#" aria-label="Account">◍</a>
-            <a class="btn btn-volt" href="/court-reservations">Book a Court</a>
+      <a class="btn btn-volt" href="/court-reservations">Book a Court</a>
       <button class="burger" aria-label="Menu">≡</button>
     </div>
   </div>
 </header>
 
-<div class="wrap"><nav class="crumb" aria-label="Breadcrumb">
-  <a href="/">Home</a><span class="sep">›</span><a href="/shop">Shop</a><span class="sep">›</span><a href="/shop">Apparel</a><span class="sep">›</span><span>Dink Responsibly Tee</span>
-</nav></div>
+<div class="pd">
+  <p class="pd-crumb"><a href="/shop">Shop</a> <span aria-hidden="true">/</span> <a href="/shop" id="crumbLine">Collection</a> <span aria-hidden="true">/</span> <span id="crumbName"></span></p>
 
-<section style="padding-top:10px">
-  <div class="wrap pdp">
-    <!-- gallery -->
-    <div class="gallery">
-      <div class="main"><img id="mainimg" src="assets/img/products/pdp-drt-0.webp" alt="Dink Responsibly Tee — Dink Club pickleball apparel, front view" width="800" height="800"></div>
-      <div class="thumbs">
-        <img class="active" src="assets/img/products/pdp-drt-0.webp" alt="Dink Responsibly Tee view 1" onclick="setImg(this)">
-        <img src="assets/img/products/pdp-drt-1.webp" alt="Dink Responsibly Tee view 2" onclick="setImg(this)">
-        <img src="assets/img/products/pdp-drt-2.webp" alt="Dink Responsibly Tee view 3" onclick="setImg(this)">
-      </div>
-    </div>
-    <!-- buy box -->
-    <div>
-      <div class="pdp-brand">Dink Club</div>
-      <h1>Dink Responsibly Tee</h1>
-      <div class="stars" style="color:#FBBC05;-webkit-text-stroke:.5px var(--ink);font-size:1rem">★★★★★ <span style="color:#8a929b;font-size:.8rem;-webkit-text-stroke:0">5.0 · Google reviews</span></div>
-      <div class="price">$30.00</div>
-      <p style="color:#3d454e">The original. Soft, premium-cotton unisex tee with our signature "Dink Responsibly" graphic — made to play in and built to last.</p>
+  <div class="pd-grid">
+    <div class="gal" id="gal"><!-- gallery injected --></div>
 
-      <div class="opt-label">Color</div>
-      <div class="opt-btns" id="colors">
-        <button class="opt active">Black / Green</button>
-        <button class="opt">Black / Pink</button>
-        <button class="opt">Black / Blue</button>
+    <div class="buycol"><div class="buy">
+      <p class="pd-line" id="pLine"></p>
+      <h1 id="pName"></h1>
+      <p class="pd-sub" id="pSub"></p>
+
+      <p class="pd-price">Price at launch
+        <small>Waitlist members hear first and get first pick of sizes.</small>
+      </p>
+
+      <div class="pd-opt">
+        <h4>Colour <span id="cwName"></span></h4>
+        <div class="sw" id="pColour"></div>
       </div>
 
-      <div class="opt-label">Size</div>
-      <div class="opt-btns" id="sizes">
-        <button class="opt active">S</button><button class="opt">M</button><button class="opt">L</button>
-        <button class="opt">XL</button><button class="opt">2XL</button><button class="opt">3XL</button><button class="opt">4XL</button>
+      <div class="pd-opt">
+        <h4>Fit</h4>
+        <div class="grid-opt fitrow" id="pFit"></div>
       </div>
 
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
-        <a class="btn btn-volt" href="https://www.dinkclub.com/products/dink-responsibly-tee" target="_blank" rel="noopener" style="flex:1;justify-content:center;min-width:200px">Add to Cart — $30</a>
-        <a class="btn btn-dark" href="https://www.dinkclub.com/products/dink-responsibly-tee" target="_blank" rel="noopener">Buy Now</a>
+      <div class="pd-opt">
+        <h4>Size <span>XS–3XL</span></h4>
+        <div class="grid-opt" id="pSize"></div>
       </div>
 
-      <div class="desc">
-        <strong>Details</strong>
-        <ul>
-          <li>Premium ringspun cotton, unisex fit</li>
-          <li>Screen-printed "Dink Responsibly" graphic</li>
-          <li>Designed in Miami by Dink Club</li>
-          <li>Machine washable</li>
-        </ul>
+      <div class="acts">
+        <button class="pill pill-dark" id="notify">Notify Me at Launch</button>
+        <a class="pill pill-ghost" href="/shop#collection">Back to the Collection</a>
       </div>
-      <div class="trust-row">
-        <span>🏓 Free pickup at the club</span>
-        <span>📦 Ships from Miami</span>
-        <span>↩ Easy returns</span>
+      <p class="pd-note" id="pNote">Not on sale yet — this is a first look at the 2026 collection. Join the waitlist and you'll get the launch email before it goes public, plus the option to collect at the club instead of paying shipping.</p>
+
+      <p class="pd-desc" id="pDesc"></p>
+
+      <div class="pd-acc">
+        <details>
+          <summary>Size &amp; Fit</summary>
+          <div class="pd-body">
+            <ul>
+              <li>Unisex sizing runs true to size — take your normal size.</li>
+              <li>Women's cut is fitted through the body; size up for a relaxed fit.</li>
+              <li>Available XS through 3XL.</li>
+              <li>Final fits and measurements are confirmed at launch.</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>Fabric &amp; Print</summary>
+          <div class="pd-body" id="pFabric"></div>
+        </details>
+        <details>
+          <summary>Collect at the Club</summary>
+          <div class="pd-body">
+            Pick up at Dink Club, 10855 SW 112th Ave, Miami, FL 33176 — no shipping cost.
+            Questions? Call <a href="tel:+13058134238" style="color:inherit;text-decoration:underline">305-813-4238</a>.
+          </div>
+        </details>
       </div>
-    </div>
+    </div></div>
   </div>
+</div>
+
+<section class="more">
+  <h2 id="moreTitle">More from the line</h2>
+  <div class="more-grid" id="more"></div>
 </section>
 
-<!-- related -->
-<section style="background:var(--smoke)">
-  <div class="wrap">
-    <div class="section-head"><p class="eyebrow">You May Also Like</p><h2>More From the Shop</h2></div>
-    <div class="grid4">
-      <a class="card" href="https://www.dinkclub.com/products/dink-club-miami-vice" target="_blank" rel="noopener"><div class="pimg"><img src="assets/img/products/dink-club-miami-vice.webp" alt="We Run The South Tee — Dink Club pickleball apparel" loading="lazy" width="800" height="800"></div><div class="pinfo"><div class="pbrand">Dink Club</div><div class="pname">We Run The South Tee</div><div class="pprice">$30</div></div></a>
-      <a class="card" href="https://www.dinkclub.com/products/dink-responsibly-crop-tank" target="_blank" rel="noopener"><div class="pimg"><img src="assets/img/products/dink-responsibly-crop-tank.webp" alt="Dink Responsibly Crop Tank — Dink Club pickleball apparel" loading="lazy" width="800" height="800"></div><div class="pinfo"><div class="pbrand">Dink Club</div><div class="pname">Dink Responsibly Crop Tank</div><div class="pprice">$30</div></div></a>
-      <a class="card" href="https://www.dinkclub.com/products/dc-signature-hat" target="_blank" rel="noopener"><div class="pimg"><img src="assets/img/products/dc-signature-hat.webp" alt="DC Signature Hat — Dink Club pickleball apparel" loading="lazy" width="800" height="1067"></div><div class="pinfo"><div class="pbrand">Dink Club</div><div class="pname">DC Signature Hat</div><div class="pprice">$27.99</div></div></a>
-      <a class="card" href="https://www.dinkclub.com/products/dink-club-performance-hoodie" target="_blank" rel="noopener"><div class="pimg"><img src="assets/img/products/dink-club-performance-hoodie.webp" alt="Dink Club Performance Hoodie — Dink Club pickleball apparel" loading="lazy" width="800" height="800"></div><div class="pinfo"><div class="pbrand">Dink Club</div><div class="pname">Performance Hoodie</div><div class="pprice">$30</div></div></a>
-    </div>
-    <div style="text-align:center;margin-top:34px"><a class="btn btn-dark" href="/shop">Back to Shop →</a></div>
-  </div>
-</section>
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Enlarged view">
+  <button class="x" id="zoomX" aria-label="Close">✕</button>
+  <img id="zoomImg" alt="">
+</div>
 
 <footer>
   <div class="wrap">
@@ -157,12 +225,10 @@
         <p style="margin-top:14px;font-size:.92rem;max-width:280px">Miami's home for pickleball — courts, lessons, leagues, and gear at 10855 SW 112th Ave.</p>
         <div class="socials">
           <a class="ig-big" href="https://www.instagram.com/dinkclubpickleball/" target="_blank" rel="noopener" aria-label="Follow Dink Club on Instagram"><span class="igmark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg></span><span class="ighandle">@dinkclubpickleball</span></a>
-          
-          
         </div>
       </div>
       <div><h4>Play</h4><ul><li><a href="/open-play">Events &amp; Open Play</a></li><li><a href="/court-reservations">Court Reservations</a></li><li><a href="/lessons">Lessons</a></li><li><a href="/clinics">Clinics</a></li></ul></div>
-      <div><h4>Shop</h4><ul><li><a href="/shop">Coming Soon →</a></li></ul></div>
+      <div><h4>Shop</h4><ul><li><a href="/shop">The 2026 Collection</a></li><li><a href="/shop#waitlist">Join the Waitlist</a></li></ul></div>
       <div><h4>Club</h4><ul><li><a href="/about">About</a></li><li><a href="/new-to-pickleball">New to Pickleball</a></li><li><a href="/court-reservations">Courts</a></li><li><a href="/dupr">What Is DUPR?</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li></ul></div>
     </div>
     <div class="fbot">
@@ -173,14 +239,101 @@
 </footer>
 
 <script>
-function setImg(el){document.getElementById('mainimg').src=el.src;document.querySelectorAll('.thumbs img').forEach(i=>i.classList.remove('active'));el.classList.add('active');}
-document.querySelectorAll('#colors .opt, #sizes .opt').forEach(b=>b.addEventListener('click',()=>{
-  b.parentElement.querySelectorAll('.opt').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-}));
 document.querySelector('.burger')?.addEventListener('click',()=>{
   const m=document.querySelector('.menu');
-  if(m){m.style.display=m.style.display==='flex'?'none':'flex';m.style.position='absolute';m.style.flexDirection='column';m.style.background='#fff';m.style.top='74px';m.style.left='0';m.style.right='0';m.style.padding='20px 24px';m.style.borderBottom='1px solid var(--line)';m.style.gap='14px';}
+  if(m){m.style.display=m.style.display==='flex'?'none':'flex';
+    m.style.position='absolute';m.style.flexDirection='column';m.style.background='#fff';
+    m.style.top='74px';m.style.left='0';m.style.right='0';m.style.padding='20px 24px';
+    m.style.borderBottom='1px solid var(--line)';m.style.gap='14px';}
 });
+
+/* which design? ?d=<slug>, falling back to the first piece */
+const slug = new URLSearchParams(location.search).get('d');
+const T = COLLECTION.find(x => x.slug === slug) || COLLECTION[0];
+const L = LINES[T.line];
+const IMG = 'assets/img/shirts/';
+
+/* colourway is the first half of the tag ("Navy · Unisex Tee") */
+const parts = T.tag.split('·').map(s => s.trim());
+const colour = parts[0] || '';
+const garment = parts[1] || 'Unisex Tee';
+
+document.title = T.name.replace(/&amp;/g,'&') + ' — Dink Club 2026 Collection';
+document.getElementById('crumbLine').textContent = L.label;
+document.getElementById('crumbName').textContent = T.name.replace(/&amp;/g,'&');
+document.getElementById('pLine').textContent = L.label + ' Line';
+document.getElementById('pName').innerHTML = T.name;
+document.getElementById('pSub').textContent = garment;
+document.getElementById('cwName').textContent = colour;
+document.getElementById('pDesc').textContent = T.desc;
+document.getElementById('pFabric').innerHTML =
+  (/Performance Poly/i.test(T.tag)
+    ? 'Moisture-wicking performance polyester, cut for match play.'
+    : 'Soft cotton jersey, pre-shrunk.') +
+  (/Back Print/i.test(T.tag) ? ' Full back print.' : ' Front print.') +
+  '<br><br>Printed to order. Final blank and print method are confirmed at launch.';
+
+/* gallery: full garment + a close crop of the print */
+document.getElementById('gal').innerHTML =
+  `<figure data-src="${IMG}${T.slug}.webp">
+     <img src="${IMG}${T.slug}.webp" alt="${T.alt}" width="1000" height="1000" fetchpriority="high">
+     <figcaption class="pd-cap">Full garment</figcaption>
+   </figure>
+   <figure data-src="${IMG}${T.slug}-detail.webp">
+     <img src="${IMG}${T.slug}-detail.webp" alt="${T.alt} — close-up of the print" width="900" height="900" loading="lazy">
+     <figcaption class="pd-cap">Print detail</figcaption>
+   </figure>`;
+
+/* colour swatch — one colourway per design for now */
+document.getElementById('pColour').innerHTML =
+  `<button type="button" aria-pressed="true" aria-label="${colour}"><img src="${IMG}${T.slug}.webp" alt=""></button>`;
+
+function options(hostId, values, kind, preselect){
+  const host = document.getElementById(hostId);
+  host.innerHTML = '';
+  values.forEach((v,i)=>{
+    const b=document.createElement('button');
+    b.type='button'; b.textContent=v;
+    b.setAttribute('aria-pressed', String(kind==='fit' && i===0 && preselect));
+    b.addEventListener('click',()=>{
+      host.querySelectorAll('button').forEach(o=>o.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true');
+      gtag('event','select_option',{kind:kind, value:v, design:T.slug});
+    });
+    host.appendChild(b);
+  });
+}
+options('pFit',  T.fits  || FITS,  'fit',  true);
+options('pSize', T.sizes || SIZES, 'size', false);
+
+document.getElementById('notify').addEventListener('click', ()=>{
+  gtag('event','notify_click',{design:T.slug});
+  location.href = '/shop#waitlist';
+});
+
+/* more from the same line */
+const siblings = COLLECTION.filter(x => x.line===T.line && x.slug!==T.slug).slice(0,4);
+const pool = siblings.length ? siblings : COLLECTION.filter(x=>x.slug!==T.slug).slice(0,4);
+document.getElementById('moreTitle').textContent =
+  siblings.length ? `More from ${L.label}` : 'More from the collection';
+document.getElementById('more').innerHTML = pool.map(x=>
+  `<a class="mcard" href="product?d=${x.slug}">
+     <div class="sh"><img src="${IMG}${x.slug}.webp" alt="${x.alt}" loading="lazy" width="1000" height="1000"></div>
+     <div class="mt"><b>${x.name}</b><span>${LINES[x.line].label}</span></div>
+   </a>`).join('');
+
+/* click any gallery image to enlarge */
+const zoom=document.getElementById('zoom'), zoomImg=document.getElementById('zoomImg');
+document.getElementById('gal').addEventListener('click', e=>{
+  const fig=e.target.closest('figure'); if(!fig) return;
+  zoomImg.src=fig.dataset.src; zoomImg.alt=fig.querySelector('img').alt;
+  zoom.setAttribute('open',''); document.body.style.overflow='hidden';
+  gtag('event','zoom_design',{design:T.slug});
+});
+function closeZoom(){ zoom.removeAttribute('open'); document.body.style.overflow=''; }
+zoom.addEventListener('click', closeZoom);
+document.getElementById('zoomX').addEventListener('click', closeZoom);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && zoom.hasAttribute('open')) closeZoom(); });
 </script>
 </body>
 </html>
