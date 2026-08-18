@@ -59,6 +59,48 @@
 .drop-shot figcaption{text-align:center;margin-top:14px;font-size:.76rem;letter-spacing:.14em;
   text-transform:uppercase;color:#8b939d;font-weight:700}
 
+
+/* ── hero motion ──────────────────────────────────────────────────────
+   Headline lines are masked and rise into place; everything else fades up
+   behind them on a stagger. All of it is CSS-driven so the hero is never
+   dependent on JS having run to become visible. */
+@keyframes riseIn{from{transform:translateY(106%)}to{transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes tileIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes sheen{0%,58%{background-position:135% 0}100%{background-position:-35% 0}}
+@keyframes drift1{from{transform:translate(0,0)}to{transform:translate(60px,-40px)}}
+@keyframes drift2{from{transform:translate(0,0)}to{transform:translate(-50px,45px)}}
+
+.drop h1 .ln{display:block;overflow:hidden;padding:.06em 0;margin:-.06em 0}
+.drop h1 .ln > i{display:block;font-style:normal;transform:translateY(106%);
+  animation:riseIn .95s cubic-bezier(.16,1,.3,1) var(--d,0s) forwards}
+.rise{opacity:0;animation:fadeUp .85s cubic-bezier(.16,1,.3,1) var(--d,0s) forwards}
+
+/* volt wordmark gets a slow light sweep. Guarded: without background-clip
+   support the text would render transparent. */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .drop h1 em{color:transparent;
+    background:linear-gradient(100deg,var(--volt) 0 42%,#f2ffc4 50%,var(--volt) 58% 100%);
+    background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
+    animation:sheen 7s ease-in-out 2s infinite}
+}
+
+.drop::before{animation:drift1 19s ease-in-out infinite alternate}
+.drop::after{animation:drift2 24s ease-in-out infinite alternate}
+
+.drop-shot{--px:0deg;--py:0deg;
+  transform:perspective(1100px) rotateY(var(--px)) rotateX(var(--py));
+  transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.drop-tile{opacity:0;animation:tileIn .9s cubic-bezier(.16,1,.3,1) .34s forwards,
+                              float 6.5s ease-in-out 1.3s infinite}
+
+@media(prefers-reduced-motion:reduce){
+  .drop h1 .ln > i,.rise,.drop-tile,.drop::before,.drop::after,.drop h1 em{
+    animation:none!important;opacity:1!important;transform:none!important}
+  .drop-shot{transform:none!important}
+}
+
 /* ── filter ───────────────────────────────────────────────────────── */
 .lines{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-bottom:8px}
 .lines button{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:.79rem;letter-spacing:.06em;
@@ -214,22 +256,22 @@
 <section class="drop">
   <div class="wrap drop-grid">
     <div>
-      <p class="eyebrow">First Look · Drop 01</p>
-      <h1>The 2026<br><em>Collection</em></h1>
-      <p class="lead">Nobody remembers the safe shot.<br>Designed in Miami, for the players who never take it.</p>
-      <div class="cta">
+      <p class="eyebrow rise" style="--d:.05s">First Look · Drop 01</p>
+      <h1><span class="ln"><i style="--d:.14s">The 2026</i></span><span class="ln"><i style="--d:.26s"><em>Collection</em></i></span></h1>
+      <p class="lead rise" style="--d:.46s">Nobody remembers the safe shot.<br>Designed in Miami, for the players who never take it.</p>
+      <div class="cta rise" style="--d:.58s">
         <a class="btn btn-volt" href="#waitlist">Join the Waitlist</a>
         <a class="btn btn-ghost light" href="#collection">See the Collection</a>
       </div>
-      <div class="drop-stats">
-        <div><b>19</b><span>Designs</span></div>
-        <div><b>5</b><span>Lines</span></div>
+      <div class="drop-stats rise" style="--d:.70s">
+        <div><b data-count="19">0</b><span>Designs</span></div>
+        <div><b data-count="5">0</b><span>Lines</span></div>
         <div><b>Soon</b><span>Drop Date</span></div>
       </div>
     </div>
     <figure class="drop-shot">
       <div class="drop-tile"><img src="assets/img/shirts/art-of-the-dink.webp" alt="The Art of the Dink navy tee — Great Wave illustration with a pickleball cresting over a net" width="1000" height="1000" fetchpriority="high"></div>
-      <figcaption>01 — The Art of the Dink</figcaption>
+      <figcaption class="rise" style="--d:.9s">01 — The Art of the Dink</figcaption>
     </figure>
   </div>
 </section>
@@ -338,6 +380,41 @@ document.querySelector('.burger')?.addEventListener('click',()=>{
     m.style.top='74px';m.style.left='0';m.style.right='0';m.style.padding='20px 24px';
     m.style.borderBottom='1px solid var(--line)';m.style.gap='14px';}
 });
+
+
+/* ── hero: stat count-up + cursor parallax on the shirt ───────────────── */
+(function(){
+  const still = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // count the stats up once the entrance stagger has landed
+  document.querySelectorAll('.drop-stats b[data-count]').forEach(el=>{
+    const target = +el.dataset.count;
+    if (still){ el.textContent = target; return; }
+    const dur = 900, t0 = performance.now() + 700;
+    (function step(now){
+      if (now < t0){ requestAnimationFrame(step); return; }
+      const k = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));   // ease-out cubic
+      if (k < 1) requestAnimationFrame(step);
+    })(performance.now());
+  });
+
+  // the hero shirt leans toward the cursor, same idea as the cards but softer
+  const shot = document.querySelector('.drop-shot');
+  const hero = document.querySelector('.drop');
+  if (shot && hero && !still && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    hero.addEventListener('pointermove', e=>{
+      const r = hero.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width  - .5;
+      const py = (e.clientY - r.top)  / r.height - .5;
+      shot.style.setProperty('--px', ( px * 7).toFixed(2) + 'deg');
+      shot.style.setProperty('--py', (-py * 5).toFixed(2) + 'deg');
+    });
+    hero.addEventListener('pointerleave', ()=>{
+      shot.style.setProperty('--px','0deg'); shot.style.setProperty('--py','0deg');
+    });
+  }
+})();
 
 /* ── the collection ────────────────────────────────────────────────
    Single source of truth. The grid, the filter and the lightbox all
