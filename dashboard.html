@@ -162,7 +162,10 @@
           </select>
         </div>
       </div>
-      <button class="btn btn-volt" id="mktGo" style="margin-top:14px">✨ Generate content plan</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="btn btn-volt" id="mktGo">✨ Generate content plan</button>
+        <button class="btn btn-ghost" id="mktClear" style="color:#0b0b0f;border-color:var(--line);display:none">🗑 Clear all posts</button>
+      </div>
       <p class="hint" id="mktNote" style="margin-top:10px"></p>
     </div>
 
@@ -184,9 +187,10 @@ const localImg={};
 function dsrc(p){return localImg[p]||p||"";}
 // Per-marketing-post pictures (index -> {src, name, path}). Primary picture = feed/story photo, or slide 1 of a carousel.
 const mktImg={};
-// Per-post Instagram format: "feed" | "story" | "carousel".
+// Per-post Instagram format: "feed" | "story" | "carousel" | "reel".
 const mktType={};
-// Extra carousel slides per post (index -> [{src, name, path}, …]); slide 1 is mktImg.
+// Extra photos per post (index -> [{src, name, path}, …]); the first is mktImg.
+// Used by carousel slides, extra Story frames, and Reel photos.
 const mktMore={};
 const $=s=>document.querySelector(s), esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600);}
@@ -433,11 +437,15 @@ async function generatePlan(){
   const idx=$("#mktEvent").value;
   const ev=idx!==""?state.events[+idx]:null;
   const goal=$("#mktGoal").value, tone=$("#mktTone").value, total=+$("#mktCount").value;
+  // Start clean: stale pictures/formats are keyed by post index and would otherwise
+  // carry over into the new batch.
+  [mktImg,mktType,mktMore].forEach(o=>Object.keys(o).forEach(k=>{delete o[k];}));
   // Lay out placeholder cards, then fill each as its post comes back (in parallel).
   $("#mktStrategy").innerHTML="";
   $("#mktPosts").innerHTML=Array.from({length:total},(_,i)=>
     `<div class="post" id="post${i}"><div class="meta"><span class="chip t">Post ${i+1}</span></div><p class="hint" style="margin:0">✍️ Writing…</p></div>`).join("");
   $("#mktNote").textContent="Writing "+total+" posts…";
+  showClear(true);
   let done=0, failed=0;
   try{
     const tk=await authToken();
@@ -449,16 +457,35 @@ async function generatePlan(){
   $("#mktNote").textContent=failed?("Done — "+done+" written, "+failed+" failed (click Generate to retry).") : "Done! Review, tweak the wording, then Copy each post into Instagram. 🎾";
   go.disabled=false;go.textContent="✨ Generate content plan";
 }
+function showClear(on){const b=$("#mktClear");if(b)b.style.display=on?"":"none";}
+
+// Wipe every generated post and its attached pictures, so the next Generate
+// starts from nothing. Without this, pictures and formats from the previous run
+// leak into the new cards because they are keyed by post index.
+function clearPlan(){
+  $("#mktStrategy").innerHTML="";
+  $("#mktPosts").innerHTML="";
+  $("#mktNote").textContent="";
+  [mktImg,mktType,mktMore].forEach(o=>Object.keys(o).forEach(k=>{delete o[k];}));
+  showClear(false);
+}
+document.addEventListener("click",e=>{
+  if(!e.target.closest("#mktClear"))return;
+  if(!confirm("Clear all the generated posts and their pictures?\n\nThis only clears this screen - nothing on Instagram or the website changes."))return;
+  clearPlan();
+  toast("Cleared — ready for a fresh batch.");
+});
+
 function fillPost(i,p,ev){
   const tags=(p.hashtags||[]).join(" ");
   // Default picture for this post = the event flyer (if any). Marcelo can replace it per card.
   const def=ev&&ev.image?ev.image:"";
   if(mktImg[i]===undefined&&def)mktImg[i]={src:dsrc(def),name:(def.split("/").pop()||"image"),path:def};
   const cur=mktImg[i]||{src:"",name:""};
-  // Default the format from the AI's suggestion (Reel falls back to Feed — video posting comes later).
+  // Default the format from the AI's suggestion.
   if(mktType[i]===undefined){
     const s=String(p.type||"");
-    mktType[i]=/carousel/i.test(s)?"carousel":/story/i.test(s)?"story":"feed";
+    mktType[i]=/reel/i.test(s)?"reel":/carousel/i.test(s)?"carousel":/story/i.test(s)?"story":"feed";
   }
   const ty=mktType[i];
   const opt=(v,label)=>`<option value="${v}"${ty===v?" selected":""}>${label}</option>`;
@@ -474,7 +501,7 @@ function fillPost(i,p,ev){
     <div class="tags" id="tags${i}">${esc(tags)}</div>
     <label style="margin-top:6px">Post as</label>
     <select class="ptype" data-mktype="${i}">
-      ${opt("feed","📷 Feed photo")}${opt("story","⭕ Story (24 hrs)")}${opt("carousel","🖼️ Carousel (2–10 photos)")}
+      ${opt("feed","📷 Feed photo")}${opt("story","⭕ Story (24 hrs)")}${opt("carousel","🖼️ Carousel (2–10 photos)")}${opt("reel","🎬 Reel (2–10 photos)")}
     </select>
     <p class="hintline" id="tynote${i}">${esc(typeNote(ty))}</p>
     <label style="margin-top:8px" id="piclabel${i}">${esc(picLabel(ty))}</label>
@@ -482,7 +509,7 @@ function fillPost(i,p,ev){
       <img id="mimg${i}" src="${esc(cur.src)}" alt="" onerror="this.style.visibility='hidden'" ${cur.src?"":'style="visibility:hidden"'}>
       <input type="file" accept="image/*" data-mkup="${i}" style="max-width:160px;border:0;padding:0">
     </div>
-    <div class="carousel-extra" id="cx${i}" style="${(ty==="carousel"||ty==="story")?"":"display:none"}">
+    <div class="carousel-extra" id="cx${i}" style="${multiPic(ty)?"":"display:none"}">
       <label style="margin-top:8px" id="cxlabel${i}">${esc(cxLabel(ty))}</label>
       <input type="file" accept="image/*" multiple data-mkmore="${i}" style="max-width:220px;border:0;padding:0">
       <div class="thumbs" id="thumbs${i}"></div>
@@ -490,24 +517,48 @@ function fillPost(i,p,ev){
     <div class="acts">
       <button class="btn btn-volt btn-sm" data-copy="${i}">📋 Copy caption + tags</button>
       <a class="btn btn-ghost btn-sm" id="mdl${i}" style="color:#0b0b0f;border-color:var(--line);${cur.src?"":"display:none"}" href="${esc(cur.src)}" download="${esc(cur.name)}">⬇ Download picture</a>
+      <button class="btn btn-ghost btn-sm" id="mdlall${i}" style="color:#0b0b0f;border-color:var(--line);display:none" data-dlall="${i}">⬇ Download all</button>
       <button class="btn btn-sm" style="background:#E1306C;color:#fff" data-igpost="${i}">${esc(postBtnLabel(ty))}</button>
     </div>`;
   renderThumbs(i);
 }
+// Formats that take more than one picture.
+function multiPic(ty){return ty==="carousel"||ty==="story"||ty==="reel";}
 function typeNote(ty){
   if(ty==="story")return "Posts to your 24-hour Story (no captions). Add more photos to post several Stories at once.";
   if(ty==="carousel")return "A swipeable feed post of 2–10 photos. Set slide 1, then add more photos.";
+  if(ty==="reel")return "Gather 2–10 photos for the reel. Instagram only accepts video for a real Reel, so use ⬇ Download all to build it in the Instagram app — or post these same photos as a carousel right now.";
   return "A single photo to your feed. Want several photos in one feed post? Choose Carousel.";
 }
-function picLabel(ty){return ty==="carousel"?"Slide 1 picture":ty==="story"?"Story photo":"Post picture";}
-function cxLabel(ty){return ty==="story"?"More Story photos (each posts as its own Story)":"More carousel photos (slide 2+)";}
-function postBtnLabel(ty){
-  return ty==="story"?"📲 Post to Story now":ty==="carousel"?"📲 Post carousel now":"📲 Post to Instagram now";
+function picLabel(ty){
+  if(ty==="carousel")return "Slide 1 picture";
+  if(ty==="story")return "Story photo";
+  if(ty==="reel")return "Reel photo 1";
+  return "Post picture";
 }
+function cxLabel(ty){
+  if(ty==="story")return "More Story photos (each posts as its own Story)";
+  if(ty==="reel")return "More reel photos (2nd onwards)";
+  return "More carousel photos (slide 2+)";
+}
+function postBtnLabel(ty){
+  if(ty==="story")return "📲 Post to Story now";
+  if(ty==="carousel")return "📲 Post carousel now";
+  if(ty==="reel")return "📲 Post photos as carousel";
+  return "📲 Post to Instagram now";
+}
+// All pictures attached to a post, in order.
+function allPics(i){return [mktImg[i],...(mktMore[i]||[])].filter(im=>im&&im.src);}
 function renderThumbs(i){
   const box=$("#thumbs"+i);if(!box)return;
   const arr=mktMore[i]||[];
   box.innerHTML=arr.map((im,k)=>`<span class="thumb"><img src="${esc(im.src)}" alt=""><button data-delslide="${i}:${k}" title="Remove">×</button></span>`).join("");
+  const all=$("#mdlall"+i);
+  if(all){
+    const pics=allPics(i);
+    all.style.display = pics.length>1 ? "" : "none";
+    all.textContent = "⬇ Download all ("+pics.length+")";
+  }
 }
 function fillPostError(i,msg){
   const el=$("#post"+i);if(!el)return;
@@ -519,6 +570,21 @@ document.addEventListener("click",e=>{
   const txt=$("#cap"+i).value+"\n\n"+$("#tags"+i).textContent;
   navigator.clipboard.writeText(txt).then(()=>toast("Caption + hashtags copied — paste into Instagram."),()=>toast("Copy failed — select the text manually."));
 });
+// Download every picture on a post, so a reel can be assembled in the Instagram app.
+document.addEventListener("click",async e=>{
+  const t=e.target.closest("[data-dlall]");if(!t)return;
+  const i=t.dataset.dlall, pics=allPics(i);
+  if(!pics.length){toast("No pictures on this post yet.");return;}
+  for(let k=0;k<pics.length;k++){
+    const a=document.createElement("a");
+    a.href=pics[k].src;
+    a.download=String(k+1).padStart(2,"0")+"-"+(pics[k].name||"photo.jpg");
+    document.body.appendChild(a); a.click(); a.remove();
+    await new Promise(r=>setTimeout(r,350));   // browsers throttle rapid downloads
+  }
+  toast("Downloading "+pics.length+" pictures — check your Downloads folder.");
+});
+
 // Wait until a just-uploaded image is actually live on the site (Instagram must fetch it).
 async function waitForLive(url,timeoutMs){
   const start=Date.now();
@@ -533,7 +599,8 @@ document.addEventListener("change",e=>{
   const t=e.target.closest("[data-mktype]");if(!t)return;
   const i=t.dataset.mktype, ty=t.value;
   mktType[i]=ty;
-  const cx=$("#cx"+i);if(cx)cx.style.display=(ty==="carousel"||ty==="story")?"":"none";
+  const cx=$("#cx"+i);if(cx)cx.style.display=multiPic(ty)?"":"none";
+  renderThumbs(i);
   const note=$("#tynote"+i);if(note)note.textContent=typeNote(ty);
   const lab=$("#piclabel"+i);if(lab)lab.textContent=picLabel(ty);
   const cl=$("#cxlabel"+i);if(cl)cl.textContent=cxLabel(ty);
@@ -573,12 +640,16 @@ document.addEventListener("click",async e=>{
   const toUrl=path=>location.origin+"/"+String(path).replace(/^\//,"");
   const orig=t.textContent;
 
-  if(type==="carousel"){
+  if(type==="carousel"||type==="reel"){
+    const isReel=type==="reel";
     const slides=[mktImg[i],...(mktMore[i]||[])].filter(im=>im&&im.path);
-    if(slides.length<2){toast("A carousel needs at least 2 pictures — add slide 1 plus at least one more.");return;}
+    if(slides.length<2){toast(isReel?"Add at least 2 photos for the reel.":"A carousel needs at least 2 pictures — add slide 1 plus at least one more.");return;}
     if(slides.length>10){toast("Instagram allows up to 10 photos — remove some.");return;}
     const urls=slides.map(s=>toUrl(s.path));
-    if(!confirm("Post this CAROUSEL ("+urls.length+" photos) to the Dink Club Instagram now?\n\nIt publishes immediately and can't be undone from here."))return;
+    const cmsg = isReel
+      ? "Instagram only accepts a video file for a true Reel, so these "+urls.length+" photos will post as a CAROUSEL.\n\nTo make a real Reel, use Download all and assemble it in the Instagram app."
+      : "Post this CAROUSEL ("+urls.length+" photos) to the Dink Club Instagram now?\n\nIt publishes immediately and cannot be undone from here.";
+    if(!confirm(cmsg))return;
     t.disabled=true;
     try{
       t.innerHTML='<span class="spin"></span>Checking photos…';
@@ -587,7 +658,7 @@ document.addEventListener("click",async e=>{
       const tk=await authToken();
       const r=await fetch("/.netlify/functions/ig-post",{method:"POST",headers:{Authorization:"Bearer "+tk,"Content-Type":"application/json"},body:JSON.stringify({type:"carousel",image_urls:urls,caption:cap})});
       const d=await r.json().catch(()=>({}));
-      if(r.ok){toast("🎉 Carousel posted!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
+      if(r.ok){toast(isReel?"🎉 Reel photos posted as a carousel!":"🎉 Carousel posted!");t.textContent="✓ Posted";t.style.background="#2e7d32";}
       else{toast("Couldn't post: "+(d.error||("error "+r.status)));t.disabled=false;t.textContent=orig;}
     }catch(err){toast("Post error: "+err.message);t.disabled=false;t.textContent=orig;}
     return;
