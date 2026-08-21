@@ -12,17 +12,6 @@
       "blurb": "Find your level, rotate into games, and meet the Dink Club community — no full group needed. Reserved sessions by skill level on 6 outdoor courts. Grab your spot online before you come."
     },
     {
-      "name": "Men's Mini Moneyball 7.1",
-      "type": "tournament",
-      "status": "auto",
-      "date": "2026-08-18",
-      "label": "Aug 18th",
-      "image": "assets/img/uploads/1785677884679-Mens_7.1.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/E5QG8ZX13841236?resId=58199264",
-      "cta": "Register",
-      "blurb": "📊 Division 7.1 (Max Individual DUPR 3.99)\n💵 $60 Per Team\n📅 Tuesday, August 18\n🕗 8:00 PM – 10:00 PM"
-    },
-    {
       "name": "Beginner Pickleball",
       "type": "event",
       "status": "auto",
@@ -76,6 +65,17 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/SCRJXB413841841?resId=58840163",
       "cta": "Register",
       "blurb": "Ready to dink, eat, and meet some great people?\n\nJoin us at Dink Club Miami for our Pickleball Round Robin: Burgers & Beers on Sunday, August 23rd, from 6:30–9:30 PM.\n\n🏓 Play fun round-robin pickleball\n🍔 Enjoy burgers on us\n🍺 Grab a beer on us\n🤝 Meet new people and connect with the community\n\nAll skill levels are welcome—whether you’re a seasoned player or picking up a paddle for the first time."
+    },
+    {
+      "name": "Ladies Mini Moneyball Combined 8.1",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-08-25",
+      "label": "Aug 25th",
+      "image": "assets/img/uploads/1787277191257-Ladies_MB_1_QR_Code.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/VH6SSKQ13841515?resId=58712579",
+      "cta": "Register",
+      "blurb": "oin us at Dink Club for an exciting Ladies Mini Moneyball Tournament featuring great competition, fast-paced games, and a cash payout!\n\n📅 Tuesday, August 25th\n⏰ 8:00–10:00 PM\n💵 $60 per team\n🏆 Maximum payout: $450\n🥈 2nd place: Entry-fee credit"
     }
   ],
   "featured": {
