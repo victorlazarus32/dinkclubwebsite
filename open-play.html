@@ -139,6 +139,25 @@
   </div>
 </section>
 
+<!-- events -->
+<section id="events" style="background:var(--smoke)">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">What's On</p><h2>Upcoming Tournaments &amp; Events</h2><p>Moneyballs, clinics, and round robins — register through Court Reserve, open an event to sign up.</p></div>
+    <div id="tournaments-block">
+      <p class="eyebrow" style="margin-bottom:14px">Tournaments</p>
+      <div class="events" id="upcoming-tournaments"></div>
+    </div>
+    <div id="events-block" style="margin-top:44px">
+      <p class="eyebrow" style="margin-bottom:14px">Events &amp; Open Play</p>
+      <div class="events" id="upcoming-events"></div>
+    </div>
+    <div id="past-wrap" style="display:none;margin-top:44px">
+      <p class="eyebrow" style="margin-bottom:14px;color:#8a929b">Past Events</p>
+      <div class="events" id="past-events"></div>
+    </div>
+  </div>
+</section>
+
 <!-- booking -->
 <section class="booking" id="schedule">
   <div class="wrap">
@@ -189,5 +208,6 @@ document.querySelectorAll('.acc button').forEach(b=>b.addEventListener('click',(
 document.querySelector('.acc')?.classList.add('open');
 document.querySelector('.burger')?.addEventListener('click',()=>{const m=document.querySelector('.menu');if(m){m.style.display=m.style.display==='flex'?'none':'flex';m.style.position='absolute';m.style.flexDirection='column';m.style.background='#fff';m.style.top='74px';m.style.left='0';m.style.right='0';m.style.padding='20px 24px';m.style.borderBottom='1px solid var(--line)';m.style.gap='14px';}});
 </script>
+<script src="assets/events.js" defer></script>
 </body>
 </html>
