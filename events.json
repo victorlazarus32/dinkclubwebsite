@@ -80,19 +80,25 @@
   ],
   "featured": {
     "enabled": true,
-    "eyebrow": "Come join us every Wednesday 6-8pm...when you feel comfortable you move into the intermediates.",
-    "title": "Beginner Pickleball",
-    "image": "assets/img/uploads/1785679201217-Beginners.png",
-    "body": "Join us every Wednesday from 6–8 PM at Dink Club for Beginner & Intermediate Round-Robin Play! These welcoming sessions are designed specifically for newer and entry-level players—so there’s no pressure and no need to feel intimidated. Everyone is learning, playing, and having fun together! 😊",
-    "tagline": "Move. Play. Connect.",
+    "eyebrow": "Events Scheduled for September",
+    "title": "Calendar",
+    "image": "assets/img/uploads/1788114389304-Calendar_Sept.png",
+    "body": "September is shaping up to be an incredible month at Dink Club Pickleball Courts! Whether you’re looking for competitive play, beginner-friendly events, food and fun, or simply a court to enjoy with friends, there’s something on the calendar for you.",
+    "tagline": "Move. Play. Connect. Eat. Drink. Be Happy :)",
     "details": [
-      "📅 Every Wednesday",
-      "⏰ 6–8 PM",
-      "📍 Dink Club",
-      "📲 Register now through Court Reserve"
+      "• Weekly Open Play and Recreational Round Robins",
+      "• Beginner and Beginner/Intermediate Round Robins",
+      "• Men’s, Ladies’ and Mixed Mini Moneyball Tournaments 💰",
+      "• Mixed Doubles Team Gauntlets",
+      "• Mix & Match Rotating Partners",
+      "• Pro Lorena Duknic Pickleball Clinics",
+      "• DCPL Fall League",
+      "• Women’s Potluck Brunch and Pickleball Gauntlet",
+      "• Tacos & Beers, Burgers & Beers, and Power Pizza socials 🌮🍔🍕",
+      "• Open court-reservation days—bring your friends, grab a cooler and have some fun!"
     ],
     "ctaText": "Sign Up →",
-    "ctaLink": "https://app.courtreserve.com/Online/Events/Details/13841/ASE6HSP13841955?resId=58197031",
-    "hideAfter": "2026-09-03"
+    "ctaLink": "https://www.dinkclub.com/open-play",
+    "hideAfter": "2026-09-30"
   }
 }
