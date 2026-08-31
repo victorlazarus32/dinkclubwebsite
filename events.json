@@ -78,15 +78,37 @@
       "blurb": "Join us for Mix & Match: Rotating Partners, a fun event pairing male and female players together for each round. You’ll rotate partnerships and play with someone new every game—making it a great way to meet players and possibly find your next mixed partner!"
     },
     {
-      "name": "Men's Moneyballs September",
+      "name": "Men's Moneyball 7.2",
       "type": "tournament",
       "status": "tba",
-      "date": "",
-      "label": "September",
-      "image": "assets/img/uploads/1788215823677-Mens_MB_Sept.png",
-      "link": "https://www.dinkclub.com/open-play",
-      "cta": "Register",
-      "blurb": "🔥 MEN’S MONEYBALL IS HEATING UP AT DINK CLUB! 🔥\n\nWe’ve got THREE Men's Moneyball nights coming your way — three different DUPR levels and three chances to battle for the cash! 💰\n\n🟢 MONDAY, SEPTEMBER 8\n\n🎯 Combined 7.2 DUPR\n\n🟣 WEDNESDAY, SEPTEMBER 17\n\n🎯 Combined 9.2 DUPR\n\n🔵 MONDAY, SEPTEMBER 22\n\n🎯 Combined 8.2 DUPR"
+      "date": "2026-09-08",
+      "label": "Sept 8th",
+      "image": "assets/img/uploads/1788217378283-Mens_MB_Sept.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/I2QZHI21384174?resId=59947218",
+      "cta": "Register 7.2",
+      "blurb": "🔥 MEN’S MONEYBALL IS HEATING UP AT DINK CLUB! 🔥\n\nWe’ve got THREE Men's Moneyball nights coming your way — three different DUPR levels and three chances to battle for the cash! 💰\n\n🟢 TUESDAY, SEPTEMBER 8\n\n🎯 Combined 7.2 DUPR\n"
+    },
+    {
+      "name": "Men's Moneyball 9.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-09-17",
+      "label": "Sept 17th",
+      "image": "assets/img/uploads/1788217582410-Mens_MB_Sept.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/9IINWYE13841655?resId=59972500",
+      "cta": "Register 9.2",
+      "blurb": "🔥 MEN’S MONEYBALL IS HEATING UP AT DINK CLUB! 🔥\n\nWe’ve got THREE Men's Moneyball nights coming your way — three different DUPR levels and three chances to battle for the cash! 💰\n\n🟢 TUESDAY, SEPTEMBER 8\n\n🎯 Combined 9.2 DUPR\n"
+    },
+    {
+      "name": "Men's Moneyball 8.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-09-22",
+      "label": "Sept 22nd",
+      "image": "assets/img/uploads/1788217717726-Mens_MB_Sept.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/WPYIZQF1384125?resId=59972610",
+      "cta": "Register 8.2",
+      "blurb": "🔥 MEN’S MONEYBALL IS HEATING UP AT DINK CLUB! 🔥\n\nWe’ve got THREE Men's Moneyball nights coming your way — three different DUPR levels and three chances to battle for the cash! 💰\n\n🟢 TUESDAY, SEPTEMBER 8\n\n🎯 Combined 8.2 DUPR\n"
     }
   ],
   "featured": {
