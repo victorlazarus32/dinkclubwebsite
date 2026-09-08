@@ -41,8 +41,8 @@ body{background:#fff}
   background:radial-gradient(circle at 50% 42%,#fff 0%,#f0f2f4 70%,#e7eaee 100%)}
 .gal img{width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;display:block;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
 .gal figure:hover img{transform:scale(1.04)}
-.gal .pd-cap{position:absolute;left:12px;bottom:11px;font-family:var(--display);font-weight:800;font-size:.66rem;
-  letter-spacing:.14em;text-transform:uppercase;color:#8b939d}
+.gal .pd-cap{position:absolute;left:12px;bottom:11px;font-family:var(--display);font-weight:800;font-size:.7rem;
+  letter-spacing:.14em;text-transform:uppercase;color:#71777f}
 
 /* buy panel */
 .buycol{min-width:0}
@@ -56,9 +56,9 @@ body{background:#fff}
 .buy .pd-price small{display:block;font-family:var(--body);font-weight:500;font-size:.82rem;color:#6f7781;letter-spacing:0;margin-top:3px}
 
 .pd-opt{margin-top:26px}
-.pd-opt h4{font-family:var(--display);font-weight:800;font-size:.76rem;letter-spacing:.12em;
+.pd-opt h2{font-family:var(--display);font-weight:800;font-size:.76rem;letter-spacing:.12em;
   text-transform:uppercase;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline}
-.pd-opt h4 span{font-family:var(--body);font-weight:500;font-size:.82rem;color:#6f7781;letter-spacing:0;text-transform:none}
+.pd-opt h2 span{font-family:var(--body);font-weight:500;font-size:.82rem;color:#6f7781;letter-spacing:0;text-transform:none}
 .sw{display:flex;gap:9px;flex-wrap:wrap}
 .sw button{width:60px;height:60px;border-radius:8px;border:2px solid var(--line);background:#fff;padding:3px;cursor:pointer;overflow:hidden}
 .sw button[aria-pressed="true"]{border-color:var(--ink)}
@@ -104,7 +104,7 @@ body{background:#fff}
 .mcard img{width:100%;height:100%;object-fit:contain}
 .mcard .mt{padding:13px 14px 15px;border-top:1px solid var(--line)}
 .mcard .mt b{display:block;font-family:var(--display);font-weight:900;font-size:.92rem}
-.mcard .mt span{font-size:.78rem;color:#8b939d;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.mcard .mt span{font-size:.78rem;color:#71777f;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 
 /* zoom overlay */
 .zoom{position:fixed;inset:0;background:rgba(8,8,11,.95);backdrop-filter:blur(6px);z-index:200;display:none;
@@ -157,17 +157,17 @@ body{background:#fff}
       </p>
 
       <div class="pd-opt">
-        <h4>Colour <span id="cwName"></span></h4>
+        <h2>Colour <span id="cwName"></span></h2>
         <div class="sw" id="pColour"></div>
       </div>
 
       <div class="pd-opt">
-        <h4>Fit</h4>
+        <h2>Fit</h2>
         <div class="grid-opt fitrow" id="pFit"></div>
       </div>
 
       <div class="pd-opt">
-        <h4>Size <span>XS–3XL</span></h4>
+        <h2>Size <span>XS–3XL</span></h2>
         <div class="grid-opt" id="pSize"></div>
       </div>
 
@@ -214,7 +214,7 @@ body{background:#fff}
 
 <div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Enlarged view">
   <button class="x" id="zoomX" aria-label="Close">✕</button>
-  <img id="zoomImg" alt="">
+  <img id="zoomImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
 </div>
 
 <footer>
@@ -227,9 +227,9 @@ body{background:#fff}
           <a class="ig-big" href="https://www.instagram.com/dinkclubpickleball/" target="_blank" rel="noopener" aria-label="Follow Dink Club on Instagram"><span class="igmark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg></span><span class="ighandle">@dinkclubpickleball</span></a>
         </div>
       </div>
-      <div><h4>Play</h4><ul><li><a href="/open-play">Events &amp; Open Play</a></li><li><a href="/court-reservations">Court Reservations</a></li><li><a href="/lessons">Lessons</a></li><li><a href="/clinics">Clinics</a></li></ul></div>
-      <div><h4>Shop</h4><ul><li><a href="/shop">The 2026 Collection</a></li><li><a href="/shop#waitlist">Join the Waitlist</a></li></ul></div>
-      <div><h4>Club</h4><ul><li><a href="/about">About</a></li><li><a href="/new-to-pickleball">New to Pickleball</a></li><li><a href="/court-reservations">Courts</a></li><li><a href="/dupr">What Is DUPR?</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div><h2>Play</h2><ul><li><a href="/open-play">Events &amp; Open Play</a></li><li><a href="/court-reservations">Court Reservations</a></li><li><a href="/lessons">Lessons</a></li><li><a href="/clinics">Clinics</a></li></ul></div>
+      <div><h2>Shop</h2><ul><li><a href="/shop">The 2026 Collection</a></li><li><a href="/shop#waitlist">Join the Waitlist</a></li></ul></div>
+      <div><h2>Club</h2><ul><li><a href="/about">About</a></li><li><a href="/new-to-pickleball">New to Pickleball</a></li><li><a href="/court-reservations">Courts</a></li><li><a href="/dupr">What Is DUPR?</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li></ul></div>
     </div>
     <div class="fbot">
       <span>© 2026 Dink Club · 10855 SW 112th Ave, Miami, FL 33176 · 305-813-4238</span>
