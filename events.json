@@ -26,8 +26,8 @@
       "name": "Pizza & Beers Pickleball",
       "type": "event",
       "status": "auto",
-      "date": "2026-09-20",
-      "label": "Sept 20th",
+      "date": "2026-09-27",
+      "label": "Sept 27th",
       "image": "assets/img/uploads/1789596618902-Pizza_Sept_20_QR.png",
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/DVC1ANG13841160?resId=59973178",
       "cta": "Register",
@@ -45,26 +45,15 @@
       "blurb": "Join us for Mix & Match: Rotating Partners, a fun event pairing male and female players together for each round. You’ll rotate partnerships and play with someone new every game—making it a great way to meet players and possibly find your next mixed partner!"
     },
     {
-      "name": "Men's Moneyball 9.2",
+      "name": "Dinktoberfest Tournament",
       "type": "tournament",
       "status": "auto",
-      "date": "2026-09-17",
-      "label": "Sept 17th",
-      "image": "assets/img/uploads/1788217582410-Mens_MB_Sept.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/9IINWYE13841655?resId=59972500",
-      "cta": "Register 9.2",
-      "blurb": "🔥 MEN’S MONEYBALL IS HEATING UP AT DINK CLUB! 🔥\n\nWe’ve got THREE Men's Moneyball nights coming your way — three different DUPR levels and three chances to battle for the cash! 💰\n\n🟢 TUESDAY, SEPTEMBER 8\n\n🎯 Combined 9.2 DUPR\n"
-    },
-    {
-      "name": "Men's Moneyball 8.2",
-      "type": "tournament",
-      "status": "auto",
-      "date": "2026-09-22",
-      "label": "Sept 22nd",
-      "image": "assets/img/uploads/1788217717726-Mens_MB_Sept.png",
-      "link": "https://app.courtreserve.com/Online/Events/Details/13841/WPYIZQF1384125?resId=59972610",
-      "cta": "Register 8.2",
-      "blurb": "🔥 MEN’S MONEYBALL IS HEATING UP AT DINK CLUB! 🔥\n\nWe’ve got THREE Men's Moneyball nights coming your way — three different DUPR levels and three chances to battle for the cash! 💰\n\n🟢 TUESDAY, SEPTEMBER 8\n\n🎯 Combined 8.2 DUPR\n"
+      "date": "2026-10-10",
+      "label": "Oct 9-11",
+      "image": "assets/img/uploads/1790206284999-Dinktoberfest_26.png",
+      "link": "https://swishtournaments.com/",
+      "cta": "X",
+      "blurb": "Get ready for a full weekend of pickleball at the Dinktoberfest Tournament, happening October 9–11 at Dink Club!\nCompete in your division, enjoy the Oktoberfest atmosphere, and play for cash—first place receives a 30% cash payout based on number of teams registered!\n\n🍂 Early-Bird Pricing: $35 until September 30\n🍂 Regular Pricing: $45 after September 30\nSpots are limited, so gather your partner and register early!\nSign up at dinkclub.com or through the Court Reserve app.\nSee you on the courts!\nDink Club\nPickleball • Community • Good Times\n"
     }
   ],
   "featured": {
@@ -88,6 +77,6 @@
     ],
     "ctaText": "Sign Up →",
     "ctaLink": "https://www.dinkclub.com/open-play",
-    "hideAfter": "2026-09-30"
+    "hideAfter": "2026-09-23"
   }
 }
