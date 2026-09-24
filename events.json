@@ -109,6 +109,39 @@
       "link": "https://swishtournaments.com/",
       "cta": "Register",
       "blurb": "Join us for the Women's 2.5 & Under Dinktoberfest Tournament!\n\n📅 Sunday, October 11\n⏰ 7 PM\n🏆 First place receives a 30% cash payout based on the number of teams registered!\n\nEarly Bird: $35 until September 30\nRegular Registration: $45"
+    },
+    {
+      "name": "Mixed 3.5 Dinktoberfest—Play for Cash! 🏓🍂",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-10-11",
+      "label": "Oct 11th",
+      "image": "assets/img/uploads/1790210181150-Dinktoberfest_6.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/13RIZNY13841858?resId=60776249",
+      "cta": "Register",
+      "blurb": "Join us for the Mixed 3.5 & Under Dinktoberfest Tournament!\n\n📅 Sunday, October 11\n⏰ 7 PM\n🏆 First place receives a 30% cash payout based on the number of teams registered!\n\nEarly Bird: $35 until September 30\nRegular Registration: $45"
+    },
+    {
+      "name": "Men's 3.0 Dinktoberfest—Play for Cash! 🏓🍂",
+      "type": "tournament",
+      "status": "tba",
+      "date": "2026-10-11",
+      "label": "Oct 11th",
+      "image": "assets/img/uploads/1790210347141-Dinktoberfest_7.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/RP26RAY1384152?resId=60776272",
+      "cta": "Register",
+      "blurb": "Join us for the Men's 3.0 & Under Dinktoberfest Tournament!\n\n📅 Sunday, October 11\n⏰ 7 PM\n🏆 First place receives a 30% cash payout based on the number of teams registered!\n\nEarly Bird: $35 until September 30\nRegular Registration: $45"
+    },
+    {
+      "name": "Women's 3.0 Dinktoberfest—Play for Cash! 🏓🍂",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-10-11",
+      "label": "Oct 11th",
+      "image": "assets/img/uploads/1790210449668-Dinktoberfest_8.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/TETLK8N13841115?resId=60776313",
+      "cta": "Register",
+      "blurb": "Join us for the Women's 3.0 & Under Dinktoberfest Tournament!\n\n📅 Sunday, October 11\n⏰ 7 PM\n🏆 First place receives a 30% cash payout based on the number of teams registered!\n\nEarly Bird: $35 until September 30\nRegular Registration: $45"
     }
   ],
   "featured": {
