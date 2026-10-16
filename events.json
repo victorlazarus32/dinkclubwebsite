@@ -98,6 +98,50 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/FTPYNE61384131?resId=62665885",
       "cta": "Register",
       "blurb": "Men's Moneyball 10.5 - $45 per player - Individual (Min 3.6) (Max 5.4) ⏰ Saturday @ 7pm"
+    },
+    {
+      "name": "Men's Moneyball 7.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-08",
+      "label": "Nov 8th @ 7am",
+      "image": "assets/img/uploads/1792158940361-Turkey_Men_7.2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/FQAWGWC13841476?resId=62665924",
+      "cta": "Register",
+      "blurb": "Men's Moneyball 7.2 - $45 per player - Individual (Min 3) (Max 4.2) ⏰ Saturday @ 7am"
+    },
+    {
+      "name": "Mixed Moneyball 9.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-08",
+      "label": "Nov 8th @ 10am",
+      "image": "assets/img/uploads/1792159070073-Turkey_Mixed_9.2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/4IRIWHF1384124?resId=62666050",
+      "cta": "Register",
+      "blurb": "Mixed Moneyball 9.2 - $45 per player - Individual (Min 3.4) (Max 52) ⏰ Saturday @ 10am"
+    },
+    {
+      "name": "Women's Moneyball 6.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-08",
+      "label": "Nov 8th @ 4pm",
+      "image": "assets/img/uploads/1792159158781-Turkey_Women_6.2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/P11X6QZ13841126?resId=62666206",
+      "cta": "Register",
+      "blurb": "Women's Moneyball 6.2 - $45 per player - Individual (Min 2.8) (Max 3.6) ⏰ Saturday @ 10am"
+    },
+    {
+      "name": "Men's Moneyball 9.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-08",
+      "label": "Nov 8th @ 7pm",
+      "image": "assets/img/uploads/1792159250095-Turkey_Men_9.2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/GXB1HVA13841461?resId=62666243",
+      "cta": "Register",
+      "blurb": "Men's Moneyball 9.2 - $45 per player - Individual (Min 3.4) (Max 52) ⏰ Saturday @ 10am"
     }
   ],
   "featured": {
