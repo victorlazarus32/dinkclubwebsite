@@ -43,6 +43,61 @@
       "link": "https://app.courtreserve.com/Online/Events/Details/13841/NSOYYHR13841664?resId=62492930",
       "cta": "Register",
       "blurb": "Ready to climb your way to the top?\n\nJoin us at Dink Club for Up & Down the River, a fast-paced pickleball event featuring rotating partners and constant court movement!\n\n📅 Monday, October 19th\n⏰ 8–10 PM\n🎟️ $10 per player\n🏓 Minimum of six games\n👤 No partner needed\n\nHow it works:\n\n⬆️ Win your game and move up a court\n⬇️ Lose your game and move down a court\n🔄 Split from your partner and rotate every round\n🏆 Keep winning to reach—and remain on—Championship Court!\n\nIt’s a fun way to meet new players, test your skills, and enjoy plenty of competitive pickleball."
+    },
+    {
+      "name": "Men's Moneyball 8.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-06",
+      "label": "Nov 6th @ 7pm",
+      "image": "assets/img/uploads/1792157897368-Turkey_Men_8.2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/CDGY9DH13841150?resId=62663092",
+      "cta": "Register",
+      "blurb": "Men's Moneyball 8.2 - $45 per player - Individual (Min 3.2) (Max 4.4) ⏰ Friday @ 7pm"
+    },
+    {
+      "name": "Mixed Moneyball 7.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-07",
+      "label": "Nov 7th @ 7am",
+      "image": "assets/img/uploads/1792158362644-Turkey_Mixed_7.2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/KPIH2V213841750?resId=62665355",
+      "cta": "Register",
+      "blurb": "Mixed Moneyball 7.2 - $45 per player - Individual (Min 3) (Max 4.2) ⏰ Saturday @ 7am"
+    },
+    {
+      "name": "Men's Moneyball 6.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-07",
+      "label": "Nov 7th @ 10am",
+      "image": "assets/img/uploads/1792158549311-Turkey_Men_6.2.png",
+      "link": "https://swishtournaments.com/",
+      "cta": "Register",
+      "blurb": "Men's Moneyball 6.2 - $45 per player - Individual (Min 2.8) (Max 3.6) ⏰ Saturday @ 10am"
+    },
+    {
+      "name": "Women's Moneyball 8.2",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-07",
+      "label": "Nov 7th @ 4pm",
+      "image": "assets/img/uploads/1792158680888-Turkey_Women_8.2.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/3DDBCRC13841591?resId=62665607",
+      "cta": "Register",
+      "blurb": "Women's Moneyball 8.2 - $45 per player - Individual (Min 3.2) (Max 4.4) ⏰ Friday @ 7pm"
+    },
+    {
+      "name": "Men's Moneyball 10.5",
+      "type": "tournament",
+      "status": "auto",
+      "date": "2026-11-07",
+      "label": "Nov 7th @ 7pm",
+      "image": "assets/img/uploads/1792158810750-Turkey_Men_10.5.png",
+      "link": "https://app.courtreserve.com/Online/Events/Details/13841/FTPYNE61384131?resId=62665885",
+      "cta": "Register",
+      "blurb": "Men's Moneyball 10.5 - $45 per player - Individual (Min 3.6) (Max 5.4) ⏰ Saturday @ 7pm"
     }
   ],
   "featured": {
